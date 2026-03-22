@@ -12,25 +12,27 @@
   <style>
     /* ─── Variables ─────────────────────────────────────────────── */
     :root {
-      --c-bg:        #0a0a0a;
-      --c-bg-2:      #0f0f0f;
-      --c-bg-3:      #141414;
-      --c-card:      #111111;
-      --c-card-2:    #161616;
-      --c-border:    #222222;
-      --c-border-2:  #2a2a2a;
+      --c-bg:        #ffffff;
+      --c-bg-2:      #f5f4f1;
+      --c-bg-3:      #ede9e3;
+      --c-card:      #ffffff;
+      --c-card-2:    #f9f8f6;
+      --c-border:    #e5e2dc;
+      --c-border-2:  #d0ccc4;
       --c-accent:    #FF4D00;
-      --c-accent-dim:rgba(255, 77, 0, 0.12);
-      --c-white:     #ffffff;
-      --c-text:      #cccccc;
-      --c-muted:     #777777;
-      --c-muted-2:   #444444;
+      --c-accent-dim:rgba(255, 77, 0, 0.08);
+      /* --c-white is repurposed as the dark heading color so every
+         existing "color: var(--c-white)" rule flips correctly */
+      --c-white:     #1a1a1a;
+      --c-text:      #3d3a36;
+      --c-muted:     #7a756e;
+      --c-muted-2:   #b5b0a8;
       --radius-sm:   8px;
       --radius-md:   12px;
       --radius-lg:   20px;
       --radius-xl:   28px;
-      --shadow-card: 0 1px 3px rgba(0,0,0,0.4), 0 0 0 1px var(--c-border);
-      --shadow-hover:0 24px 64px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,77,0,0.25);
+      --shadow-card: 0 1px 4px rgba(0,0,0,0.06), 0 0 0 1px var(--c-border);
+      --shadow-hover:0 16px 48px rgba(0,0,0,0.10), 0 0 0 1px rgba(255,77,0,0.18);
       --transition:  0.25s cubic-bezier(0.4, 0, 0.2, 1);
       --font:        'Inter', system-ui, sans-serif;
     }
@@ -125,11 +127,11 @@
     .btn--ghost {
       background: transparent;
       color: var(--c-white);
-      border: 1px solid var(--c-border-2);
+      border: 1.5px solid var(--c-border-2);
     }
     .btn--ghost:hover {
-      background: rgba(255,255,255,0.05);
-      border-color: rgba(255,255,255,0.3);
+      background: var(--c-bg-2);
+      border-color: var(--c-muted);
     }
     .btn--outline {
       background: transparent;
@@ -156,11 +158,15 @@
       border-bottom: 1px solid transparent;
     }
     .header.scrolled {
-      background: rgba(10, 10, 10, 0.92);
+      background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       padding: 14px 0;
       border-bottom-color: var(--c-border);
+      box-shadow: 0 1px 0 var(--c-border);
+    }
+    @supports not (backdrop-filter: blur(1px)) {
+      .header.scrolled { background: rgba(255,255,255,0.99); }
     }
     .nav {
       display: flex;
@@ -197,7 +203,7 @@
       color: var(--c-muted);
       transition: color var(--transition), background var(--transition);
     }
-    .nav-link:hover { color: var(--c-white); background: rgba(255,255,255,0.05); }
+    .nav-link:hover { color: var(--c-white); background: rgba(0,0,0,0.04); }
     .nav-link.active { color: var(--c-white); }
     .nav-link--cta {
       background: var(--c-accent);
@@ -241,8 +247,8 @@
       display: flex;
       align-items: center;
       background-color: var(--c-bg);
-      background-image: radial-gradient(rgba(255,255,255,0.035) 1px, transparent 1px);
-      background-size: 32px 32px;
+      background-image: radial-gradient(rgba(0,0,0,0.055) 1px, transparent 1px);
+      background-size: 28px 28px;
       overflow: hidden;
     }
     .hero::before {
@@ -377,7 +383,7 @@
       transition: background var(--transition);
     }
     .trust__item:last-child { border-right: none; }
-    .trust__item:hover { background: rgba(255,255,255,0.02); }
+    .trust__item:hover { background: rgba(0,0,0,0.02); }
     .trust__icon {
       width: 44px;
       height: 44px;
@@ -437,8 +443,8 @@
     }
     .product-card:hover::before { opacity: 1; }
     .product-card--featured {
-      border-color: rgba(255,77,0,0.2);
-      background: linear-gradient(145deg, #141414, #111111);
+      border-color: rgba(255,77,0,0.25);
+      background: linear-gradient(145deg, #fff8f5, #ffffff);
     }
     .product-card__badge {
       position: absolute;
@@ -553,7 +559,7 @@
       transition: background var(--transition);
     }
     .materials-table tbody tr:last-child { border-bottom: none; }
-    .materials-table tbody tr:hover { background: rgba(255,255,255,0.018); }
+    .materials-table tbody tr:hover { background: rgba(255,77,0,0.03); }
     .materials-table td {
       padding: 20px 24px;
       font-size: 14px;
@@ -1186,12 +1192,12 @@
       .footer__top { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 768px) {
-      .section { padding: 80px 0; }
+      .section { padding: 72px 0; }
       .nav-menu {
         display: none;
         position: fixed;
         top: 0; left: 0; right: 0; bottom: 0;
-        background: rgba(10,10,10,0.98);
+        background: rgba(255,255,255,0.98);
         flex-direction: column;
         justify-content: center;
         align-items: center;
@@ -1200,31 +1206,55 @@
         padding: 40px 24px;
       }
       .nav-menu.open { display: flex; }
-      .nav-link { font-size: 20px; padding: 12px 24px; }
+      .nav-link { font-size: 20px; padding: 12px 24px; color: var(--c-text); }
+      .nav-link:hover { color: var(--c-white); }
       .nav-link--cta { margin-left: 0; margin-top: 8px; }
       .hamburger { display: flex; z-index: 999; }
-      .hero__title { font-size: clamp(40px, 10vw, 72px); }
-      .hero__stats {
-        gap: 28px;
-        flex-wrap: wrap;
-      }
-      .products__grid { grid-template-columns: 1fr; }
+      .hero__title { font-size: clamp(34px, 9vw, 64px); }
+      .hero__sub { font-size: 15px; }
+      .hero__stats { gap: 24px; flex-wrap: wrap; }
+      .hero__stat-number { font-size: 28px; }
+      .products__grid { grid-template-columns: 1fr 1fr; }
       .steps__grid { grid-template-columns: 1fr; gap: 32px; }
       .form-row { grid-template-columns: 1fr; }
       .footer__top { grid-template-columns: 1fr; }
       .footer__bottom { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .section__title { font-size: clamp(24px, 5vw, 36px); }
+    }
+    @media (max-width: 600px) {
+      .products__grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 480px) {
       .container { padding: 0 16px; }
-      .section { padding: 64px 0; }
+      .section { padding: 56px 0; }
       .trust__grid { grid-template-columns: 1fr; }
       .trust__item { border-right: none; border-bottom: 1px solid var(--c-border); }
       .trust__item:last-child { border-bottom: none; }
       .hero__actions { flex-direction: column; }
       .hero__actions .btn { width: 100%; justify-content: center; }
-      .calc-form, .calc-result, .form { padding: 24px 20px; }
+      .calc-form, .calc-result, .form { padding: 24px 16px; }
+      .calc-qty-row { grid-template-columns: 1fr 70px; }
+      .product-card { padding: 24px 20px; }
       .materials-table th:nth-child(4),
       .materials-table td:nth-child(4) { display: none; }
+      .float-btn { bottom: 16px; right: 16px; }
+    }
+    @media (max-width: 375px) {
+      .container { padding: 0 12px; }
+      .section { padding: 48px 0; }
+      .hero__title { font-size: clamp(28px, 8vw, 40px); }
+      .hero__sub { font-size: 14px; }
+      .hero__badge { font-size: 11px; padding: 5px 12px; }
+      .hero__stats { grid-template-columns: 1fr 1fr; display: grid; gap: 16px; }
+      .hero__stat-number { font-size: 24px; }
+      .hero__stat-label { font-size: 11px; }
+      .section__title { font-size: 22px; }
+      .btn--lg { padding: 14px 20px; font-size: 15px; }
+      .trust__item { padding: 20px 16px; }
+      .calc-form, .calc-result, .form { padding: 20px 14px; }
+      .materials-table th:nth-child(3),
+      .materials-table td:nth-child(3) { display: none; }
+      .step { padding: 0 4px; }
     }
   </style>
 </head>
@@ -1452,7 +1482,7 @@
               <td><span class="mat-tag">Промо-матеріали, тимчасові теги</span></td>
             </tr>
             <tr>
-              <td><div class="mat-name">УФ-лакування<small>Selective UV Gloss</small></div></td>
+              <td><div class="mat-name">Матова ламінація<small>Matte Lamination</small></div></td>
               <td>
                 <div class="mat-dots">
                   <div class="mat-dot on"></div>
@@ -1462,7 +1492,7 @@
                   <div class="mat-dot"></div>
                 </div>
               </td>
-              <td>Глянцевий блиск, яскравість</td>
+              <td>Рівний матовий, без відблисків</td>
               <td>
                 <div class="mat-price">
                   <div class="mat-price-bar on"></div>
@@ -1470,17 +1500,17 @@
                   <div class="mat-price-bar"></div>
                 </div>
               </td>
-              <td><span class="mat-tag">Логотипи, фірмовий брендинг</span></td>
+              <td><span class="mat-tag">Упаковка, етикетки, косметика</span></td>
             </tr>
             <tr>
-              <td><div class="mat-name">Ламінація глянець<small>Gloss Lamination</small></div></td>
+              <td><div class="mat-name">Глянцева ламінація<small>Gloss Lamination</small></div></td>
               <td>
                 <div class="mat-dots">
                   <div class="mat-dot on"></div>
                   <div class="mat-dot on"></div>
                   <div class="mat-dot on"></div>
                   <div class="mat-dot on"></div>
-                  <div class="mat-dot on"></div>
+                  <div class="mat-dot"></div>
                 </div>
               </td>
               <td>Насичені кольори, дзеркальний блиск</td>
@@ -1491,10 +1521,10 @@
                   <div class="mat-price-bar on"></div>
                 </div>
               </td>
-              <td><span class="mat-tag mat-tag--best">Вулиця, волога, тривале використання <span class="mat-tag-label">Топ вибір</span></span></td>
+              <td><span class="mat-tag mat-tag--best">Вулиця, волога, логотипи <span class="mat-tag-label">Топ вибір</span></span></td>
             </tr>
             <tr>
-              <td><div class="mat-name">Ламінація матова<small>Soft Touch Matte</small></div></td>
+              <td><div class="mat-name">Софт-тач ламінація<small>Soft Touch</small></div></td>
               <td>
                 <div class="mat-dots">
                   <div class="mat-dot on"></div>
@@ -1504,7 +1534,7 @@
                   <div class="mat-dot on"></div>
                 </div>
               </td>
-              <td>Шовковисто-матовий, преміум відчуття</td>
+              <td>Оксамитове на дотик, надматовий</td>
               <td>
                 <div class="mat-price">
                   <div class="mat-price-bar on"></div>
@@ -1512,7 +1542,49 @@
                   <div class="mat-price-bar on"></div>
                 </div>
               </td>
-              <td><span class="mat-tag">Преміум упаковка, косметика, бутік</span></td>
+              <td><span class="mat-tag">Преміум брендинг, косметика, бутік</span></td>
+            </tr>
+            <tr>
+              <td><div class="mat-name">Тиснення фольгою<small>Foil Stamping</small></div></td>
+              <td>
+                <div class="mat-dots">
+                  <div class="mat-dot on"></div>
+                  <div class="mat-dot on"></div>
+                  <div class="mat-dot"></div>
+                  <div class="mat-dot"></div>
+                  <div class="mat-dot"></div>
+                </div>
+              </td>
+              <td>Золото / срібло металік, ефект розкоші</td>
+              <td>
+                <div class="mat-price">
+                  <div class="mat-price-bar on"></div>
+                  <div class="mat-price-bar on"></div>
+                  <div class="mat-price-bar on"></div>
+                </div>
+              </td>
+              <td><span class="mat-tag">Ювелірні, парфуми, ексклюзив</span></td>
+            </tr>
+            <tr>
+              <td><div class="mat-name">Вибіркове лакування<small>Spot UV</small></div></td>
+              <td>
+                <div class="mat-dots">
+                  <div class="mat-dot on"></div>
+                  <div class="mat-dot on"></div>
+                  <div class="mat-dot on"></div>
+                  <div class="mat-dot"></div>
+                  <div class="mat-dot"></div>
+                </div>
+              </td>
+              <td>Контраст матове + глянцеві акценти</td>
+              <td>
+                <div class="mat-price">
+                  <div class="mat-price-bar on"></div>
+                  <div class="mat-price-bar on"></div>
+                  <div class="mat-price-bar on"></div>
+                </div>
+              </td>
+              <td><span class="mat-tag">Дизайнерські рішення, логотипи</span></td>
             </tr>
           </tbody>
         </table>
@@ -1545,9 +1617,11 @@
             <label class="calc-label" for="calc-coating">Покриття</label>
             <select class="calc-select" id="calc-coating">
               <option value="none">Без покриття</option>
-              <option value="uv">УФ-лакування (+15%)</option>
-              <option value="glossy">Ламінація глянець (+25%)</option>
-              <option value="matte">Ламінація матова (+25%)</option>
+              <option value="matte">Матова ламінація (+20%)</option>
+              <option value="glossy">Глянцева ламінація (+25%)</option>
+              <option value="soft-touch">Софт-тач ламінація (+35%)</option>
+              <option value="foil">Тиснення фольгою (+55%)</option>
+              <option value="spot-uv">Вибіркове лакування (+30%)</option>
             </select>
           </div>
           <!-- Shape -->
@@ -1907,10 +1981,12 @@
       'film-clear': 'Плівка (прозора)'
     };
     const COATING_LABELS = {
-      'none':   'Без покриття',
-      'uv':     'УФ-лакування',
-      'glossy': 'Ламінація глянець',
-      'matte':  'Ламінація матова'
+      'none':       'Без покриття',
+      'matte':      'Матова ламінація',
+      'glossy':     'Глянцева ламінація',
+      'soft-touch': 'Софт-тач ламінація',
+      'foil':       'Тиснення фольгою',
+      'spot-uv':    'Вибіркове лакування',
     };
 
     function getQuantityFactor(qty) {
@@ -1934,7 +2010,7 @@
     }
 
     function getCoatingFactor(coating) {
-      return { none: 1.00, uv: 1.15, glossy: 1.25, matte: 1.25 }[coating] || 1.00;
+      return { none: 1.00, matte: 1.20, glossy: 1.25, 'soft-touch': 1.35, foil: 1.55, 'spot-uv': 1.30 }[coating] || 1.00;
     }
 
     function getShapeFactor(shape) {
@@ -2003,7 +2079,7 @@
     function updateSliderFill() {
       const slider = document.getElementById('calc-qty-range');
       const pct = ((+slider.value - +slider.min) / (+slider.max - +slider.min)) * 100;
-      slider.style.background = `linear-gradient(to right, #FF4D00 ${pct}%, #2a2a2a ${pct}%)`;
+      slider.style.background = `linear-gradient(to right, #FF4D00 ${pct}%, #d0ccc4 ${pct}%)`;
     }
 
     // Qty slider ↔ number sync
