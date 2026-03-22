@@ -148,8 +148,11 @@
 
     /* ─── Header ─────────────────────────────────────────────────── */
     .header {
-      position: sticky;
+      position: fixed;
       top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
       z-index: 999;
       padding: 20px 0;
       transition: padding var(--transition), background var(--transition), border-color var(--transition);
@@ -273,10 +276,11 @@
       position: relative;
       min-height: 100vh;
       min-height: 100svh;
+      padding-top: 70px;
       display: flex;
       align-items: center;
       background-color: var(--c-bg);
-      background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url(https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600);
+      background-image: url(https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600);
       background-size: cover;
       background-position: center;
       overflow: hidden;
@@ -302,6 +306,12 @@
       bottom: -100px;
       left: -150px;
       pointer-events: none;
+    }
+    .hero__overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 0;
     }
     .hero__content {
       position: relative;
@@ -1341,6 +1351,7 @@
 
   <!-- ════════ HERO ════════ -->
   <section class="hero" id="home">
+    <div class="hero__overlay"></div>
     <div class="container hero__content">
       <div class="hero__badge">Друк у Львові з 2019 року</div>
       <h1 class="hero__title">
