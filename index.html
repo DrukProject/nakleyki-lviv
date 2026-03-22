@@ -217,18 +217,20 @@
     }
     /* ─── Dropdown ───────────────────────────────────────────────── */
     .nav-dropdown { position: relative; }
-    .nav-dropdown > .nav-link::after { content: ' ▾'; font-size: 10px; }
+    .nav-btn-dropdown { background: none; border: none; cursor: pointer; font-family: inherit; display: inline-flex; align-items: center; gap: 4px; }
+    .nav-chevron { font-size: 10px; display: inline-block; transition: transform .25s ease; }
+    .nav-dropdown:hover .nav-chevron { transform: rotate(180deg); }
     .dropdown-menu {
       display: none;
       position: absolute;
-      top: calc(100% + 8px);
+      top: 100%;
       left: 0;
       min-width: 210px;
       background: #fff;
       border: 1px solid var(--c-border);
       border-radius: var(--radius-md);
       box-shadow: 0 8px 32px rgba(0,0,0,.1);
-      padding: 6px;
+      padding: 8px 6px 6px;
       z-index: 1000;
     }
     .nav-dropdown:hover .dropdown-menu,
@@ -1223,25 +1225,34 @@
     @media (max-width: 768px) {
       .section { padding: 72px 0; }
       .nav-menu {
-        display: none;
-        position: fixed;
-        top: 0; left: 0; right: 0; bottom: 0;
-        background: rgba(255,255,255,0.98);
+        display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 8px;
-        z-index: 998;
-        padding: 40px 24px;
+        align-items: stretch;
+        gap: 0;
+        margin-left: 0;
+        position: fixed;
+        inset: 0;
+        background: #fff;
+        z-index: 1000;
+        padding: 80px 0 32px;
+        transform: translateX(100%);
+        transition: transform .35s cubic-bezier(.4,0,.2,1);
+        overflow-y: auto;
       }
-      .nav-menu.open { display: flex; }
-      .nav-link { font-size: 20px; padding: 12px 24px; color: var(--c-text); }
-      .nav-link:hover { color: var(--c-white); }
-      .nav-link--cta { margin-left: 0; margin-top: 8px; }
-      .hamburger { display: flex; z-index: 999; }
-      .nav-dropdown > .nav-link::after { display: none; }
-      .dropdown-menu { display: block; position: static; box-shadow: none; border: none; background: none; padding: 0 0 0 16px; }
-      .dropdown-menu a { font-size: 16px; padding: 8px 16px; color: var(--c-muted); }
+      .nav-menu.open { transform: translateX(0); }
+      .nav-link { font-size: 17px; padding: 0 28px; min-height: 52px; display: flex; align-items: center; color: var(--c-text); border-radius: 0; width: 100%; }
+      .nav-link:hover, .nav-link.active { background: var(--c-bg-2); color: var(--c-white); }
+      .nav-btn-dropdown { width: 100%; min-height: 52px; padding: 0 28px; font-size: 17px; font-weight: 500; justify-content: space-between; color: var(--c-text); }
+      .nav-btn-dropdown:hover { background: var(--c-bg-2); color: var(--c-white); }
+      .nav-chevron { font-size: 14px; color: var(--c-muted); }
+      .nav-dropdown.open > .nav-btn-dropdown .nav-chevron { transform: rotate(180deg); }
+      .dropdown-menu { display: none; position: static; box-shadow: none; border: none; border-left: 3px solid var(--c-accent); background: var(--c-bg-2); padding: 6px 0; margin: 0 0 4px 28px; border-radius: 0; min-width: 0; }
+      .nav-dropdown.open > .dropdown-menu { display: block; }
+      .dropdown-menu a { font-size: 15px; min-height: 44px; padding: 0 20px; display: flex; align-items: center; color: var(--c-muted); border-radius: 0; }
+      .dropdown-menu a:hover { background: var(--c-bg-3); color: var(--c-white); }
+      .nav-link--cta { background: var(--c-accent); color: #fff !important; margin: 16px 28px 0; width: calc(100% - 56px); border-radius: var(--radius-md); justify-content: center; }
+      .nav-link--cta:hover { background: #e64500; }
+      .hamburger { display: flex; z-index: 1001; }
       .hero__title { font-size: clamp(34px, 9vw, 64px); }
       .hero__sub { font-size: 15px; }
       .hero__stats { gap: 24px; flex-wrap: wrap; }
@@ -1311,7 +1322,7 @@
         <ul class="nav-menu" id="navMenu">
           <li><a href="#products" class="nav-link" data-section="products">Продукти</a></li>
           <li class="nav-dropdown">
-            <a href="#" class="nav-link" onclick="return false">Послуги</a>
+            <button class="nav-link nav-btn-dropdown" type="button">Послуги <span class="nav-chevron">▾</span></button>
             <div class="dropdown-menu">
               <a href="materials.html">Матеріали</a>
               <a href="lamination.html">Ламінація</a>
@@ -1968,6 +1979,12 @@
     /* ── Mobile nav ────────────────────────────────────────────── */
     const hamburger = document.getElementById('hamburger');
     const navMenu   = document.getElementById('navMenu');
+    function closeNav() {
+      hamburger.classList.remove('open');
+      navMenu.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
     hamburger.addEventListener('click', () => {
       const open = hamburger.classList.toggle('open');
       navMenu.classList.toggle('open', open);
@@ -1975,12 +1992,12 @@
       document.body.style.overflow = open ? 'hidden' : '';
     });
     navMenu.addEventListener('click', (e) => {
-      if (e.target.classList.contains('nav-link')) {
-        hamburger.classList.remove('open');
-        navMenu.classList.remove('open');
-        hamburger.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
+      const dropBtn = e.target.closest('.nav-btn-dropdown');
+      if (dropBtn) {
+        dropBtn.closest('.nav-dropdown').classList.toggle('open');
+        return;
       }
+      if (e.target.closest('a')) closeNav();
     });
 
     /* ── Active nav on scroll ──────────────────────────────────── */
