@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Наклейки Львів — Друк наклейок на замовлення</title>
+  <title>DsPrint — Друк наклейок на замовлення</title>
   <meta name="description" content="Професійний друк наклейок у Львові. Паперові, плівкові та фігурні наклейки від 50 штук. Виготовлення за 1 день. Доставка Новою Поштою по всій Україні.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1189,7 +1189,10 @@
         gap: 0;
         margin-left: 0;
         position: fixed;
-        inset: 0;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         background: #ffffff;
         opacity: 1;
         z-index: 1000;
@@ -1197,6 +1200,7 @@
         transform: translateX(100%);
         transition: transform .35s cubic-bezier(.4,0,.2,1);
         overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
       }
       .nav-menu.open { transform: translateX(0); }
       .nav-link { font-size: 17px; padding: 0 28px; min-height: 52px; display: flex; align-items: center; color: var(--c-text); border-radius: 0; width: 100%; }
@@ -1263,14 +1267,14 @@
   <header class="header" id="header">
     <div class="container">
       <nav class="nav">
-        <a href="#home" class="logo" aria-label="Наклейки Львів — на головну">
+        <a href="#home" class="logo" aria-label="DsPrint — на головну">
           <svg class="logo__icon" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="30" height="30" rx="7" fill="#FF4D00"/>
             <rect x="6" y="8" width="18" height="3" rx="1.5" fill="white"/>
             <rect x="6" y="13.5" width="13" height="3" rx="1.5" fill="white" opacity="0.7"/>
             <rect x="6" y="19" width="10" height="3" rx="1.5" fill="white" opacity="0.45"/>
           </svg>
-          Наклейки<span>&nbsp;Львів</span>
+          <span style="color:#1a1a1a">Ds</span><span style="color:#FF4D00">Print</span>
         </a>
         <button class="hamburger" id="hamburger" aria-label="Відкрити меню" aria-expanded="false">
           <span></span><span></span><span></span>
@@ -1299,7 +1303,7 @@
   <!-- ════════ HERO ════════ -->
   <section class="hero" id="home">
     <div class="container hero__content">
-      <div class="hero__badge">Друк у Львові з 2019 року</div>
+      <div class="hero__badge">Друк з 2005 року</div>
       <h1 class="hero__title">
         Наклейки<br>що <span class="accent">працюють</span>
       </h1>
@@ -1762,11 +1766,11 @@
               </div>
               +38 (067) 123-45-67
             </a>
-            <a href="mailto:info@nakleyki.lviv.ua" class="order__contact">
+            <a href="mailto:dsprint.ua@gmail.com" class="order__contact">
               <div class="order__contact-icon">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
               </div>
-              info@nakleyki.lviv.ua
+              dsprint.ua@gmail.com
             </a>
             <a href="https://t.me/nakleykylviv" class="order__contact" target="_blank" rel="noopener">
               <div class="order__contact-icon">
@@ -1862,9 +1866,9 @@
               <rect x="6" y="13.5" width="13" height="3" rx="1.5" fill="white" opacity="0.7"/>
               <rect x="6" y="19" width="10" height="3" rx="1.5" fill="white" opacity="0.45"/>
             </svg>
-            Наклейки<span>&nbsp;Львів</span>
+            <span style="color:#1a1a1a">Ds</span><span style="color:#FF4D00">Print</span>
           </a>
-          <p class="footer__brand-desc">Професійний друк наклейок у Львові з 2019 року. Якість, швидкість та підтримка на кожному кроці.</p>
+          <p class="footer__brand-desc">Професійний друк наклейок з 2005 року. Якість, швидкість та підтримка на кожному кроці.</p>
           <div class="footer__social">
             <a href="#" class="footer__social-link" aria-label="Instagram" target="_blank" rel="noopener">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
@@ -1896,14 +1900,14 @@
           <h4 class="footer__col-title">Контакти</h4>
           <ul class="footer__links">
             <li><a href="tel:+380671234567">+38 (067) 123-45-67</a></li>
-            <li><a href="mailto:info@nakleyki.lviv.ua">info@nakleyki.lviv.ua</a></li>
-            <li><span>Львів, вул. Городоцька, 34</span></li>
+            <li><a href="mailto:dsprint.ua@gmail.com">dsprint.ua@gmail.com</a></li>
+            <li><span>Львів, вул. Джерельна 38</span></li>
             <li><span>Пн–Пт: 9:00–18:00</span></li>
           </ul>
         </div>
       </div>
       <div class="footer__bottom">
-        <p class="footer__copy">© 2024 Наклейки Львів. Всі права захищені.</p>
+        <p class="footer__copy">© 2026 DsPrint. Всі права захищені.</p>
         <p class="footer__made">Максимальний формат друку: 320×450 мм</p>
       </div>
     </div>
