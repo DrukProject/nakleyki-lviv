@@ -834,9 +834,29 @@ function fabCallSubmit(){ const n=document.getElementById('fab-name').value.trim
 // Order overlay
 const orderOverlay = document.getElementById('orderOverlay');
 function openOrderOverlay(){orderOverlay.classList.add('open');document.body.style.overflow='hidden';}
-function closeOrderOverlay(){orderOverlay.classList.remove('open');document.body.style.overflow='';}
+function closeOrderOverlay(){
+  orderOverlay.classList.remove('open');
+  document.body.style.overflow='';
+  if (window.location.hash === '#order') {
+    history.replaceState(null, '', window.location.pathname + window.location.search);
+  }
+}
 document.getElementById('orderOverlayClose').addEventListener('click', closeOrderOverlay);
 orderOverlay.addEventListener('click', e => { if(e.target===orderOverlay) closeOrderOverlay(); });
+document.querySelectorAll('a[href="#order"]').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    history.replaceState(null, '', '#order');
+    openOrderOverlay();
+  });
+});
+function syncOrderOverlayWithHash(){
+  if (window.location.hash === '#order') {
+    openOrderOverlay();
+  }
+}
+window.addEventListener('hashchange', syncOrderOverlayWithHash);
+window.addEventListener('load', syncOrderOverlayWithHash);
 function orderOverlaySubmit(){
   const phone=document.getElementById('oo-phone').value.trim();
   const desc=document.getElementById('oo-desc').value.trim();
