@@ -63,6 +63,27 @@
     .why__icon{width:48px;height:48px;background:rgba(255,77,0,.1);border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:22px}
     .why__text strong{display:block;font-size:15px;font-weight:700;color:var(--c-dark);margin-bottom:2px}
     .why__text span{font-size:13px;color:var(--c-muted)}
+    /* Feature blocks */
+    .features{}
+    .feat-block{display:grid;grid-template-columns:1fr 1fr;min-height:400px}
+    .feat-block--alt{background:#faf9f7}
+    .feat-block__img{overflow:hidden}
+    .feat-block__img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s var(--tr)}
+    .feat-block:hover .feat-block__img img{transform:scale(1.03)}
+    .feat-block__body{display:flex;flex-direction:column;justify-content:center;padding:60px}
+    .feat-block--reverse .feat-block__img{order:2}
+    .feat-block--reverse .feat-block__body{order:1}
+    .feat-block__title{font-size:clamp(22px,2.8vw,34px);font-weight:800;color:var(--c-dark);letter-spacing:-.02em;line-height:1.2;margin-bottom:16px}
+    .feat-block__text{font-size:15px;color:var(--c-muted);line-height:1.75;margin-bottom:28px}
+    .feat-block__btn{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;color:var(--c-accent);transition:gap var(--tr)}
+    .feat-block__btn:hover{gap:12px}
+    @media(max-width:768px){
+      .feat-block{grid-template-columns:1fr;min-height:auto}
+      .feat-block__img{height:260px}
+      .feat-block__body{padding:36px 24px}
+      .feat-block--reverse .feat-block__img{order:0}
+      .feat-block--reverse .feat-block__body{order:1}
+    }
     /* Order form */
     .order{padding:80px 0;background:var(--c-bg-2)}
     .order__wrap{max-width:580px}
@@ -217,6 +238,43 @@
         <div class="why__icon">🚚</div>
         <div class="why__text"><strong>Доставка НП</strong><span>Відправляємо Новою Поштою по Україні</span></div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- Feature blocks -->
+<section class="features">
+  <!-- Block 1: photo left, text right -->
+  <div class="feat-block">
+    <div class="feat-block__img">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800" alt="Цифровий друк від 1 примірника" loading="lazy">
+    </div>
+    <div class="feat-block__body reveal">
+      <h2 class="feat-block__title">Цифровий друк від 1 примірника</h2>
+      <p class="feat-block__text">Не потрібно замовляти великі тиражі. Друкуємо від одного аркуша — ідеально для тестових зразків, персоналізованої продукції та малих партій. Швидко, якісно, без передоплати за тираж.</p>
+      <a href="#calculator" class="feat-block__btn">Замовити цифровий друк →</a>
+    </div>
+  </div>
+  <!-- Block 2: text left, photo right -->
+  <div class="feat-block feat-block--alt feat-block--reverse">
+    <div class="feat-block__img">
+      <img src="https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=800" alt="Ексклюзивний об'ємний друк" loading="lazy">
+    </div>
+    <div class="feat-block__body reveal">
+      <h2 class="feat-block__title">Ексклюзивний об'ємний друк</h2>
+      <p class="feat-block__text">Наша головна перевага — об'ємний друк на готових предметах. Чохли, ручки, блокноти, таблички з рельєфними елементами. Виглядає дорого, відчувається преміально.</p>
+      <a href="#calculator" class="feat-block__btn">Дізнатись більше →</a>
+    </div>
+  </div>
+  <!-- Block 3: photo left, text right -->
+  <div class="feat-block">
+    <div class="feat-block__img">
+      <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800" alt="Доставка по всій Україні" loading="lazy">
+    </div>
+    <div class="feat-block__body reveal">
+      <h2 class="feat-block__title">Доставка по всій Україні</h2>
+      <p class="feat-block__text">Відправляємо Новою Поштою в будь-яке місто. Самовивіз у Львові на вул. Джерельна 38. Виконуємо замовлення від 1 дня — отримаєте продукцію якнайшвидше.</p>
+      <a href="#order" class="feat-block__btn">Адреса та контакти →</a>
     </div>
   </div>
 </section>
