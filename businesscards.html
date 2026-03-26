@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Візитки у Львові | DsPrint</title>
+  <meta name="description" content="Друк візиток у Львові від DsPrint. Швидкий друк, допомога з макетом, різні папери, компактна конфігурація параметрів прямо на сторінці.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#faf9f7;
+      --card:#fff;
+      --line:#e7e1d8;
+      --line-dark:#d8d0c5;
+      --text:#1a1a1a;
+      --muted:#6f6a63;
+      --accent:#FF4D00;
+      --accent-dark:#e54800;
+      --soft:#f4efe8;
+      --green:#2e9d49;
+      --green-soft:#edf8f0;
+      --shadow:0 14px 34px rgba(26,26,26,.07);
+      --radius:20px;
+      --radius-sm:14px;
+      --font:'Inter',system-ui,sans-serif;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+    a{text-decoration:none;color:inherit}
+    img{display:block;max-width:100%}
+    button,input,select{font:inherit}
+    .container{max-width:1120px;margin:0 auto;padding:0 24px}
+
+    .header{position:sticky;top:0;z-index:100;background:rgba(250,249,247,.94);backdrop-filter:blur(18px);border-bottom:1px solid rgba(231,225,216,.9)}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 0}
+    .logo{display:flex;align-items:center;gap:8px;font-size:19px;font-weight:800;letter-spacing:-.03em}
+    .logo__icon{width:30px;height:30px}
+    .nav__actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+    .nav__link{display:inline-flex;align-items:center;justify-content:center;padding:9px 16px;border:1px solid var(--line);border-radius:12px;background:#fff;font-size:14px;font-weight:500;transition:.2s}
+    .nav__link:hover{border-color:var(--line-dark);background:#fffdfa}
+    .nav__link--accent{background:var(--accent);border-color:var(--accent);color:#fff}
+    .nav__link--accent:hover{background:var(--accent-dark);border-color:var(--accent-dark)}
+
+    .page{padding:28px 0 84px}
+    .breadcrumbs{font-size:14px;color:#9b9388;margin-bottom:12px}
+    .breadcrumbs a:hover{color:var(--accent)}
+    .hero{margin-bottom:28px}
+    .hero__title{font-size:clamp(30px,4vw,50px);line-height:1.05;font-weight:900;letter-spacing:-.045em;max-width:860px;margin-bottom:12px}
+    .hero__title .accent{color:var(--accent)}
+    .hero__sub{font-size:17px;color:var(--muted);max-width:720px}
+
+    .top{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:24px;align-items:start}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+
+    .gallery{padding:16px}
+    .gallery__main{aspect-ratio:1.25/1;overflow:hidden;border-radius:16px;background:#ece7de}
+    .gallery__main img{width:100%;height:100%;object-fit:cover}
+    .gallery__thumbs{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:10px}
+    .gallery__thumb{border:none;background:none;padding:0;border-radius:12px;overflow:hidden;cursor:pointer;outline:2px solid transparent;transition:outline-color .2s,transform .2s}
+    .gallery__thumb img{width:100%;height:74px;object-fit:cover}
+    .gallery__thumb.active{outline-color:var(--accent)}
+    .gallery__thumb:hover{transform:translateY(-2px)}
+
+    .sidebar{display:grid;gap:18px}
+    .price-card{padding:18px 18px 20px}
+    .price-row{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+    .price-title{font-size:28px;line-height:1.05;font-weight:900;letter-spacing:-.04em;color:var(--text)}
+    .price-sub{font-size:14px;color:var(--muted);margin-top:8px}
+    .price-order{display:inline-flex;align-items:center;justify-content:center;padding:16px 24px;min-width:160px;border:none;border-radius:14px;background:var(--accent);color:#fff;font-size:17px;font-weight:800;cursor:pointer;transition:.2s}
+    .price-order:hover{background:var(--accent-dark)}
+    .summary{display:grid;gap:0;margin:8px 0 14px}
+    .summary__item{padding:14px 0;border-bottom:1px solid var(--line);font-size:16px;color:#35322e}
+    .summary__item:last-child{border-bottom:none}
+    .actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .action-btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 16px;border-radius:14px;border:none;font-weight:700;font-size:15px;cursor:pointer;transition:.2s}
+    .action-btn--green{background:var(--green-soft);border:1px solid #bee0c8;color:var(--green)}
+    .action-btn--green:hover{background:#e2f4e7}
+    .action-btn--blue{background:#f0f6ff;border:1px solid #d1e1f7;color:#2765a5}
+    .action-btn--blue:hover{background:#e6f0fd}
+
+    .panel{display:none;margin-top:14px;padding:16px;border:1px solid var(--line);border-radius:16px;background:#fcfbf9}
+    .panel.open{display:block}
+    .panel__title{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+    .help-form{display:grid;gap:10px}
+    .help-form input{width:100%;padding:13px 14px;border:1px solid var(--line-dark);border-radius:12px;background:#fff}
+    .help-form input:focus{outline:none;border-color:var(--accent)}
+    .help-form__btn{padding:14px 16px;border:none;border-radius:12px;background:var(--accent);color:#fff;font-weight:800;cursor:pointer}
+    .help-form__btn:hover{background:var(--accent-dark)}
+    .help-note{font-size:14px;color:var(--muted)}
+
+    .config-box{display:grid;gap:12px}
+    .config-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+    .config-head__title{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:800;letter-spacing:-.02em}
+    .config-head__icon{font-size:20px;color:var(--accent)}
+    .config-grid{display:grid;grid-template-columns:170px 1fr;gap:10px 16px;align-items:center}
+    .config-grid label{font-size:15px;color:#403c37}
+    .inline-size{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+    .inline-size input,.config-box select,.config-box .small-input{padding:11px 12px;border:1px solid var(--line-dark);border-radius:12px;background:#fff}
+    .inline-size input,.small-input{width:68px;text-align:center}
+    .config-box select:focus,.inline-size input:focus,.small-input:focus{outline:none;border-color:var(--accent)}
+    .config-actions{padding-top:10px}
+    .config-note{font-size:15px;color:var(--muted);text-align:center;line-height:1.7;margin-bottom:12px}
+    .config-submit{display:inline-flex;align-items:center;justify-content:center;width:100%;padding:16px;border:none;border-radius:14px;background:#e63a44;color:#fff;font-size:17px;font-weight:800;cursor:pointer;margin-top:6px}
+    .config-submit:hover{background:#d4303a}
+    .radio-row{display:flex;align-items:center;gap:10px}
+    .radio-row input{accent-color:var(--accent)}
+
+    .info-card{padding:22px 24px}
+    .info-card p{font-size:16px;color:#32302c;line-height:1.8}
+    .info-card strong{color:var(--text)}
+
+    .content-card{padding:28px 30px;margin-top:22px}
+    .content-card h2{font-size:28px;font-weight:800;letter-spacing:-.03em;margin-bottom:14px}
+    .content-card h3{font-size:22px;font-weight:800;letter-spacing:-.03em;margin:22px 0 10px}
+    .content-card p{font-size:17px;color:#3d3934;line-height:1.85;margin-bottom:16px}
+    .content-card ul{padding-left:22px}
+    .content-card li{font-size:17px;color:#3d3934;line-height:1.75;margin-bottom:8px}
+    .content-card li::marker{color:var(--accent)}
+
+    .services{margin-top:34px}
+    .services__title{font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+    .services__heading{font-size:32px;font-weight:900;letter-spacing:-.04em;line-height:1.08;margin-bottom:24px}
+    .services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+    .service{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 10px 24px rgba(26,26,26,.06);transition:transform .2s,box-shadow .2s}
+    .service:hover{transform:translateY(-3px);box-shadow:0 16px 34px rgba(26,26,26,.1)}
+    .service__image{aspect-ratio:1/.72;overflow:hidden;background:#ece7de}
+    .service__image img{width:100%;height:100%;object-fit:cover}
+    .service__name{padding:14px 16px;font-size:15px;font-weight:700;color:#1a1a1a}
+
+    .footer{margin-top:42px;background:#1f1e1c;color:#fff}
+    .footer__grid{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:40px;padding:46px 0 34px}
+    .footer__brand{font-size:18px;font-weight:800;letter-spacing:-.02em;margin-bottom:10px}
+    .footer__desc{font-size:13px;color:rgba(255,255,255,.46);max-width:240px;line-height:1.75}
+    .footer__col h4{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.36);margin-bottom:14px}
+    .footer__col ul{list-style:none}
+    .footer__col li{margin-bottom:8px}
+    .footer__col a,.footer__col span{font-size:13px;color:rgba(255,255,255,.62)}
+    .footer__bottom{border-top:1px solid rgba(255,255,255,.08);padding:18px 0 24px;font-size:12px;color:rgba(255,255,255,.34)}
+
+    .floating-chat{position:fixed;right:22px;bottom:22px;width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--accent);box-shadow:0 14px 30px rgba(255,77,0,.28)}
+    .floating-chat svg{width:26px;height:26px;fill:#fff}
+
+    @media(max-width:980px){
+      .top{grid-template-columns:1fr}
+      .services-grid{grid-template-columns:repeat(2,1fr)}
+      .footer__grid{grid-template-columns:1fr 1fr}
+    }
+    @media(max-width:720px){
+      .container{padding:0 16px}
+      .nav{flex-direction:column;align-items:flex-start}
+      .nav__actions{width:100%}
+      .nav__link{flex:1 1 auto}
+      .gallery__thumbs{grid-template-columns:repeat(3,1fr)}
+      .price-row{flex-direction:column;align-items:flex-start}
+      .price-order{width:100%}
+      .actions{grid-template-columns:1fr}
+      .config-grid{grid-template-columns:1fr}
+      .services-grid{grid-template-columns:1fr}
+      .footer__grid{grid-template-columns:1fr}
+      .hero__title{font-size:34px}
+      .content-card{padding:22px 20px}
+      .content-card p,.content-card li,.info-card p{font-size:16px}
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <nav class="nav">
+        <a href="index.html" class="logo" aria-label="DsPrint">
+          <svg class="logo__icon" viewBox="0 0 30 30" fill="none"><rect width="30" height="30" rx="7" fill="#FF4D00"/><path d="M7 8h8c3.866 0 7 3.134 7 7s-3.134 7-7 7H7V8z" fill="#fff"/><rect x="10" y="12" width="4" height="6" rx="1" fill="#FF4D00"/></svg>
+          <span><span style="color:#1a1a1a">Ds</span><span style="color:#FF4D00">Print</span></span>
+        </a>
+        <div class="nav__actions">
+          <a class="nav__link" href="index.html">← Головна</a>
+          <a class="nav__link" href="catalog.html">Каталог продукції</a>
+          <a class="nav__link" href="#services">Послуги</a>
+          <a class="nav__link nav__link--accent" href="#helpPanel">Замовити</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="container">
+      <div class="breadcrumbs"><a href="index.html">Головна</a> &gt; <span>Візитки</span></div>
+      <section class="hero">
+        <h1 class="hero__title">Друк <span class="accent">візиток</span> швидко і без зайвих кроків</h1>
+        <p class="hero__sub">Компактна сторінка з фото, базовою ціною і параметрами прямо тут. Без перекидання в окремий калькулятор, якщо потрібно просто змінити папір, друк або кількість.</p>
+      </section>
+
+      <section class="top">
+        <div class="gallery card">
+          <div class="gallery__main">
+            <img id="mainCardImage" src="photos/photo_1_2026-03-26_18-13-34.jpg" alt="Друк візиток DsPrint">
+          </div>
+          <div class="gallery__thumbs">
+            <button class="gallery__thumb active" type="button" data-src="photos/photo_1_2026-03-26_18-13-34.jpg" data-alt="Візитка DsPrint 1"><img src="photos/photo_1_2026-03-26_18-13-34.jpg" alt="Мініатюра 1"></button>
+            <button class="gallery__thumb" type="button" data-src="photos/photo_2_2026-03-26_18-13-34.jpg" data-alt="Візитка DsPrint 2"><img src="photos/photo_2_2026-03-26_18-13-34.jpg" alt="Мініатюра 2"></button>
+            <button class="gallery__thumb" type="button" data-src="photos/photo_3_2026-03-26_18-13-34.jpg" data-alt="Візитка DsPrint 3"><img src="photos/photo_3_2026-03-26_18-13-34.jpg" alt="Мініатюра 3"></button>
+            <button class="gallery__thumb" type="button" data-src="photos/photo_4_2026-03-26_18-13-34.jpg" data-alt="Візитка DsPrint 4"><img src="photos/photo_4_2026-03-26_18-13-34.jpg" alt="Мініатюра 4"></button>
+            <button class="gallery__thumb" type="button" data-src="photos/photo_5_2026-03-26_18-13-34.jpg" data-alt="Візитка DsPrint 5"><img src="photos/photo_5_2026-03-26_18-13-34.jpg" alt="Мініатюра 5"></button>
+          </div>
+        </div>
+
+        <div class="sidebar">
+          <div class="price-card card">
+            <div class="price-row">
+              <div>
+                <div class="price-title">Конфігурація візиток</div>
+                <div class="price-sub">Оберіть папір, друк і додаткові параметри. Ми використаємо це як готову заявку без неточної ціни.</div>
+              </div>
+              <button class="price-order" type="button" data-open-help>Замовити</button>
+            </div>
+
+            <div class="summary">
+              <div class="summary__item" id="summaryPaper">папір крейдований матовий 350 грам</div>
+              <div class="summary__item" id="summarySize">розмір 90 × 50 мм</div>
+              <div class="summary__item" id="summaryPrint">повноколірні односторонні</div>
+            </div>
+
+            <div class="actions">
+              <button class="action-btn action-btn--green" type="button" data-open-config>Змінити параметри</button>
+              <button class="action-btn action-btn--blue" type="button" data-open-help>Допомогти замовити</button>
+            </div>
+
+            <div class="panel" id="configPanel">
+              <div class="panel__title">Цифровий друк</div>
+              <div class="config-box">
+                <div class="config-head">
+                  <div class="config-head__title"><span class="config-head__icon">☰</span><span>Параметри візиток</span></div>
+                </div>
+                <div class="config-grid">
+                  <label for="widthInput">розмір</label>
+                  <div class="inline-size">
+                    <input id="widthInput" type="number" value="90" min="40" max="150">
+                    <span>x</span>
+                    <input id="heightInput" type="number" value="50" min="40" max="150">
+                    <span>мм</span>
+                  </div>
+
+                  <label for="paperSelect">папір</label>
+                  <select id="paperSelect">
+                    <option value="coated-matte-350" selected>папір крейдований матовий 350 грам</option>
+                    <option value="plastic-300">папір пластиковий 300 грам</option>
+                    <option value="offset-250">папір офсетний 250 грам</option>
+                    <option value="coated-matte-400">папір крейдований матовий 400 грам</option>
+                    <option value="coated-matte-300">папір крейдований матовий 300 грам</option>
+                    <option value="coated-matte-250">папір крейдований матовий 250 грам</option>
+                    <option value="kolotech-300">папір колотех 300 грам</option>
+                    <option value="kolotech-250">папір колотех 250 грам</option>
+                    <option value="splendorgel-340">папір SplendorGel 340 грам</option>
+                    <option value="dns-300">папір DNS 300 грам</option>
+                    <option value="icelite-toile-300">картон льон Icelite toile moyenne 300 грам</option>
+                    <option value="tintoretto-gesso-300">картон Tintoretto Gesso 300 грам</option>
+                    <option value="gc1-250">картон GC1 білий зворот 250 грам</option>
+                  </select>
+
+                  <label for="printSelect">друк</label>
+                  <select id="printSelect">
+                    <option value="full-color-1" selected>повноколорові односторонні</option>
+                    <option value="full-color-2">повноколорові двосторонні</option>
+                    <option value="bw-1">чорно-білі односторонні</option>
+                    <option value="bw-2">чорно-білі двосторонні</option>
+                  </select>
+
+                  <label for="extraSelect">додатково</label>
+                  <select id="extraSelect">
+                    <option value="none" selected>немає</option>
+                    <option value="lam-matte-25-1">ламінація матова 25мк 1 сторона</option>
+                    <option value="lam-matte-25-2">ламінація матова 25мк 2 сторін</option>
+                    <option value="lam-gloss-25-1">ламінація глянцева 25мк 1 сторона</option>
+                    <option value="lam-gloss-25-2">ламінація глянцева 25мк 2 сторін</option>
+                    <option value="lam-gloss-100-2">ламінація глянцева 100мк 2 сторін</option>
+                    <option value="lam-matte-100-2">ламінація матова 100мк 2 сторін</option>
+                    <option value="lam-gloss-175-2">ламінація глянцева 175мк 2 сторін</option>
+                    <option value="perforation">перфорація</option>
+                    <option value="lam-softtouch-1">ламінація Soft Touch 1 сторона</option>
+                    <option value="lam-softtouch-2">ламінація Soft Touch 2 сторін</option>
+                    <option value="lam-gloss-75-2">ламінація глянцева 75мк 2 сторін</option>
+                  </select>
+
+                  <label for="qtyInput">кількість</label>
+                  <div class="inline-size">
+                    <input id="qtyInput" class="small-input" type="number" value="100" min="100" step="50">
+                    <span>штук одного виду</span>
+                  </div>
+
+                  <label for="typesInput">різних видів</label>
+                  <div class="inline-size">
+                    <input id="typesInput" class="small-input" type="number" value="1" min="1" step="1">
+                    <span>або різних прізвищ</span>
+                  </div>
+
+                  <label>скруглені кути</label>
+                  <div class="radio-row">
+                    <input id="roundedInput" type="checkbox">
+                  </div>
+                </div>
+                <div class="config-actions">
+                  <div class="config-note">Ціну зараз не показуємо. Зберігаємо тільки правильний вибір параметрів для заявки.</div>
+                  <button class="config-submit" type="button" data-open-help>Замовити</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel" id="helpPanel">
+              <div class="panel__title">Допомогти замовити</div>
+              <form class="help-form">
+                <input type="tel" placeholder="ваш номер телефону" aria-label="Номер телефону">
+                <div class="help-note">Ми передзвонимо, допоможемо з параметрами і підкажемо по макету.</div>
+                <button class="help-form__btn" type="button">Надіслати номер</button>
+              </form>
+            </div>
+          </div>
+
+          <div class="info-card card">
+            <p><strong>Доставка:</strong> самовивіз з представництва; до відділення Нової пошти; кур'єрська доставка.<br><strong>Оплата:</strong> готівкова, безготівкова, VISA/Mastercard.<br><strong>Обмін та повернення:</strong> здійснюється протягом 14 днів після покупки у випадку браку згідно із законом України.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-card card">
+        <h2>Друк візиток різними способами</h2>
+        <p>Виконуємо друк візиток на крейдованому, матовому, дизайнерському папері та картоні. Є базові варіанти для швидкого корпоративного друку і більш виразні рішення для брендів, які хочуть виділитись фактурою, щільністю або оздобленням.</p>
+        <p>Друкуємо як з готових макетів, так і допомагаємо з підготовкою файлів перед друком. За потреби можемо запропонувати ламінацію, тиснення, вибірковий лак або інші після друкарські ефекти, якщо для проєкту важливе враження при першому контакті.</p>
+        <h3>Основні формати візиток</h3>
+        <ul>
+          <li>Стандартний формат 90×50 мм. Практичний розмір для повсякденного використання і ділових зустрічей.</li>
+          <li>Євростандарт 85×55 мм. Виглядає стримано і добре лягає в формат банківської картки.</li>
+          <li>Квадратні або нестандартні формати. Підходять для дизайнерських брендів, шоурумів, салонів і креативних студій.</li>
+        </ul>
+        <h3>Що можемо додати</h3>
+        <ul>
+          <li>односторонній або двосторонній друк</li>
+          <li>матове чи глянцеве ламінування</li>
+          <li>тиснення фольгою або сліпе тиснення</li>
+          <li>преміальні папери з фактурою або кольором</li>
+          <li>допомогу з підготовкою макета до друку</li>
+        </ul>
+      </section>
+
+      <section class="services" id="services">
+        <div class="services__title">Каталог</div>
+        <h2 class="services__heading">Далі наші послуги</h2>
+        <div class="services-grid">
+          <a class="service" href="calculator.html">
+            <div class="service__image"><img src="photos/photo_1_2026-03-26_18-03-15.jpg" alt="Вартість друку"></div>
+            <div class="service__name">Вартість друку</div>
+          </a>
+          <a class="service" href="businesscards.html">
+            <div class="service__image"><img src="photos/photo_1_2026-03-26_18-13-34.jpg" alt="Візитки"></div>
+            <div class="service__name">Візитки</div>
+          </a>
+          <a class="service" href="catalog.html">
+            <div class="service__image"><img src="photos/photo_4_2026-03-26_18-13-34.jpg" alt="Каталог"></div>
+            <div class="service__name">Каталог продукції</div>
+          </a>
+          <a class="service" href="labels.html">
+            <div class="service__image"><img src="photos/photo_5_2026-03-26_18-13-34.jpg" alt="Наклейки та стікери"></div>
+            <div class="service__name">Наклейки та стікери</div>
+          </a>
+          <a class="service" href="materials.html">
+            <div class="service__image"><img src="photos/photo_2_2026-03-26_18-13-34.jpg" alt="Матеріали"></div>
+            <div class="service__name">Матеріали</div>
+          </a>
+          <a class="service" href="lamination.html">
+            <div class="service__image"><img src="photos/photo_3_2026-03-26_18-13-34.jpg" alt="Ламінування"></div>
+            <div class="service__name">Ламінування</div>
+          </a>
+          <a class="service" href="foil.html">
+            <div class="service__image"><img src="photos/photo_1_2026-03-26_18-13-34.jpg" alt="Фольгування"></div>
+            <div class="service__name">Фольгування</div>
+          </a>
+          <a class="service" href="stickerpacks.html">
+            <div class="service__image"><img src="photos/photo_4_2026-03-26_18-03-15.jpg" alt="Стікерпаки"></div>
+            <div class="service__name">Стікерпаки</div>
+          </a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <div class="footer__brand"><span style="color:#fff">Ds</span><span style="color:#FF4D00">Print</span></div>
+          <p class="footer__desc">Цифровий друк та сувенірна продукція у Львові з 2005 року.</p>
+        </div>
+        <div class="footer__col">
+          <h4>Послуги</h4>
+          <ul>
+            <li><a href="businesscards.html">Візитки</a></li>
+            <li><a href="labels.html">Наклейки</a></li>
+            <li><a href="foil.html">Фольгування</a></li>
+            <li><a href="lamination.html">Ламінування</a></li>
+            <li><a href="materials.html">Матеріали</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Контакти</h4>
+          <ul>
+            <li><a href="tel:+380678003050">+380 67 800 30 50</a></li>
+            <li><a href="https://t.me/dsprints" target="_blank" rel="noopener">Telegram: @dsprints</a></li>
+            <li><a href="viber://chat?number=+380678003050">Viber: +380 67 800 30 50</a></li>
+            <li><a href="mailto:dsprint.ua@gmail.com">dsprint.ua@gmail.com</a></li>
+            <li><span>Львів, вул. Джерельна 38</span></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Години роботи</h4>
+          <ul>
+            <li><span>Пн–Пт: 9:00–18:00</span></li>
+            <li><span>Сб: 10:00–15:00</span></li>
+            <li><span>Нд: вихідний</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">© 2026 DsPrint — Всі права захищені. Львів, Україна.</div>
+    </div>
+  </footer>
+
+  <a href="#helpPanel" class="floating-chat" aria-label="Допомогти замовити">
+    <svg viewBox="0 0 24 24"><path d="M20 3H4a2 2 0 0 0-2 2v17l4-4h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2Zm-1 10H5v-2h14v2Zm0-3H5V8h14v2Zm0-3H5V5h14v2Z"/></svg>
+  </a>
+
+  <script>
+    const mainImage = document.getElementById('mainCardImage');
+    const thumbs = document.querySelectorAll('.gallery__thumb');
+    thumbs.forEach((thumb) => {
+      thumb.addEventListener('click', () => {
+        thumbs.forEach((item) => item.classList.remove('active'));
+        thumb.classList.add('active');
+        mainImage.src = thumb.dataset.src;
+        mainImage.alt = thumb.dataset.alt;
+      });
+    });
+
+    const configPanel = document.getElementById('configPanel');
+    const helpPanel = document.getElementById('helpPanel');
+    const openConfigButtons = document.querySelectorAll('[data-open-config]');
+    const openHelpButtons = document.querySelectorAll('[data-open-help]');
+
+    function openPanel(panel) {
+      if (panel === configPanel) {
+        configPanel.classList.add('open');
+        helpPanel.classList.remove('open');
+        configPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      } else {
+        helpPanel.classList.add('open');
+        configPanel.classList.remove('open');
+        helpPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+
+    openConfigButtons.forEach((button) => button.addEventListener('click', () => openPanel(configPanel)));
+    openHelpButtons.forEach((button) => button.addEventListener('click', () => openPanel(helpPanel)));
+
+    const widthInput = document.getElementById('widthInput');
+    const heightInput = document.getElementById('heightInput');
+    const paperSelect = document.getElementById('paperSelect');
+    const printSelect = document.getElementById('printSelect');
+    const extraSelect = document.getElementById('extraSelect');
+    const qtyInput = document.getElementById('qtyInput');
+    const typesInput = document.getElementById('typesInput');
+    const roundedInput = document.getElementById('roundedInput');
+    const priceValue = document.getElementById('priceValue');
+    const summaryPaper = document.getElementById('summaryPaper');
+    const summarySize = document.getElementById('summarySize');
+    const summaryPrint = document.getElementById('summaryPrint');
+
+    function updatePrice() {
+      const width = widthInput.value || 90;
+      const height = heightInput.value || 50;
+      summaryPaper.textContent = paperSelect.options[paperSelect.selectedIndex].text;
+      summarySize.textContent = 'розмір ' + width + ' × ' + height + ' мм';
+      const roundedText = roundedInput.checked ? ', скруглені кути' : '';
+      const extraText = extraSelect.options[extraSelect.selectedIndex].text;
+      summaryPrint.textContent = printSelect.options[printSelect.selectedIndex].text + (extraText !== 'немає' ? ', ' + extraText : '') + roundedText;
+    }
+
+    [widthInput, heightInput, paperSelect, printSelect, extraSelect, qtyInput, typesInput, roundedInput].forEach((field) => {
+      field.addEventListener('input', updatePrice);
+      field.addEventListener('change', updatePrice);
+    });
+  </script>
+</body>
+</html>
