@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Цифровий друк — калькулятор ціни | DsPrint Львів</title>
+  <meta name="description" content="Розрахуйте вартість цифрового друку онлайн. Візитки, флаєри, листівки, наклейки — від 1 примірника.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--c-bg:#fff;--c-bg-2:#f5f4f1;--c-bg-3:#ede9e3;--c-border:#e5e2dc;--c-accent:#FF4D00;--c-dark:#1a1a1a;--c-text:#3d3a36;--c-muted:#7a756e;--r-sm:8px;--r-md:12px;--f:'Inter',system-ui,sans-serif;--tr:.2s}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--f);background:#fff;color:var(--c-text);-webkit-font-smoothing:antialiased;overflow-x:clip}
+    a{color:inherit;text-decoration:none} ul{list-style:none}
+    .container{max-width:1200px;margin:0 auto;padding:0 24px}
+    .header{position:fixed;top:0;left:0;right:0;z-index:999;padding:18px 0;transition:padding var(--tr),background var(--tr);border-bottom:1px solid transparent}
+    .header.scrolled{background:rgba(255,255,255,.96);backdrop-filter:blur(20px);padding:12px 0;border-bottom-color:var(--c-border);box-shadow:0 1px 0 var(--c-border)}
+    .nav{display:flex;align-items:center;gap:24px}
+    .logo{display:flex;align-items:center;gap:8px;font-size:18px;font-weight:800;letter-spacing:-.03em;flex-shrink:0}
+    .logo__icon{width:30px;height:30px}
+    .nav-menu{display:flex;align-items:center;gap:4px;margin-left:auto}
+    .nav-btn{display:inline-flex;align-items:center;padding:8px 16px;border-radius:var(--r-sm);font-size:14px;font-weight:500;cursor:pointer;font-family:var(--f);transition:var(--tr);white-space:nowrap}
+    .nav-btn--outline{background:transparent;color:var(--c-dark);border:1.5px solid var(--c-border)}
+    .nav-btn--outline:hover{border-color:var(--c-dark);background:rgba(0,0,0,.04)}
+    .nav-btn--accent{background:var(--c-accent);color:#fff;border:none}
+    .nav-btn--accent:hover{background:#e64500}
+    .hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:40px;height:40px;background:none;border:none;cursor:pointer;margin-left:auto;padding:8px}
+    .hamburger span{display:block;height:2px;background:var(--c-dark);border-radius:2px}
+    /* calculator */
+    .calc-page{padding:104px 0 64px}
+    .calc-head{margin-bottom:28px}
+    .calc-head h1{font-size:clamp(22px,3vw,34px);font-weight:800;color:var(--c-dark);letter-spacing:-.02em;margin-bottom:4px}
+    .calc-head h1 span{color:var(--c-accent)}
+    .calc-head p{font-size:14px;color:var(--c-muted)}
+    .calc-tabs{display:flex;border-bottom:2px solid var(--c-border);margin-bottom:28px}
+    .calc-tab{padding:10px 20px;font-size:13px;font-weight:600;color:var(--c-muted);cursor:pointer;border:none;background:none;font-family:var(--f);border-bottom:2px solid transparent;margin-bottom:-2px;transition:color .2s;white-space:nowrap}
+    .calc-tab.active{color:var(--c-accent);border-bottom-color:var(--c-accent)}
+    .calc-row{margin-bottom:22px}
+    .calc-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--c-muted);margin-bottom:9px}
+    .btn-group{display:flex;flex-wrap:wrap;gap:7px}
+    .btn-opt{padding:8px 13px;border:1.5px solid var(--c-border);border-radius:var(--r-sm);font-size:13px;font-weight:500;color:var(--c-dark);background:#fff;cursor:pointer;font-family:var(--f);transition:border-color .15s,color .15s,background .15s;white-space:nowrap;line-height:1.3}
+    .btn-opt:hover{border-color:var(--c-accent);color:var(--c-accent)}
+    .btn-opt.active{border-color:var(--c-accent);background:var(--c-accent);color:#fff}
+    .size-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+    .size-inputs{display:flex;align-items:center;gap:6px}
+    .size-inputs input{width:66px;padding:8px 10px;border:1.5px solid var(--c-border);border-radius:var(--r-sm);font-family:var(--f);font-size:14px;color:var(--c-dark);text-align:center;outline:none;transition:border-color .15s}
+    .size-inputs input:focus{border-color:var(--c-accent)}
+    .size-inputs span{font-size:12px;color:var(--c-muted)}
+    .qty-row{display:flex;flex-wrap:wrap;gap:20px;align-items:center}
+    .qty-wrap{display:flex;align-items:center;gap:0}
+    .qty-wrap label{font-size:12px;font-weight:600;color:var(--c-muted);margin-right:10px;white-space:nowrap}
+    .qty-btn{width:34px;height:36px;border:1.5px solid var(--c-border);background:#fff;font-size:17px;cursor:pointer;color:var(--c-dark);line-height:1;transition:background .15s;font-family:var(--f)}
+    .qty-btn:first-of-type{border-radius:var(--r-sm) 0 0 var(--r-sm)}
+    .qty-btn:last-of-type{border-radius:0 var(--r-sm) var(--r-sm) 0}
+    .qty-btn:hover{background:var(--c-bg-2)}
+    .qty-input{width:72px;height:36px;border:1.5px solid var(--c-border);border-left:none;border-right:none;text-align:center;font-family:var(--f);font-size:14px;color:var(--c-dark);outline:none}
+    .mat-scroll{display:flex;gap:0;overflow-x:auto;scrollbar-width:none;border:1.5px solid var(--c-border);border-radius:var(--r-md);width:fit-content;max-width:100%}
+    .mat-scroll::-webkit-scrollbar{display:none}
+    .mat-btn{padding:10px 15px;border:none;background:none;font-size:13px;font-weight:500;color:var(--c-muted);cursor:pointer;font-family:var(--f);white-space:nowrap;transition:color .15s,background .15s;border-right:1px solid var(--c-border)}
+    .mat-btn:last-child{border-right:none}
+    .mat-btn:hover{color:var(--c-dark);background:var(--c-bg-2)}
+    .mat-btn.active{background:var(--c-accent);color:#fff}
+    .mat-sub{margin-top:9px;display:none}
+    .mat-sub.show{display:block}
+    .mat-sub select{padding:9px 12px;border:1.5px solid var(--c-border);border-radius:var(--r-sm);font-family:var(--f);font-size:13px;color:var(--c-dark);background:#fff;outline:none;cursor:pointer;max-width:100%}
+    .mat-sub select:focus{border-color:var(--c-accent)}
+    .finish-toggle{padding:9px 16px;border:1.5px solid var(--c-border);border-radius:var(--r-sm);font-size:13px;font-weight:600;color:var(--c-dark);background:#fff;cursor:pointer;font-family:var(--f);display:flex;align-items:center;gap:8px;transition:border-color .15s}
+    .finish-toggle:hover{border-color:var(--c-accent)}
+    .finish-panel{display:none;margin-top:9px;flex-wrap:wrap;gap:7px}
+    .finish-panel.show{display:flex}
+    .calc-result{background:var(--c-bg-2);border-radius:var(--r-md);padding:24px 28px;margin-top:28px;display:flex;align-items:center;gap:32px;flex-wrap:wrap;min-height:88px}
+    .calc-result__placeholder{color:var(--c-muted);font-size:15px;display:flex;align-items:center;gap:10px}
+    .calc-result__prices{display:none}
+    .calc-result__unit{font-size:12px;color:var(--c-muted);margin-bottom:2px}
+    .calc-result__total{font-size:34px;font-weight:800;color:var(--c-dark);letter-spacing:-.02em;line-height:1}
+    .calc-result__sub{font-size:13px;color:var(--c-muted);margin-top:6px}
+    .disc-badge{display:inline-block;background:rgba(255,77,0,.12);color:var(--c-accent);font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;margin-left:8px;vertical-align:middle}
+    .calc-order-btn{padding:14px 32px;background:var(--c-accent);color:#fff;border:none;border-radius:var(--r-md);font-size:15px;font-weight:700;cursor:pointer;font-family:var(--f);text-transform:uppercase;letter-spacing:.04em;transition:background .2s;white-space:nowrap;display:none;margin-left:auto}
+    .calc-order-btn:hover{background:#e64500}
+    .calc-info{margin-top:24px;padding-top:20px;border-top:1px solid var(--c-border);font-size:13px;color:var(--c-muted);line-height:1.85}
+    /* footer */
+    .footer{background:var(--c-dark);padding:0}
+    .footer__top-arrow{display:block;width:100%;padding:14px 0 10px;background:var(--c-dark);text-align:center;cursor:pointer;border:none;border-bottom:1px solid rgba(255,255,255,.07);transition:background .2s}
+    .footer__top-arrow:hover{background:#222}
+    .footer__top-arrow svg{width:32px;height:18px;stroke:rgba(255,255,255,.35);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .footer__grid{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:40px;padding-top:48px;margin-bottom:48px}
+    .footer__brand{font-size:17px;font-weight:800;color:#fff;margin-bottom:10px;letter-spacing:-.02em}
+    .footer__desc{font-size:13px;color:rgba(255,255,255,.4);line-height:1.7;max-width:220px}
+    .footer__social{display:flex;gap:10px;margin-top:20px}
+    .footer__soc-btn{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:transform .2s;flex-shrink:0}
+    .footer__soc-btn svg{width:18px;height:18px;fill:#fff}
+    .footer__soc-btn:hover{transform:scale(1.1)}
+    .footer__soc-btn--tg{background:#229ED9} .footer__soc-btn--vb{background:#7360F2}
+    .footer__soc-btn--ig{background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)}
+    .footer__col h4{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.35);margin-bottom:14px}
+    .footer__col li{margin-bottom:8px}
+    .footer__col a{font-size:13px;color:rgba(255,255,255,.55);transition:color .2s}
+    .footer__col a:hover{color:#fff}
+    .footer__bottom{background:#111;padding:16px 24px;display:flex;flex-direction:column;align-items:center;gap:10px}
+    .footer__bottom-nav{display:flex;align-items:center;flex-wrap:wrap;justify-content:center}
+    .footer__bottom-nav a{font-size:11px;font-weight:500;color:rgba(255,255,255,.45);letter-spacing:.06em;text-transform:uppercase;padding:4px 14px;transition:color .2s}
+    .footer__bottom-nav a:hover{color:rgba(255,255,255,.8)}
+    .footer__bottom-nav span{font-size:11px;color:rgba(255,255,255,.2)}
+    .footer__copy{font-size:11px;color:rgba(255,255,255,.3)}
+    @media(max-width:768px){
+      .footer__grid{grid-template-columns:1fr 1fr;gap:28px}
+      .calc-result{flex-direction:column;align-items:flex-start;gap:14px}
+      .calc-order-btn{margin-left:0;width:100%}
+    }
+    @media(max-width:480px){
+      .footer__grid{grid-template-columns:1fr}
+      .nav-menu{display:none}
+      .hamburger{display:flex}
+    }
+  </style>
+</head>
+<body>
+
+<header class="header" id="header">
+  <div class="container">
+    <nav class="nav">
+      <a href="index.html" class="logo" aria-label="DsPrint — головна">
+        <svg class="logo__icon" viewBox="0 0 30 30" fill="none"><rect width="30" height="30" rx="7" fill="#FF4D00"/><path d="M7 8h8c3.866 0 7 3.134 7 7s-3.134 7-7 7H7V8z" fill="#fff"/><rect x="10" y="12" width="4" height="6" rx="1" fill="#FF4D00"/></svg>
+        <span><span style="color:#1a1a1a">Ds</span><span style="color:#FF4D00">Print</span></span>
+      </a>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html" class="nav-btn nav-btn--outline">← Головна</a></li>
+        <li><a href="index.html#services" class="nav-btn nav-btn--outline">Продукція</a></li>
+        <li><a href="index.html#footer" class="nav-btn nav-btn--outline">Контакти</a></li>
+        <li><a href="index.html#order" class="nav-btn nav-btn--accent">Замовити</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Меню"><span></span><span></span><span></span></button>
+    </nav>
+  </div>
+</header>
+
+<main class="calc-page">
+  <div class="container">
+    <div class="calc-head">
+      <h1><span>Цифровий друк</span> — калькулятор ціни</h1>
+      <p>Розрахуйте вартість онлайн — вкажіть параметри і отримайте орієнтовну ціну</p>
+    </div>
+
+    <div class="calc-tabs">
+      <button class="calc-tab active" id="tab1">односторінкова продукція</button>
+      <button class="calc-tab" id="tab2">багатосторінкова продукція</button>
+    </div>
+
+    <!-- Row 1: Size -->
+    <div class="calc-row">
+      <div class="calc-label">Розмір аркуша</div>
+      <div class="size-row">
+        <div class="size-inputs">
+          <input type="number" id="w" value="210" min="10" max="1200">
+          <span>×</span>
+          <input type="number" id="h" value="297" min="10" max="1200">
+          <span style="margin-left:2px">мм</span>
+        </div>
+        <div class="btn-group">
+          <button class="btn-opt" data-w="210" data-h="297">A4 210×297</button>
+          <button class="btn-opt" data-w="148" data-h="210">A5 148×210</button>
+          <button class="btn-opt" data-w="105" data-h="148">A6 105×148</button>
+          <button class="btn-opt" data-w="90" data-h="50">Візитка 90×50</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 1b: Qty + Variants -->
+    <div class="calc-row">
+      <div class="calc-label">Тираж</div>
+      <div class="qty-row">
+        <div class="qty-wrap">
+          <label>Штук</label>
+          <button class="qty-btn" onclick="adj('qty',-50)">−</button>
+          <input class="qty-input" type="number" id="qty" value="100" min="1">
+          <button class="qty-btn" onclick="adj('qty',50)">+</button>
+        </div>
+        <div class="qty-wrap">
+          <label>Різних видів</label>
+          <button class="qty-btn" onclick="adj('vars',-1)">−</button>
+          <input class="qty-input" type="number" id="vars" value="1" min="1">
+          <button class="qty-btn" onclick="adj('vars',1)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 2: Material -->
+    <div class="calc-row">
+      <div class="calc-label">Матеріал</div>
+      <div class="mat-scroll" id="matBtns">
+        <button class="mat-btn" data-mat="кальки">кальки</button>
+        <button class="mat-btn" data-mat="самоклеючі">самоклеючі</button>
+        <button class="mat-btn" data-mat="пластикові">пластикові</button>
+        <button class="mat-btn" data-mat="офсетні">офсетні</button>
+        <button class="mat-btn" data-mat="крейдовані">крейдовані</button>
+        <button class="mat-btn" data-mat="крафтові">крафтові</button>
+        <button class="mat-btn" data-mat="колотехі">колотехі</button>
+        <button class="mat-btn" data-mat="картон">картон та дизайнерські</button>
+      </div>
+      <div class="mat-sub" id="subSelf">
+        <select id="selSelf" onchange="calc()">
+          <option>самоклеюча плівка UPM біла матова</option>
+          <option>самоклеюча плівка Ritrama ПРОЗОРА глянець</option>
+          <option>самоклеюча плівка Ritrama БІЛА глянець</option>
+          <option>самоклеючий папір з надсічками</option>
+          <option>Waterproof White вологостійкий</option>
+        </select>
+      </div>
+      <div class="mat-sub" id="subCoated">
+        <select id="selCoated" onchange="calc()">
+          <option>115г</option><option>130г</option><option>150г</option>
+          <option selected>170г</option><option>200г</option><option>250г</option><option>300г</option>
+        </select>
+      </div>
+      <div class="mat-sub" id="subOffset">
+        <select id="selOffset" onchange="calc()">
+          <option>80г</option><option>100г</option><option>120г</option><option>170г</option><option>250г</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Row 3: Print type -->
+    <div class="calc-row">
+      <div class="calc-label">Вид друку</div>
+      <div class="btn-group" id="printBtns">
+        <button class="btn-opt active" data-print="4+0">повноколірний односторонній</button>
+        <button class="btn-opt" data-print="4+4">повноколірний двосторонній</button>
+        <button class="btn-opt" data-print="4+1">повноколірний + чорно-білий</button>
+        <button class="btn-opt" data-print="1+0">чорно-білий односторонній</button>
+        <button class="btn-opt" data-print="1+1">чорно-білий двосторонній</button>
+        <button class="btn-opt" data-print="0">без друку</button>
+      </div>
+    </div>
+
+    <!-- Row 4: Finishing -->
+    <div class="calc-row">
+      <div class="calc-label">Оздоблення</div>
+      <button class="finish-toggle" onclick="toggleFinish()">
+        <span id="finishLabel">без оздоблення</span> ▾
+      </button>
+      <div class="finish-panel" id="finishPanel">
+        <button class="btn-opt active" data-fin="none">без оздоблення</button>
+        <button class="btn-opt" data-fin="lam1m">ламінація матова 25мк 1 сторона</button>
+        <button class="btn-opt" data-fin="lam2m">ламінація матова 25мк 2 сторони</button>
+        <button class="btn-opt" data-fin="lam1g">ламінація глянцева 25мк 1 сторона</button>
+        <button class="btn-opt" data-fin="lam2g">ламінація глянцева 25мк 2 сторони</button>
+        <button class="btn-opt" data-fin="soft">ламінація Soft Touch 1 сторона</button>
+        <button class="btn-opt" data-fin="foil">тиснення фольгою</button>
+      </div>
+    </div>
+
+    <!-- Row 5: Cutting -->
+    <div class="calc-row">
+      <div class="calc-label">Різання та обробка</div>
+      <div class="btn-group" id="cutBtns">
+        <button class="btn-opt active" data-cut="cut">порізка</button>
+        <button class="btn-opt" data-cut="none">без порізки</button>
+        <button class="btn-opt" data-cut="fold">фальцювання / біговання</button>
+        <button class="btn-opt" data-cut="die">висікання штанцформою</button>
+        <button class="btn-opt" data-cut="diecutdig">висікання цифрове</button>
+        <button class="btn-opt" data-cut="corner">заокруглення кутів</button>
+        <button class="btn-opt" data-cut="mount">кашування</button>
+      </div>
+    </div>
+
+    <!-- Result -->
+    <div class="calc-result" id="calcResult">
+      <div class="calc-result__placeholder" id="resPlaceholder">⬆ оберіть матеріал для друку</div>
+      <div class="calc-result__prices" id="resPrices">
+        <div class="calc-result__unit">ціна за штуку — <strong id="resUnit">—</strong> грн</div>
+        <div class="calc-result__total">
+          <span id="resTotal">—</span> грн
+          <span class="disc-badge" id="resDiscount" style="display:none"></span>
+        </div>
+        <div class="calc-result__sub" id="resSub"></div>
+      </div>
+      <button class="calc-order-btn" id="orderBtn" onclick="location.href='index.html#order'">ЗАМОВИТИ</button>
+    </div>
+
+    <div class="calc-info">
+      <strong>Доставка:</strong> самовивіз з представниками; до відділення Нової пошти; кур'єрська доставка.<br>
+      <strong>Оплата:</strong> готівкова; безготівкова; VISA/Mastercard.
+    </div>
+  </div>
+</main>
+
+<footer class="footer" id="footer">
+  <button class="footer__top-arrow" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Вгору">
+    <svg viewBox="0 0 32 18"><polyline points="2,16 16,2 30,16"/></svg>
+  </button>
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand"><span style="color:#fff">Ds</span><span style="color:#FF4D00">Print</span></div>
+        <p class="footer__desc">Цифровий друк та сувенірна продукція у Львові з 2005 року</p>
+        <div class="footer__social">
+          <a href="https://t.me/dsprints" class="footer__soc-btn footer__soc-btn--tg" target="_blank" rel="noopener" aria-label="Telegram"><svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></a>
+          <a href="viber://chat?number=%2B380678003050" onclick="window.open('viber://chat?number=%2B380678003050','_blank')" class="footer__soc-btn footer__soc-btn--vb" aria-label="Viber"><svg viewBox="0 0 24 24"><path d="M17.88 4.09C16.18 2.49 13.9 1.6 11.5 1.6c-5.05 0-9.15 4.1-9.15 9.15 0 1.61.42 3.18 1.22 4.57L2.3 20l4.82-1.26a9.1 9.1 0 0 0 4.38 1.12c5.05 0 9.15-4.1 9.15-9.15 0-2.44-.95-4.74-2.77-6.62zm-6.38 14.07a7.57 7.57 0 0 1-3.86-1.05l-.28-.17-2.86.75.76-2.79-.18-.29a7.59 7.59 0 0 1-1.16-4.06c0-4.19 3.41-7.6 7.6-7.6 2.03 0 3.94.79 5.37 2.23a7.54 7.54 0 0 1 2.23 5.39c-.01 4.19-3.42 7.59-7.62 7.59zm4.17-5.69c-.23-.11-1.35-.67-1.56-.74-.21-.08-.36-.11-.51.11-.15.23-.58.74-.72.9-.13.15-.26.17-.49.06-.23-.11-.97-.36-1.84-1.14-.68-.61-1.14-1.36-1.27-1.59-.13-.23-.01-.36.1-.47.1-.1.23-.26.34-.39.11-.13.15-.23.23-.38.08-.15.04-.28-.02-.39-.06-.11-.51-1.23-.7-1.68-.18-.44-.37-.38-.51-.39h-.43c-.15 0-.39.06-.6.28-.2.23-.78.76-.78 1.86s.8 2.16.91 2.31c.11.15 1.57 2.4 3.81 3.36.53.23.95.37 1.27.47.54.17 1.02.15 1.41.09.43-.07 1.32-.54 1.51-1.06.19-.52.19-.97.13-1.06-.06-.09-.21-.15-.44-.26z"/></svg></a>
+          <a href="#" class="footer__soc-btn footer__soc-btn--ig" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer__col"><h4>Послуги</h4><ul>
+        <li><a href="index.html#services">Наклейки</a></li>
+        <li><a href="index.html#services">Візитки</a></li>
+        <li><a href="index.html#services">Флаєри</a></li>
+        <li><a href="index.html#services">Брошури</a></li>
+        <li><a href="index.html#services">Каталоги</a></li>
+      </ul></div>
+      <div class="footer__col"><h4>Контакти</h4><ul>
+        <li><a href="tel:+380678003050">+380 67 800 30 50</a></li>
+        <li><a href="https://t.me/dsprints" target="_blank" rel="noopener">Telegram: @dsprints</a></li>
+        <li><a href="viber://chat?number=+380678003050">Viber</a></li>
+        <li><a href="mailto:dsprint.ua@gmail.com">dsprint.ua@gmail.com</a></li>
+        <li><span style="color:rgba(255,255,255,.55)">Львів, вул. Джерельна 38</span></li>
+      </ul></div>
+      <div class="footer__col"><h4>Години роботи</h4><ul>
+        <li><span style="color:rgba(255,255,255,.55)">Пн–Пт: 9:00–18:00</span></li>
+        <li><span style="color:rgba(255,255,255,.55)">Сб: 10:00–15:00</span></li>
+        <li><span style="color:rgba(255,255,255,.55)">Нд: вихідний</span></li>
+      </ul></div>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <nav class="footer__bottom-nav">
+      <a href="index.html#services">Продукція &amp; послуги</a>
+      <span>|</span><a href="#footer">Контакти</a>
+      <span>|</span><a href="#">Умови роботи</a>
+    </nav>
+    <span class="footer__copy">© 2026 DsPrint — Всі права захищені. Львів, Україна</span>
+  </div>
+</footer>
+
+<script>
+'use strict';
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => header.classList.toggle('scrolled', scrollY > 40), {passive:true});
+
+// Tabs (visual only for now)
+document.querySelectorAll('.calc-tab').forEach(t => t.addEventListener('click', () => {
+  document.querySelectorAll('.calc-tab').forEach(x => x.classList.remove('active'));
+  t.classList.add('active');
+}));
+
+// Size presets
+document.querySelectorAll('[data-w]').forEach(btn => btn.addEventListener('click', () => {
+  document.getElementById('w').value = btn.dataset.w;
+  document.getElementById('h').value = btn.dataset.h;
+  calc();
+}));
+
+// Qty adjust
+function adj(id, delta) {
+  const el = document.getElementById(id);
+  el.value = Math.max(1, (+el.value || 1) + delta);
+  calc();
+}
+['qty','vars','w','h'].forEach(id => document.getElementById(id).addEventListener('input', calc));
+
+// Material
+let selMat = '';
+document.querySelectorAll('.mat-btn').forEach(btn => btn.addEventListener('click', () => {
+  document.querySelectorAll('.mat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  selMat = btn.dataset.mat;
+  document.getElementById('subSelf').classList.toggle('show', selMat === 'самоклеючі');
+  document.getElementById('subCoated').classList.toggle('show', selMat === 'крейдовані');
+  document.getElementById('subOffset').classList.toggle('show', selMat === 'офсетні');
+  calc();
+}));
+
+// Print type
+let selPrint = '4+0';
+document.querySelectorAll('[data-print]').forEach(btn => btn.addEventListener('click', () => {
+  document.querySelectorAll('[data-print]').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active'); selPrint = btn.dataset.print; calc();
+}));
+
+// Finishing
+let selFin = 'none';
+function toggleFinish() { document.getElementById('finishPanel').classList.toggle('show'); }
+document.querySelectorAll('[data-fin]').forEach(btn => btn.addEventListener('click', () => {
+  document.querySelectorAll('[data-fin]').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active'); selFin = btn.dataset.fin;
+  document.getElementById('finishLabel').textContent = btn.textContent;
+  document.getElementById('finishPanel').classList.remove('show');
+  calc();
+}));
+
+// Cutting
+let selCut = 'cut';
+document.querySelectorAll('[data-cut]').forEach(btn => btn.addEventListener('click', () => {
+  document.querySelectorAll('[data-cut]').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active'); selCut = btn.dataset.cut; calc();
+}));
+
+// Calculation
+function calc() {
+  if (!selMat) return;
+  const w = Math.max(10, +document.getElementById('w').value || 210);
+  const h = Math.max(10, +document.getElementById('h').value || 297);
+  const qty = Math.max(1, +document.getElementById('qty').value || 100);
+
+  const sizeMul = Math.sqrt((w * h) / (210 * 297));
+  const matMul = {кальки:1.1,самоклеючі:1.4,пластикові:1.5,офсетні:0.75,крейдовані:1.0,крафтові:0.95,колотехі:0.85,картон:1.3}[selMat] || 1;
+  const printMul = {'4+0':1,'4+4':1.6,'4+1':1.4,'1+0':0.5,'1+1':0.8,'0':0.3}[selPrint] || 1;
+  const finMul = {none:1,lam1m:1.2,lam2m:1.35,lam1g:1.2,lam2g:1.35,soft:1.45,foil:1.6}[selFin] || 1;
+  const cutMul = {cut:1,none:0.95,fold:1.15,die:1.4,diecutdig:1.25,corner:1.1,mount:1.5}[selCut] || 1;
+
+  let disc = 0;
+  if (qty >= 2000) disc = 35;
+  else if (qty >= 1000) disc = 25;
+  else if (qty >= 500) disc = 15;
+
+  const unit = 4 * sizeMul * matMul * printMul * finMul * cutMul * (1 - disc / 100);
+  const total = unit * qty;
+
+  document.getElementById('resPlaceholder').style.display = 'none';
+  document.getElementById('resPrices').style.display = 'block';
+  document.getElementById('orderBtn').style.display = 'flex';
+  document.getElementById('resUnit').textContent = unit.toFixed(2);
+  document.getElementById('resTotal').textContent = Math.round(total).toLocaleString('uk-UA');
+  document.getElementById('resSub').textContent = qty + ' шт × ' + unit.toFixed(2) + ' грн';
+  const discEl = document.getElementById('resDiscount');
+  discEl.style.display = disc > 0 ? 'inline-block' : 'none';
+  if (disc > 0) discEl.textContent = '−' + disc + '%';
+}
+</script>
+</body>
+</html>

@@ -22,12 +22,35 @@
     .logo{display:flex;align-items:center;gap:8px;font-size:18px;font-weight:800;letter-spacing:-.03em;flex-shrink:0}
     .logo__icon{width:30px;height:30px}
     .nav-menu{display:flex;align-items:center;gap:4px;margin-left:auto}
-    .nav-link{padding:7px 14px;border-radius:var(--r-sm);font-size:14px;font-weight:500;color:var(--c-muted);transition:color var(--tr),background var(--tr)}
-    .nav-link:hover,.nav-link.active{color:var(--c-dark);background:rgba(0,0,0,.04)}
-    .nav-link--cta{background:var(--c-accent);color:#fff!important;font-weight:600;margin-left:8px} .nav-link--cta:hover{background:#e64500}
+    .nav-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:var(--r-sm);font-size:14px;font-weight:500;cursor:pointer;font-family:var(--f);transition:var(--tr);white-space:nowrap;text-decoration:none}
+    .nav-btn--outline{background:transparent;color:var(--c-dark);border:1.5px solid var(--c-border)} .nav-btn--outline:hover{border-color:var(--c-dark);background:rgba(0,0,0,.04)}
     .hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:40px;height:40px;background:none;border:none;cursor:pointer;margin-left:auto;padding:8px;border-radius:var(--r-sm)}
     .hamburger span{display:block;height:2px;background:var(--c-dark);border-radius:2px;transition:var(--tr)}
     .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)} .hamburger.open span:nth-child(2){opacity:0} .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+    /* Catalog drawer */
+    .cat-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:997;opacity:0;pointer-events:none;transition:opacity .3s}
+    .cat-overlay.open{opacity:1;pointer-events:all}
+    .cat-drawer{position:fixed;top:0;left:0;right:0;z-index:998;background:#fff;box-shadow:0 8px 40px rgba(0,0,0,.15);transform:translateY(-100%);transition:transform .3s cubic-bezier(.4,0,.2,1);max-height:80vh;overflow-y:auto}
+    .cat-drawer.open{transform:translateY(0)}
+    .cat-drawer__inner{padding:88px 0 48px}
+    .cat-drawer__head{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+    .cat-drawer__title{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--c-muted)}
+    .cat-drawer__close{width:36px;height:36px;background:var(--c-bg-2);border:none;border-radius:50%;cursor:pointer;font-size:18px;line-height:1;display:flex;align-items:center;justify-content:center;color:var(--c-dark);transition:background var(--tr)}
+    .cat-drawer__close:hover{background:var(--c-bg-3)}
+    .cat-dict{display:flex;flex-wrap:wrap;gap:32px 40px}
+    .cat-dict__group{min-width:130px}
+    .cat-dict__letter{font-size:12px;font-weight:700;text-transform:uppercase;color:var(--c-muted);margin-bottom:6px;padding-bottom:4px;border-bottom:2px solid var(--c-border)}
+    .cat-dict__items a{display:block;font-size:15px;color:var(--c-dark);line-height:2;transition:color var(--tr)}
+    .cat-dict__items a:hover{color:var(--c-accent)}
+    .nav-cat-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:var(--r-sm);font-size:14px;font-weight:600;color:#fff;background:var(--c-accent);border:none;cursor:pointer;font-family:var(--f);transition:var(--tr)}
+    .nav-cat-btn:hover{background:#e64500} .nav-cat-btn.open{background:#e64500}
+    .nav-cat-btn svg{width:14px;height:14px;transition:transform .25s;flex-shrink:0}
+    .nav-cat-btn.open svg{transform:rotate(180deg)}
+    @media(max-width:768px){
+      .cat-dict{gap:24px 20px}
+      .cat-dict__group{min-width:calc(50% - 10px)}
+      .cat-dict__items a{font-size:16px;min-height:44px;display:flex;align-items:center}
+    }
     /* Hero */
     .hero{padding:140px 0 80px;background:#faf9f7}
     .hero__title{font-size:clamp(38px,5.5vw,72px);font-weight:900;color:var(--c-dark);line-height:1.08;letter-spacing:-.04em;margin-bottom:16px}
@@ -49,7 +72,7 @@
     .section__tag{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--c-accent);margin-bottom:12px}
     .section__tag::before{content:'';display:block;width:20px;height:2px;background:var(--c-accent);border-radius:2px}
     .section__title{font-size:clamp(26px,3.5vw,40px);font-weight:800;color:var(--c-dark);line-height:1.15;letter-spacing:-.02em;margin-bottom:40px}
-    .prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    .prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;grid-auto-rows:1fr}
     .prod-item{background:#fff;border-radius:var(--r-md);overflow:hidden;border:1px solid var(--c-border);transition:transform var(--tr),box-shadow var(--tr);cursor:pointer}
     .prod-item:hover{transform:translateY(-3px);box-shadow:0 10px 32px rgba(0,0,0,.09)}
     .prod-item__img{aspect-ratio:1/1;overflow:hidden;background:var(--c-bg-3)}
@@ -98,24 +121,119 @@
     .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;min-height:48px;border-radius:var(--r-md);font-size:15px;font-weight:600;cursor:pointer;transition:var(--tr);border:none;white-space:nowrap;font-family:var(--f)}
     .btn--primary{background:var(--c-accent);color:#fff} .btn--primary:hover{background:#e64500;transform:translateY(-1px);box-shadow:0 8px 32px rgba(255,77,0,.35)}
     .btn--full{width:100%;justify-content:center}
+    .btn--outline{background:transparent;color:var(--c-dark);border:1.5px solid var(--c-border)} .btn--outline:hover{border-color:var(--c-accent);color:var(--c-accent)}
     .form-success{display:none;padding:32px;background:#fff;border-radius:var(--r-lg);text-align:center;border:1px solid var(--c-border)}
     .form-success__icon{font-size:40px;margin-bottom:12px}
     .form-success h3{font-size:20px;font-weight:700;color:var(--c-dark);margin-bottom:8px}
     .form-success p{color:var(--c-muted);font-size:14px}
+    /* Order overlay */
+    .order-overlay{position:fixed;inset:0;z-index:1100;background:#f5f5f5;opacity:0;pointer-events:none;transition:opacity .28s;overflow-y:auto}
+    .order-overlay.open{opacity:1;pointer-events:all}
+    .order-overlay__inner{min-height:100%;display:flex;flex-direction:column;padding:56px 0 64px}
+    .order-overlay__close{position:fixed;top:20px;right:24px;width:44px;height:44px;background:rgba(0,0,0,.08);border:none;border-radius:50%;cursor:pointer;color:#1a1a1a;font-size:22px;display:flex;align-items:center;justify-content:center;transition:background .2s;z-index:1}
+    .order-overlay__close:hover{background:rgba(0,0,0,.15)}
+    .order-overlay__title{font-size:clamp(18px,2.4vw,26px);font-weight:700;color:#1a1a1a;line-height:1.4;max-width:680px;margin-bottom:48px}
+    .order-overlay__grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+    .order-checklist{list-style:none;display:flex;flex-direction:column;gap:14px}
+    .order-checklist li{display:flex;align-items:flex-start;gap:12px;font-size:15px;color:#3d3a36;line-height:1.45}
+    .order-checklist li::before{content:'✓';color:var(--c-accent);font-weight:700;font-size:15px;flex-shrink:0;margin-top:1px}
+    .order-form{display:flex;flex-direction:column;gap:12px}
+    .order-form input,.order-form textarea{padding:13px 16px;background:#fff;border:1.5px solid #ddd;border-radius:var(--r-md);font-family:var(--f);font-size:14px;color:#1a1a1a;outline:none;transition:border-color .2s;width:100%}
+    .order-form input::placeholder,.order-form textarea::placeholder{color:#aaa}
+    .order-form input:focus,.order-form textarea:focus{border-color:var(--c-accent)}
+    .order-form textarea{resize:vertical;min-height:90px}
+    .order-form__file{display:flex;align-items:center;gap:10px}
+    .order-form__file-btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;background:#fff;border:1.5px solid #ddd;border-radius:var(--r-md);color:#555;font-size:13px;font-weight:500;cursor:pointer;transition:background .2s;white-space:nowrap;font-family:var(--f)}
+    .order-form__file-btn:hover{background:#f0f0f0}
+    .order-form__file-name{font-size:13px;color:#888;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:160px}
+    .order-form__submit{padding:14px 28px;background:var(--c-accent);color:#fff;border:none;border-radius:var(--r-md);font-family:var(--f);font-size:15px;font-weight:700;letter-spacing:.04em;cursor:pointer;transition:background .2s,transform .15s;width:100%}
+    .order-form__submit:hover{background:#e64500;transform:translateY(-1px)}
+    .order-form__ok{display:none;text-align:center;padding:24px;font-size:16px;font-weight:600;color:var(--c-accent)}
+    .order-gallery{margin-top:40px}
+    .order-gallery__strip{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+    .order-gallery__strip::-webkit-scrollbar{display:none}
+    .order-gallery__strip img{width:150px;height:100px;object-fit:cover;border-radius:8px;flex-shrink:0;display:block}
+    .order-products{margin-top:40px}
+    .order-products__title{font-size:16px;font-weight:700;color:#1a1a1a;margin-bottom:16px}
+    .order-products__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+    .order-prod-item{background:#fff;border-radius:var(--r-md);overflow:hidden;border:1px solid #e5e2dc;cursor:pointer;transition:transform .2s,box-shadow .2s}
+    .order-prod-item:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.1)}
+    .order-prod-item__img{aspect-ratio:1/1;overflow:hidden;background:#ede9e3}
+    .order-prod-item__img img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
+    .order-prod-item:hover .order-prod-item__img img{transform:scale(1.06)}
+    .order-prod-item__name{padding:8px 10px;font-size:12px;font-weight:600;color:#1a1a1a;line-height:1.3}
+    @media(max-width:768px){.order-overlay__grid{grid-template-columns:1fr;gap:32px}.order-overlay__inner{padding:64px 0 48px}.order-products__grid{grid-template-columns:repeat(2,1fr)}}
     /* Footer */
-    .footer{background:var(--c-dark);padding:56px 0 32px}
-    .footer__grid{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px}
+    .footer{background:var(--c-dark);padding:0 0 0}
+    .footer__grid{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px;padding-top:48px}
     .footer__brand{font-size:17px;font-weight:800;color:#fff;margin-bottom:10px;letter-spacing:-.02em}
     .footer__desc{font-size:13px;color:rgba(255,255,255,.4);line-height:1.7;max-width:220px}
     .footer__col h4{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.35);margin-bottom:14px}
     .footer__col li{margin-bottom:8px}
     .footer__col a{font-size:13px;color:rgba(255,255,255,.55);transition:color var(--tr)} .footer__col a:hover{color:#fff}
-    .footer__bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
-    .footer__copy{font-size:12px;color:rgba(255,255,255,.3)}
-    /* Float */
-    .float-btn{position:fixed;bottom:24px;right:24px;z-index:990;width:52px;height:52px;background:#29A9EB;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(41,169,235,.4);transition:transform var(--tr)}
-    .float-btn:hover{transform:scale(1.08)}
-    .float-btn svg{width:26px;height:26px;fill:#fff}
+    .footer__social{display:flex;gap:10px;margin-top:20px}
+    .footer__soc-btn{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:transform .2s,box-shadow .2s;flex-shrink:0}
+    .footer__soc-btn:hover{transform:scale(1.1)}
+    .footer__soc-btn--tg{background:#229ED9}
+    .footer__soc-btn--vb{background:#7360F2}
+    .footer__soc-btn--ig{background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)}
+    .footer__soc-btn svg{width:20px;height:20px;fill:#fff}
+    .footer__bottom{background:#111;padding:16px 24px;display:flex;flex-direction:column;align-items:center;gap:12px}
+    .footer__bottom-nav{display:flex;align-items:center;gap:0;flex-wrap:wrap;justify-content:center}
+    .footer__bottom-nav a{font-size:11px;font-weight:500;color:rgba(255,255,255,.45);letter-spacing:.06em;text-transform:uppercase;padding:4px 14px;transition:color .2s;text-decoration:none}
+    .footer__bottom-nav a:hover{color:rgba(255,255,255,.8)}
+    .footer__bottom-nav span{font-size:11px;color:rgba(255,255,255,.2)}
+    .footer__bottom-row{display:flex;align-items:center;justify-content:center;width:100%;flex-wrap:wrap;gap:16px}
+    .footer__copy{font-size:11px;color:rgba(255,255,255,.3)}
+    /* Scroll to top */
+    .footer__top-arrow{display:block;width:100%;padding:14px 0 10px;background:var(--c-dark);text-align:center;cursor:pointer;border:none;border-bottom:1px solid rgba(255,255,255,.07);transition:background .2s}
+    .footer__top-arrow:hover{background:#222}
+    .footer__top-arrow svg{width:32px;height:18px;stroke:rgba(255,255,255,.35);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round;transition:stroke .2s}
+    .footer__top-arrow:hover svg{stroke:rgba(255,255,255,.65)}
+    /* FAB widget */
+    .fab-wrap{position:fixed;bottom:24px;right:24px;z-index:990;display:flex;flex-direction:column;align-items:flex-end;gap:0;isolation:isolate}
+    .fab-main{width:56px;height:56px;background:var(--c-accent);border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 20px rgba(255,77,0,.4);transition:transform .25s,box-shadow .25s,background .25s;flex-shrink:0;position:relative;z-index:2}
+    .fab-main:hover{background:#e64500;transform:scale(1.08);box-shadow:0 6px 28px rgba(255,77,0,.55)}
+    .fab-main svg{width:26px;height:26px;fill:#fff;transition:transform .3s,opacity .3s}
+    .fab-wrap.open .fab-main svg.icon-chat{transform:rotate(90deg) scale(0);opacity:0}
+    .fab-main svg.icon-close{position:absolute;transform:rotate(-90deg) scale(0);opacity:0}
+    .fab-wrap.open .fab-main svg.icon-close{transform:rotate(0deg) scale(1);opacity:1}
+    /* action row */
+    .fab-actions{display:flex;flex-direction:column;align-items:flex-end;gap:10px;margin-bottom:12px}
+    .fab-actions.hidden{display:none}
+    .fab-action{display:grid;grid-template-columns:1fr 46px;align-items:center;gap:10px;min-width:215px;opacity:0;transform:translateY(12px) scale(.9);transition:opacity .22s,transform .22s;pointer-events:none}
+    .fab-wrap.open .fab-actions:not(.hidden) .fab-action{opacity:1;transform:none;pointer-events:all}
+    .fab-wrap.open .fab-actions:not(.hidden) .fab-action:nth-child(1){transition-delay:.07s}
+    .fab-wrap.open .fab-actions:not(.hidden) .fab-action:nth-child(2){transition-delay:.0s}
+    .fab-action__label{background:#1a1a1a;color:#fff;font-size:13px;font-weight:500;padding:6px 14px;border-radius:50px;white-space:nowrap;box-shadow:0 4px 12px rgba(0,0,0,.4),0 0 0 1px rgba(255,255,255,.1);border:2px solid #fff;font-family:var(--f)}
+    .fab-action__btn{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 12px rgba(255,77,0,.35);transition:transform .2s,box-shadow .2s;cursor:pointer;border:none;justify-self:end}
+    .fab-action__btn:hover{transform:scale(1.1);box-shadow:0 5px 18px rgba(255,77,0,.5)}
+    .fab-action__btn--call,.fab-action__btn--msg{background:var(--c-accent)}
+    .fab-action__btn svg{width:20px;height:20px;fill:#fff}
+    /* messenger sub-row */
+    .fab-messengers{display:flex;flex-direction:column;align-items:flex-end;gap:10px;margin-bottom:12px;pointer-events:none}
+    .fab-messengers.open{pointer-events:all}
+    .fab-msg-item{display:grid;grid-template-columns:1fr 46px;align-items:center;gap:10px;min-width:215px;opacity:0;transform:translateY(12px) scale(.9);transition:opacity .22s,transform .22s}
+    .fab-messengers.open .fab-msg-item{opacity:1;transform:none}
+    .fab-messengers.open .fab-msg-item:nth-child(3){transition-delay:.0s}
+    .fab-messengers.open .fab-msg-item:nth-child(2){transition-delay:.07s}
+    .fab-messengers.open .fab-msg-item:nth-child(1){transition-delay:.14s}
+    .fab-msg-btn{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 12px rgba(0,0,0,.18);transition:transform .2s;text-decoration:none;justify-self:end}
+    .fab-msg-btn:hover{transform:scale(1.1)}
+    .fab-msg-btn--tg{background:#229ED9} .fab-msg-btn--vb{background:#7360F2}
+    .fab-msg-btn svg{width:20px;height:20px;fill:#fff}
+    .fab-back{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border:2px solid #fff;background:#1a1a1a;border-radius:50%;cursor:pointer;color:#fff;transition:background .2s;font-size:16px;line-height:1;font-family:var(--f);justify-self:center;box-shadow:0 4px 12px rgba(0,0,0,.4)}
+    .fab-back:hover{background:#333}
+    /* callback popup */
+    .fab-popup{position:absolute;bottom:72px;right:0;width:260px;background:#fff;border-radius:16px;box-shadow:0 8px 40px rgba(0,0,0,.18);padding:20px;opacity:0;pointer-events:none;transform:translateY(8px) scale(.97);transition:opacity .22s,transform .22s;transform-origin:bottom right}
+    .fab-popup.open{opacity:1;pointer-events:all;transform:none}
+    .fab-popup__head{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+    .fab-popup__title{font-size:14px;font-weight:700;color:var(--c-dark)}
+    .fab-popup input{width:100%;padding:9px 12px;border:1.5px solid var(--c-border);border-radius:10px;font-family:var(--f);font-size:14px;color:var(--c-dark);outline:none;margin-bottom:9px;transition:border-color .2s}
+    .fab-popup input:focus{border-color:var(--c-accent)}
+    .fab-popup__btn{width:100%;padding:10px;background:var(--c-accent);color:#fff;border:none;border-radius:10px;font-family:var(--f);font-size:14px;font-weight:600;cursor:pointer;transition:background .2s}
+    .fab-popup__btn:hover{background:#e64500}
+    .fab-popup__ok{display:none;text-align:center;padding:8px 0;font-size:14px;color:var(--c-accent);font-weight:600}
     /* Reveal */
     .reveal{opacity:0;transform:translateY(24px);transition:opacity .5s var(--tr),transform .5s var(--tr)}
     .reveal.visible{opacity:1;transform:none}
@@ -129,9 +247,9 @@
       .why__row{grid-template-columns:1fr 1fr}
       .prod-grid{grid-template-columns:repeat(2,1fr)}
       .order__grid{grid-template-columns:1fr}
-      .nav-menu{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:#fff;flex-direction:column;align-items:stretch;padding:80px 16px 32px;gap:4px;overflow-y:auto;-webkit-overflow-scrolling:touch;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1)}
+      .nav-menu{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:#fff;flex-direction:column;align-items:stretch;padding:80px 16px 32px;gap:12px;overflow-y:auto;-webkit-overflow-scrolling:touch;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1)}
       .nav-menu.open{display:flex;transform:none}
-      .nav-link{padding:12px 16px;font-size:16px}
+      .nav-menu .nav-cat-btn,.nav-menu .nav-btn{width:100%;justify-content:center;padding:14px 20px;font-size:16px;border-radius:var(--r-md)}
       .hamburger{display:flex}
       .bigcard{padding:36px 28px}
     }
@@ -140,6 +258,18 @@
       .footer__grid{grid-template-columns:1fr}
       .hero{padding:120px 0 56px}
     }
+    /* Full-screen catalog */
+    .fullcat{position:fixed;inset:0;z-index:1001;background:#fff;overflow-y:auto;opacity:0;pointer-events:none;transition:opacity .25s}
+    .fullcat.open{opacity:1;pointer-events:all}
+    .fullcat__inner{max-width:1200px;margin:0 auto;padding:56px 24px 80px}
+    .fullcat__head{display:flex;align-items:center;justify-content:space-between;margin-bottom:48px;padding-bottom:24px;border-bottom:1px solid var(--c-border)}
+    .fullcat__title{font-size:clamp(24px,3vw,36px);font-weight:800;color:var(--c-dark);letter-spacing:-.02em}
+    .fullcat__close{width:44px;height:44px;background:var(--c-bg-2);border:none;border-radius:50%;cursor:pointer;font-size:22px;line-height:1;display:flex;align-items:center;justify-content:center;color:var(--c-dark);transition:background var(--tr);font-family:var(--f)} .fullcat__close:hover{background:var(--c-bg-3)}
+    .fullcat__dict{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
+    .fullcat__letter{font-size:13px;font-weight:700;text-transform:uppercase;color:var(--c-muted);margin-bottom:8px;padding-bottom:6px;border-bottom:2px solid var(--c-border);letter-spacing:.08em}
+    .fullcat__items a{display:block;font-size:15px;color:var(--c-dark);line-height:2.2;transition:color var(--tr)} .fullcat__items a:hover{color:var(--c-accent)}
+    @media(max-width:768px){.fullcat__dict{grid-template-columns:repeat(2,1fr);gap:28px}}
+    @media(max-width:480px){.fullcat__dict{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
@@ -152,12 +282,9 @@
         <span><span style="color:#1a1a1a">Ds</span><span style="color:#FF4D00">Print</span></span>
       </a>
       <ul class="nav-menu" id="navMenu" role="list">
-        <li><a href="labels.html" class="nav-link">Наклейки</a></li>
-        <li><a href="stickerpacks.html" class="nav-link">Стікерпаки</a></li>
-        <li><a href="foil.html" class="nav-link">Фольгування</a></li>
-        <li><a href="lamination.html" class="nav-link">Ламінування</a></li>
-        <li><a href="materials.html" class="nav-link">Матеріали</a></li>
-        <li><a href="#order" class="nav-link nav-link--cta">Замовити</a></li>
+        <li><button class="nav-cat-btn" id="catBtn" aria-expanded="false" aria-controls="catDrawer">Каталог продукції <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4"/></svg></button></li>
+        <li><a href="#footer" class="nav-btn nav-btn--outline">Контакти</a></li>
+        <li><a href="#" class="nav-btn nav-btn--outline">Вхід</a></li>
       </ul>
       <button class="hamburger" id="hamburger" aria-label="Меню" aria-expanded="false" aria-controls="navMenu">
         <span></span><span></span><span></span>
@@ -182,13 +309,13 @@
         <div class="bigcard__icon">🖨️</div>
         <h2 class="bigcard__title">Цифровий друк</h2>
         <p class="bigcard__desc">Візитки, флаєри, брошури, наклейки, меню, календарі — від 1 примірника</p>
-        <a href="#calculator" class="bigcard__btn">Калькулятор ціни →</a>
+        <a href="#calculator" class="bigcard__btn" style="background:#fff;color:#FF4D00;border-color:rgba(255,255,255,.5)">Калькулятор ціни →</a>
       </div>
       <div class="bigcard bigcard--dark reveal">
         <div class="bigcard__icon">✨</div>
         <h2 class="bigcard__title">Об'ємний друк та сувеніри</h2>
         <p class="bigcard__desc">Брендовані чохли, ручки, блокноти, таблички, бейджі — ексклюзивно</p>
-        <a href="#calculator" class="bigcard__btn">Калькулятор ціни →</a>
+        <a href="#calculator" class="bigcard__btn" style="background:#fff;color:#1a1a1a;border-color:rgba(255,255,255,.5)">Калькулятор ціни →</a>
       </div>
     </div>
   </div>
@@ -200,6 +327,7 @@
     <div class="section__tag">Каталог</div>
     <h2 class="section__title">Що ми друкуємо</h2>
     <div class="prod-grid">
+      <div class="prod-item prod-item--order reveal" onclick="openOrderOverlay()" style="cursor:pointer"><div class="prod-item__img"><img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400" alt="Вартість друку" loading="lazy"></div><div class="prod-item__name" style="background:var(--c-accent);color:#fff;font-weight:700">Вартість друку</div></div>
       <div class="prod-item reveal"><div class="prod-item__img"><img src="https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=400" alt="Візитки" loading="lazy"></div><div class="prod-item__name">Візитки</div></div>
       <div class="prod-item reveal"><div class="prod-item__img"><img src="https://images.unsplash.com/photo-1572044162444-ad60f128bdea?w=400" alt="Флаєри та листівки" loading="lazy"></div><div class="prod-item__name">Флаєри та листівки</div></div>
       <div class="prod-item reveal"><div class="prod-item__img"><img src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=400" alt="Брошури та буклети" loading="lazy"></div><div class="prod-item__name">Брошури та буклети</div></div>
@@ -214,6 +342,14 @@
       <div class="prod-item reveal"><div class="prod-item__img"><img src="https://images.unsplash.com/photo-1585336261022-680e295ce3fe?w=400" alt="Ручки та запальнички" loading="lazy"></div><div class="prod-item__name">Ручки та запальнички</div></div>
       <div class="prod-item reveal"><div class="prod-item__img"><img src="https://images.unsplash.com/photo-1531346878377-a5be20888e57?w=400" alt="Блокноти та щоденники" loading="lazy"></div><div class="prod-item__name">Блокноти та щоденники</div></div>
       <div class="prod-item reveal"><div class="prod-item__img"><img src="https://images.unsplash.com/photo-1607082349566-187342175e2f?w=400" alt="Таблички та бейджі" loading="lazy"></div><div class="prod-item__name">Таблички та бейджі</div></div>
+      <div class="prod-item reveal"><div class="prod-item__img"><img src="https://images.unsplash.com/photo-1568667256549-094345857637?w=400" alt="Папки презентаційні" loading="lazy"></div><div class="prod-item__name">Папки презентаційні</div></div>
+      <div class="prod-item reveal"><div class="prod-item__img"><img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=400" alt="Запрошення" loading="lazy"></div><div class="prod-item__name">Запрошення</div></div>
+      <div class="prod-item reveal"><div class="prod-item__img"><img src="https://images.unsplash.com/photo-1572044162444-ad60f128bdea?w=400" alt="Флаєри" loading="lazy"></div><div class="prod-item__name">Флаєри</div></div>
+      <div class="prod-item reveal"><div class="prod-item__img"><img src="https://images.unsplash.com/photo-1607013251379-e6eecfffe234?w=400" alt="Сертифікати" loading="lazy"></div><div class="prod-item__name">Сертифікати</div></div>
+      <div class="prod-item reveal"><div class="prod-item__img"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400" alt="Меню" loading="lazy"></div><div class="prod-item__name">Меню</div></div>
+    </div>
+    <div style="text-align:center;margin-top:36px">
+      <button class="btn btn--outline" onclick="openFullCat()" style="font-size:15px;padding:14px 32px">Більше продукції та послуг →</button>
     </div>
   </div>
 </section>
@@ -252,7 +388,7 @@
     <div class="feat-block__body reveal">
       <h2 class="feat-block__title">Цифровий друк від 1 примірника</h2>
       <p class="feat-block__text">Не потрібно замовляти великі тиражі. Друкуємо від одного аркуша — ідеально для тестових зразків, персоналізованої продукції та малих партій. Швидко, якісно, без передоплати за тираж.</p>
-      <a href="#calculator" class="feat-block__btn">Замовити цифровий друк →</a>
+      <a href="#order" class="feat-block__btn">Замовити цифровий друк →</a>
     </div>
   </div>
   <!-- Block 2: text left, photo right -->
@@ -263,7 +399,7 @@
     <div class="feat-block__body reveal">
       <h2 class="feat-block__title">Ексклюзивний об'ємний друк</h2>
       <p class="feat-block__text">Наша головна перевага — об'ємний друк на готових предметах. Чохли, ручки, блокноти, таблички з рельєфними елементами. Виглядає дорого, відчувається преміально.</p>
-      <a href="#calculator" class="feat-block__btn">Дізнатись більше →</a>
+      <a href="#order" class="feat-block__btn">Дізнатись більше →</a>
     </div>
   </div>
   <!-- Block 3: photo left, text right -->
@@ -279,66 +415,27 @@
   </div>
 </section>
 
-<!-- Order form -->
-<section class="order" id="calculator">
-  <div class="container">
-    <div class="order__wrap">
-      <div class="section__tag">Замовлення</div>
-      <h2 class="section__title">Розрахувати вартість</h2>
-      <div id="orderForm">
-        <div class="order__grid">
-          <div class="form-field">
-            <label for="f-name">Ваше ім'я</label>
-            <input type="text" id="f-name" placeholder="Андрій">
-          </div>
-          <div class="form-field">
-            <label for="f-phone">Телефон</label>
-            <input type="tel" id="f-phone" placeholder="+38 050 000 00 00">
-          </div>
-          <div class="form-field form-field--full">
-            <label for="f-service">Послуга</label>
-            <select id="f-service">
-              <option value="">— обрати —</option>
-              <option>Візитки</option>
-              <option>Флаєри та листівки</option>
-              <option>Брошури та буклети</option>
-              <option>Каталоги</option>
-              <option>Наклейки та стікери</option>
-              <option>Меню для ресторанів</option>
-              <option>Сертифікати та дипломи</option>
-              <option>Календарі</option>
-              <option>Фірмові бланки</option>
-              <option>Конверти</option>
-              <option>Чохли для телефонів</option>
-              <option>Ручки та запальнички</option>
-              <option>Блокноти та щоденники</option>
-              <option>Таблички та бейджі</option>
-              <option>Інше</option>
-            </select>
-          </div>
-          <div class="form-field form-field--full">
-            <label for="f-comment">Коментар</label>
-            <textarea id="f-comment" placeholder="Тираж, розмір, матеріал, побажання…"></textarea>
-          </div>
-        </div>
-        <button class="btn btn--primary btn--full form-submit" onclick="handleFormSubmit()">Надіслати заявку →</button>
-      </div>
-      <div class="form-success" id="formSuccess">
-        <div class="form-success__icon">✅</div>
-        <h3>Заявку отримано!</h3>
-        <p>Ми зв'яжемося з вами протягом години в робочий час.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- Footer -->
-<footer class="footer">
+<footer class="footer" id="footer">
+  <button class="footer__top-arrow" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Вгору">
+    <svg viewBox="0 0 32 18"><polyline points="2,16 16,2 30,16"/></svg>
+  </button>
   <div class="container">
     <div class="footer__grid">
       <div>
         <div class="footer__brand"><span style="color:#fff">Ds</span><span style="color:#FF4D00">Print</span></div>
-        <p class="footer__desc">Професійний друк наклейок з 2005 року</p>
+        <p class="footer__desc">Цифровий друк та сувенірна продукція у Львові з 2005 року</p>
+        <div class="footer__social">
+          <a href="https://t.me/dsprints" class="footer__soc-btn footer__soc-btn--tg" target="_blank" rel="noopener" aria-label="Telegram">
+            <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+          </a>
+          <a href="viber://chat?number=%2B380678003050" onclick="window.open('viber://chat?number=%2B380678003050','_blank')" class="footer__soc-btn footer__soc-btn--vb" aria-label="Viber">
+            <svg viewBox="0 0 24 24"><path d="M17.88 4.09C16.18 2.49 13.9 1.6 11.5 1.6c-5.05 0-9.15 4.1-9.15 9.15 0 1.61.42 3.18 1.22 4.57L2.3 20l4.82-1.26a9.1 9.1 0 0 0 4.38 1.12c5.05 0 9.15-4.1 9.15-9.15 0-2.44-.95-4.74-2.77-6.62zm-6.38 14.07a7.57 7.57 0 0 1-3.86-1.05l-.28-.17-2.86.75.76-2.79-.18-.29a7.59 7.59 0 0 1-1.16-4.06c0-4.19 3.41-7.6 7.6-7.6 2.03 0 3.94.79 5.37 2.23a7.54 7.54 0 0 1 2.23 5.39c-.01 4.19-3.42 7.59-7.62 7.59zm4.17-5.69c-.23-.11-1.35-.67-1.56-.74-.21-.08-.36-.11-.51.11-.15.23-.58.74-.72.9-.13.15-.26.17-.49.06-.23-.11-.97-.36-1.84-1.14-.68-.61-1.14-1.36-1.27-1.59-.13-.23-.01-.36.1-.47.1-.1.23-.26.34-.39.11-.13.15-.23.23-.38.08-.15.04-.28-.02-.39-.06-.11-.51-1.23-.7-1.68-.18-.44-.37-.38-.51-.39h-.43c-.15 0-.39.06-.6.28-.2.23-.78.76-.78 1.86s.8 2.16.91 2.31c.11.15 1.57 2.4 3.81 3.36.53.23.95.37 1.27.47.54.17 1.02.15 1.41.09.43-.07 1.32-.54 1.51-1.06.19-.52.19-.97.13-1.06-.06-.09-.21-.15-.44-.26z"/></svg>
+          </a>
+          <a href="#" class="footer__soc-btn footer__soc-btn--ig" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+          </a>
+        </div>
       </div>
       <div class="footer__col">
         <h4>Послуги</h4>
@@ -353,9 +450,11 @@
       <div class="footer__col">
         <h4>Контакти</h4>
         <ul>
+          <li><a href="tel:+380678003050">+380 67 800 30 50</a></li>
+          <li><a href="https://t.me/dsprints" target="_blank" rel="noopener">Telegram: @dsprints</a></li>
+          <li><a href="viber://chat?number=+380678003050">Viber: +380 67 800 30 50</a></li>
           <li><a href="mailto:dsprint.ua@gmail.com">dsprint.ua@gmail.com</a></li>
-          <li><a href="tel:+380322000000">+38 032 200-00-00</a></li>
-          <li><a href="#">вул. Джерельна 38, Львів</a></li>
+          <li><span style="color:rgba(255,255,255,.55)">Львів, вул. Джерельна 38</span></li>
         </ul>
       </div>
       <div class="footer__col">
@@ -367,29 +466,395 @@
         </ul>
       </div>
     </div>
-    <div class="footer__bottom">
-      <span class="footer__copy">© 2026 DsPrint — Всі права захищені</span>
-      <span class="footer__copy">Львів, Україна</span>
+  </div>
+  <div class="footer__bottom">
+    <nav class="footer__bottom-nav">
+      <a href="#services">Продукція &amp; послуги</a>
+      <span>|</span>
+      <a href="#footer">Контакти</a>
+      <span>|</span>
+      <a href="#">Умови роботи</a>
+    </nav>
+    <div class="footer__bottom-row">
+      <span class="footer__copy">© 2026 DsPrint — Всі права захищені. Львів, Україна</span>
     </div>
   </div>
 </footer>
 
-<!-- Telegram float -->
-<a href="https://t.me/dsprint_lviv" class="float-btn" aria-label="Telegram" target="_blank" rel="noopener">
-  <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-</a>
+<!-- Catalog drawer -->
+<div class="cat-overlay" id="catOverlay"></div>
+<div class="cat-drawer" id="catDrawer" role="dialog" aria-label="Каталог продукції">
+  <div class="container">
+    <div class="cat-drawer__inner">
+      <div class="cat-drawer__head">
+        <span class="cat-drawer__title">Каталог продукції</span>
+        <button class="cat-drawer__close" id="catClose" aria-label="Закрити">×</button>
+      </div>
+      <div class="cat-dict">
+        <div class="cat-dict__group"><div class="cat-dict__items">
+          <a href="#order">Бейджі</a>
+          <a href="#order">Бланки</a>
+          <a href="#order">Блокноти</a>
+          <a href="#order">Брошури</a>
+          <a href="#order">Буклети</a>
+        </div></div>
+        <div class="cat-dict__group"><div class="cat-dict__items">
+          <a href="#order">Візитки</a>
+          <a href="#order">Вітальні листівки</a>
+          <a href="#order">Запрошення</a>
+          <a href="#order">Календар перекидний</a>
+          <a href="#order">Календарик</a>
+        </div></div>
+        <div class="cat-dict__group"><div class="cat-dict__items">
+          <a href="#order">Каталоги</a>
+          <a href="#order">Конверти</a>
+          <a href="#order">Листівки</a>
+          <a href="#order">Листовий друк</a>
+          <a href="#order">Меню для ресторанів</a>
+        </div></div>
+        <div class="cat-dict__group"><div class="cat-dict__items">
+          <a href="#order">Наклейки</a>
+          <a href="#order">Папки</a>
+          <a href="#order">Постери</a>
+          <a href="#order">Ручки та запальнички</a>
+          <a href="#order">Сертифікати</a>
+        </div></div>
+        <div class="cat-dict__group"><div class="cat-dict__items">
+          <a href="#order">Стікерпаки</a>
+          <a href="#order">Таблички</a>
+          <a href="#order">Флаєри</a>
+          <a href="#order">Чохли для телефонів</a>
+          <a href="#order">Цінники</a>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Full-screen catalog overlay -->
+<div class="fullcat" id="fullCat" role="dialog" aria-modal="true" aria-label="Вся продукція та послуги">
+  <div class="fullcat__inner">
+    <div class="fullcat__head">
+      <h2 class="fullcat__title">Вся продукція та послуги</h2>
+      <button class="fullcat__close" id="fullCatClose" aria-label="Закрити">×</button>
+    </div>
+    <div class="fullcat__dict">
+      <div>
+        <div class="fullcat__letter">Б</div>
+        <div class="fullcat__items">
+          <a href="#order">Бейджі</a>
+          <a href="#order">Бланки</a>
+          <a href="#order">Блокноти</a>
+          <a href="#order">Брошури</a>
+          <a href="#order">Буклети</a>
+        </div>
+      </div>
+      <div>
+        <div class="fullcat__letter">В</div>
+        <div class="fullcat__items">
+          <a href="#order">Візитки</a>
+          <a href="#order">Вітальні листівки</a>
+        </div>
+      </div>
+      <div>
+        <div class="fullcat__letter">З</div>
+        <div class="fullcat__items">
+          <a href="#order">Запрошення</a>
+        </div>
+      </div>
+      <div>
+        <div class="fullcat__letter">К</div>
+        <div class="fullcat__items">
+          <a href="#order">Календар перекидний</a>
+          <a href="#order">Календарик</a>
+          <a href="#order">Каталоги</a>
+          <a href="#order">Конверти</a>
+        </div>
+      </div>
+      <div>
+        <div class="fullcat__letter">Л</div>
+        <div class="fullcat__items">
+          <a href="#order">Листівки</a>
+          <a href="#order">Листовий друк</a>
+        </div>
+      </div>
+      <div>
+        <div class="fullcat__letter">М</div>
+        <div class="fullcat__items">
+          <a href="#order">Меню для ресторанів</a>
+        </div>
+      </div>
+      <div>
+        <div class="fullcat__letter">Н</div>
+        <div class="fullcat__items">
+          <a href="#order">Наклейки</a>
+        </div>
+      </div>
+      <div>
+        <div class="fullcat__letter">П</div>
+        <div class="fullcat__items">
+          <a href="#order">Папки</a>
+          <a href="#order">Постери</a>
+        </div>
+      </div>
+      <div>
+        <div class="fullcat__letter">Р</div>
+        <div class="fullcat__items">
+          <a href="#order">Ручки та запальнички</a>
+        </div>
+      </div>
+      <div>
+        <div class="fullcat__letter">С</div>
+        <div class="fullcat__items">
+          <a href="#order">Сертифікати</a>
+          <a href="#order">Стікерпаки</a>
+        </div>
+      </div>
+      <div>
+        <div class="fullcat__letter">Т</div>
+        <div class="fullcat__items">
+          <a href="#order">Таблички</a>
+        </div>
+      </div>
+      <div>
+        <div class="fullcat__letter">Ф</div>
+        <div class="fullcat__items">
+          <a href="#order">Флаєри</a>
+        </div>
+      </div>
+      <div>
+        <div class="fullcat__letter">Ч</div>
+        <div class="fullcat__items">
+          <a href="#order">Чохли для телефонів</a>
+        </div>
+      </div>
+      <div>
+        <div class="fullcat__letter">Ц</div>
+        <div class="fullcat__items">
+          <a href="#order">Цінники</a>
+        </div>
+      </div>
+      <div>
+        <div class="fullcat__letter">Щ</div>
+        <div class="fullcat__items">
+          <a href="#order">Щоденники</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Order overlay -->
+<div class="order-overlay" id="orderOverlay" role="dialog" aria-modal="true" aria-label="Замовлення друку">
+  <button class="order-overlay__close" id="orderOverlayClose" aria-label="Закрити">×</button>
+  <div class="container order-overlay__inner">
+    <p class="order-overlay__title">Вкажіть що необхідно надрукувати — розрахуємо і зв'яжемось з вами</p>
+    <div class="order-overlay__grid">
+      <ul class="order-checklist">
+        <li>цифровий друк від 1 примірника</li>
+        <li>висікання, надсікання самоклеючих матеріалів</li>
+        <li>тиснення фольгою або сліпе</li>
+        <li>ламінування тонке і товсте</li>
+        <li>зшивання на скобу, нитку, термоклей</li>
+        <li>фальцювання, біговка, вибіркове лакування</li>
+        <li>доставка Новою Поштою, Гюнсел</li>
+        <li>готівкова та безготівкова оплата</li>
+      </ul>
+      <div class="order-form" id="orderOverlayForm">
+        <input type="tel" id="oo-phone" placeholder="ваш мобільний" autocomplete="tel">
+        <textarea id="oo-desc" placeholder="ваше ім'я та що необхідно надрукувати"></textarea>
+        <div class="order-form__file">
+          <label class="order-form__file-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 6v11.5c0 2.21-1.79 4-4 4s-4-1.79-4-4V5a2.5 2.5 0 0 1 5 0v10.5c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5V6H9v9.5a3.5 3.5 0 0 0 7 0V5c0-2.76-2.24-5-5-5S6 2.24 6 5v12.5c0 3.31 2.69 6 6 6s6-2.69 6-6V6h-1.5z"/></svg>
+            прикріпити файл (pdf, eps, jpg, tif, cdr, rar, zip)
+            <input type="file" id="oo-file" accept=".pdf,.eps,.jpg,.jpeg,.tif,.tiff,.cdr,.rar,.zip" style="display:none" onchange="document.getElementById('oo-fname').textContent=this.files[0]?.name||''">
+          </label>
+          <span class="order-form__file-name" id="oo-fname"></span>
+        </div>
+        <input type="url" id="oo-link" placeholder="або посилання на файлообмінник">
+        <button class="order-form__submit" onclick="orderOverlaySubmit()">НАДІСЛАТИ</button>
+      </div>
+      <div class="order-form__ok" id="orderOverlayOk">✅ Дякуємо! Зв'яжемося з вами найближчим часом.</div>
+    </div>
+    <!-- Photo gallery strip -->
+    <div class="order-gallery">
+      <div class="order-gallery__strip">
+        <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=300" alt="Приклад друку" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=300" alt="Приклад друку" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=300" alt="Приклад друку" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1572044162444-ad60f128bdea?w=300" alt="Приклад друку" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1607013251379-e6eecfffe234?w=300" alt="Приклад друку" loading="lazy">
+      </div>
+    </div>
+    <!-- Product grid -->
+    <div class="order-products">
+      <h3 class="order-products__title">Обрати продукт</h3>
+      <div class="order-products__grid">
+        <div class="order-prod-item" onclick="closeOrderOverlay();document.getElementById('services').scrollIntoView({behavior:'smooth'})">
+          <div class="order-prod-item__img"><img src="https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=300" alt="Візитки" loading="lazy"></div>
+          <div class="order-prod-item__name">Візитки</div>
+        </div>
+        <div class="order-prod-item" onclick="closeOrderOverlay();document.getElementById('services').scrollIntoView({behavior:'smooth'})">
+          <div class="order-prod-item__img"><img src="https://images.unsplash.com/photo-1572044162444-ad60f128bdea?w=300" alt="Флаєри" loading="lazy"></div>
+          <div class="order-prod-item__name">Флаєри</div>
+        </div>
+        <div class="order-prod-item" onclick="closeOrderOverlay();document.getElementById('services').scrollIntoView({behavior:'smooth'})">
+          <div class="order-prod-item__img"><img src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=300" alt="Брошури" loading="lazy"></div>
+          <div class="order-prod-item__name">Брошури</div>
+        </div>
+        <div class="order-prod-item" onclick="closeOrderOverlay();document.getElementById('services').scrollIntoView({behavior:'smooth'})">
+          <div class="order-prod-item__img"><img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=300" alt="Наклейки" loading="lazy"></div>
+          <div class="order-prod-item__name">Наклейки</div>
+        </div>
+        <div class="order-prod-item" onclick="closeOrderOverlay();document.getElementById('services').scrollIntoView({behavior:'smooth'})">
+          <div class="order-prod-item__img"><img src="https://images.unsplash.com/photo-1614332287897-cdc485fa562d?w=300" alt="Каталоги" loading="lazy"></div>
+          <div class="order-prod-item__name">Каталоги</div>
+        </div>
+        <div class="order-prod-item" onclick="closeOrderOverlay();document.getElementById('services').scrollIntoView({behavior:'smooth'})">
+          <div class="order-prod-item__img"><img src="https://images.unsplash.com/photo-1607013251379-e6eecfffe234?w=300" alt="Сертифікати" loading="lazy"></div>
+          <div class="order-prod-item__name">Сертифікати</div>
+        </div>
+        <div class="order-prod-item" onclick="closeOrderOverlay();document.getElementById('services').scrollIntoView({behavior:'smooth'})">
+          <div class="order-prod-item__img"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=300" alt="Меню" loading="lazy"></div>
+          <div class="order-prod-item__name">Меню</div>
+        </div>
+        <div class="order-prod-item" onclick="closeOrderOverlay();document.getElementById('services').scrollIntoView({behavior:'smooth'})">
+          <div class="order-prod-item__img"><img src="https://images.unsplash.com/photo-1531346878377-a5be20888e57?w=300" alt="Блокноти" loading="lazy"></div>
+          <div class="order-prod-item__name">Блокноти</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FAB widget -->
+<div class="fab-wrap" id="fabWrap">
+  <!-- Callback popup -->
+  <div class="fab-popup" id="fabPopup">
+    <div class="fab-popup__head">
+      <button class="fab-back" id="fabBackCall" aria-label="Назад">&#8592;</button>
+      <div class="fab-popup__title">Зворотній дзвінок</div>
+    </div>
+    <div id="fabForm">
+      <input type="text" id="fab-name" placeholder="Ваше ім'я" autocomplete="name">
+      <input type="tel" id="fab-phone" placeholder="Телефон" autocomplete="tel">
+      <button class="fab-popup__btn" onclick="fabCallSubmit()">Передзвоніть мені</button>
+    </div>
+    <div class="fab-popup__ok" id="fabOk">✅ Дякуємо! Передзвонимо незабаром.</div>
+  </div>
+  <!-- Messenger sub-row -->
+  <div class="fab-messengers" id="fabMessengers">
+    <div class="fab-msg-item">
+      <span class="fab-action__label">Viber</span>
+      <a href="viber://chat?number=%2B380678003050" onclick="window.open('viber://chat?number=%2B380678003050','_blank')" class="fab-msg-btn fab-msg-btn--vb" aria-label="Viber">
+        <svg viewBox="0 0 24 24"><path d="M17.88 4.09C16.18 2.49 13.9 1.6 11.5 1.6c-5.05 0-9.15 4.1-9.15 9.15 0 1.61.42 3.18 1.22 4.57L2.3 20l4.82-1.26a9.1 9.1 0 0 0 4.38 1.12c5.05 0 9.15-4.1 9.15-9.15 0-2.44-.95-4.74-2.77-6.62zm-6.38 14.07a7.57 7.57 0 0 1-3.86-1.05l-.28-.17-2.86.75.76-2.79-.18-.29a7.59 7.59 0 0 1-1.16-4.06c0-4.19 3.41-7.6 7.6-7.6 2.03 0 3.94.79 5.37 2.23a7.54 7.54 0 0 1 2.23 5.39c-.01 4.19-3.42 7.59-7.62 7.59zm4.17-5.69c-.23-.11-1.35-.67-1.56-.74-.21-.08-.36-.11-.51.11-.15.23-.58.74-.72.9-.13.15-.26.17-.49.06-.23-.11-.97-.36-1.84-1.14-.68-.61-1.14-1.36-1.27-1.59-.13-.23-.01-.36.1-.47.1-.1.23-.26.34-.39.11-.13.15-.23.23-.38.08-.15.04-.28-.02-.39-.06-.11-.51-1.23-.7-1.68-.18-.44-.37-.38-.51-.39h-.43c-.15 0-.39.06-.6.28-.2.23-.78.76-.78 1.86s.8 2.16.91 2.31c.11.15 1.57 2.4 3.81 3.36.53.23.95.37 1.27.47.54.17 1.02.15 1.41.09.43-.07 1.32-.54 1.51-1.06.19-.52.19-.97.13-1.06-.06-.09-.21-.15-.44-.26z"/></svg>
+      </a>
+    </div>
+    <div class="fab-msg-item">
+      <span class="fab-action__label">Telegram</span>
+      <a href="https://t.me/dsprints" class="fab-msg-btn fab-msg-btn--tg" aria-label="Telegram" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+      </a>
+    </div>
+    <div class="fab-msg-item">
+      <button class="fab-back" id="fabBackMsg" aria-label="Назад" style="grid-column:2">&#8592;</button>
+    </div>
+  </div>
+  <!-- Action row -->
+  <div class="fab-actions" id="fabActions">
+    <div class="fab-action">
+      <span class="fab-action__label">Зворотній дзвінок</span>
+      <button class="fab-action__btn fab-action__btn--call" id="fabCallBtn" aria-label="Зворотній дзвінок">
+        <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+      </button>
+    </div>
+    <div class="fab-action">
+      <span class="fab-action__label">Повідомлення</span>
+      <button class="fab-action__btn fab-action__btn--msg" id="fabMsgBtn" aria-label="Повідомлення">
+        <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+      </button>
+    </div>
+  </div>
+  <!-- Main toggle button -->
+  <button class="fab-main" id="fabMain" aria-label="Зв'язатись з нами" aria-expanded="false">
+    <svg class="icon-chat" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+    <svg class="icon-close" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+  </button>
+</div>
 
 <script>
 'use strict';
 const header = document.getElementById('header');
-window.addEventListener('scroll', () => header.classList.toggle('scrolled', scrollY > 40), {passive:true});
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', scrollY > 40);
+}, {passive:true});
 const ham = document.getElementById('hamburger'), menu = document.getElementById('navMenu');
 function closeNav(){ham.classList.remove('open');menu.classList.remove('open');ham.setAttribute('aria-expanded','false');document.body.style.overflow='';}
 document.addEventListener('DOMContentLoaded', () => closeNav());
 ham.addEventListener('click', () => { const open = ham.classList.toggle('open'); menu.classList.toggle('open', open); ham.setAttribute('aria-expanded', open); document.body.style.overflow = open ? 'hidden' : ''; });
 menu.addEventListener('click', e => { if (e.target.closest('a')) closeNav(); });
+const catBtn = document.getElementById('catBtn'), catDrawer = document.getElementById('catDrawer'), catOverlay = document.getElementById('catOverlay');
+function openCat(){catBtn.classList.add('open');catDrawer.classList.add('open');catOverlay.classList.add('open');catBtn.setAttribute('aria-expanded','true');document.body.style.overflow='hidden';}
+function closeCat(){catBtn.classList.remove('open');catDrawer.classList.remove('open');catOverlay.classList.remove('open');catBtn.setAttribute('aria-expanded','false');document.body.style.overflow='';}
+catBtn.addEventListener('click', () => catDrawer.classList.contains('open') ? closeCat() : openCat());
+document.getElementById('catClose').addEventListener('click', closeCat);
+catOverlay.addEventListener('click', closeCat);
+const fullCat = document.getElementById('fullCat');
+function openFullCat(){fullCat.classList.add('open');document.body.style.overflow='hidden';}
+function closeFullCat(){fullCat.classList.remove('open');document.body.style.overflow='';}
+document.getElementById('fullCatClose').addEventListener('click', closeFullCat);
+fullCat.addEventListener('click', e => { if(e.target===fullCat) closeFullCat(); });
 const obs = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);} }), {threshold:.1});
 document.querySelectorAll('.reveal').forEach((el, i) => { el.style.transitionDelay = (i % 4) * 60 + 'ms'; obs.observe(el); });
+// FAB widget
+const fabWrap = document.getElementById('fabWrap');
+const fabMain = document.getElementById('fabMain');
+const fabActions = document.getElementById('fabActions');
+const fabMessengers = document.getElementById('fabMessengers');
+const fabPopup = document.getElementById('fabPopup');
+let fabState = 'closed'; // 'closed' | 'main' | 'call' | 'msg'
+function fabSetState(s){
+  fabState = s;
+  const open = s !== 'closed';
+  fabWrap.classList.toggle('open', open);
+  fabMain.setAttribute('aria-expanded', String(open));
+  fabActions.classList.toggle('hidden', s === 'call' || s === 'msg');
+  fabMessengers.classList.toggle('open', s === 'msg');
+  fabPopup.classList.toggle('open', s === 'call');
+}
+function fabReset(){ fabSetState('closed'); }
+fabMain.addEventListener('click', e => { e.stopPropagation(); fabSetState(fabState === 'closed' ? 'main' : 'closed'); });
+document.getElementById('fabCallBtn').addEventListener('click', e => { e.stopPropagation(); fabSetState('call'); document.getElementById('fab-name').focus(); });
+document.getElementById('fabMsgBtn').addEventListener('click', e => { e.stopPropagation(); fabSetState('msg'); });
+document.getElementById('fabBackCall').addEventListener('click', e => { e.stopPropagation(); fabSetState('main'); });
+document.getElementById('fabBackMsg').addEventListener('click', e => { e.stopPropagation(); fabSetState('main'); });
+document.addEventListener('click', e => { if(!fabWrap.contains(e.target)) fabReset(); });
+document.addEventListener('keydown', e => { if(e.key==='Escape'){closeCat();closeFullCat();fabReset();closeOrderOverlay();} });
+function fabCallSubmit(){ const n=document.getElementById('fab-name').value.trim(); const p=document.getElementById('fab-phone').value.trim(); if(!n||!p){document.getElementById('fab-phone').focus();return;} document.getElementById('fabForm').style.display='none'; document.getElementById('fabOk').style.display='block'; setTimeout(()=>{ fabReset(); setTimeout(()=>{ document.getElementById('fabForm').style.display=''; document.getElementById('fabOk').style.display='none'; document.getElementById('fab-name').value=''; document.getElementById('fab-phone').value=''; },400); },2500); }
+// Order overlay
+const orderOverlay = document.getElementById('orderOverlay');
+function openOrderOverlay(){orderOverlay.classList.add('open');document.body.style.overflow='hidden';}
+function closeOrderOverlay(){orderOverlay.classList.remove('open');document.body.style.overflow='';}
+document.getElementById('orderOverlayClose').addEventListener('click', closeOrderOverlay);
+orderOverlay.addEventListener('click', e => { if(e.target===orderOverlay) closeOrderOverlay(); });
+function orderOverlaySubmit(){
+  const phone=document.getElementById('oo-phone').value.trim();
+  const desc=document.getElementById('oo-desc').value.trim();
+  if(!phone){document.getElementById('oo-phone').focus();return;}
+  document.getElementById('orderOverlayForm').style.display='none';
+  document.getElementById('orderOverlayOk').style.display='block';
+  setTimeout(()=>{
+    closeOrderOverlay();
+    setTimeout(()=>{
+      document.getElementById('orderOverlayForm').style.display='';
+      document.getElementById('orderOverlayOk').style.display='none';
+      document.getElementById('oo-phone').value='';
+      document.getElementById('oo-desc').value='';
+      document.getElementById('oo-link').value='';
+      document.getElementById('oo-fname').textContent='';
+    },400);
+  },2800);
+}
 function handleFormSubmit() { const name = document.getElementById('f-name').value.trim(); const phone = document.getElementById('f-phone').value.trim(); if (!name || !phone) { alert('Будь ласка, заповніть ім\'я та телефон.'); return; } document.getElementById('orderForm').style.display = 'none'; document.getElementById('formSuccess').style.display = 'block'; }
 </script>
 </body>

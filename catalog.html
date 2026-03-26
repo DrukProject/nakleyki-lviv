@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Каталог продукції — DsPrint Львів. Цифровий друк понад 20 видів</title>
+  <meta name="description" content="Каталог продукції друкарні DsPrint у Львові. Візитки, флаєри, брошури, наклейки, меню, сертифікати, календарі та ще понад 20 видів цифрового друку від 1 примірника.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{--c-bg:#fff;--c-bg-2:#f5f4f1;--c-bg-3:#ede9e3;--c-border:#e5e2dc;--c-accent:#FF4D00;--c-dark:#1a1a1a;--c-text:#3d3a36;--c-muted:#7a756e;--r-sm:8px;--r-md:12px;--r-lg:20px;--tr:.25s cubic-bezier(.4,0,.2,1);--f:'Inter',system-ui,sans-serif}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--f);background:var(--c-bg);color:var(--c-text);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
+    a{color:inherit;text-decoration:none} img{max-width:100%;display:block} ul{list-style:none}
+    .container{max-width:1200px;margin:0 auto;padding:0 24px}
+    /* Header */
+    .header{position:fixed;top:0;left:0;right:0;z-index:999;padding:18px 0;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--c-border)}
+    .nav{display:flex;align-items:center;gap:32px}
+    .logo{display:flex;align-items:center;gap:8px;font-size:18px;font-weight:800;letter-spacing:-.03em;flex-shrink:0}
+    .logo__icon{width:30px;height:30px}
+    .nav-menu{display:flex;align-items:center;gap:4px;margin-left:auto}
+    .nav-link{padding:7px 14px;border-radius:var(--r-sm);font-size:14px;font-weight:500;color:var(--c-muted);transition:color var(--tr),background var(--tr)}
+    .nav-link:hover,.nav-link.active{color:var(--c-dark);background:rgba(0,0,0,.04)}
+    .nav-link--cta{background:var(--c-accent);color:#fff!important;font-weight:600;margin-left:8px} .nav-link--cta:hover{background:#e64500}
+    .hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:40px;height:40px;background:none;border:none;cursor:pointer;margin-left:auto;padding:8px;border-radius:var(--r-sm)}
+    .hamburger span{display:block;height:2px;background:var(--c-dark);border-radius:2px;transition:var(--tr)}
+    .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)} .hamburger.open span:nth-child(2){opacity:0} .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+    /* Hero */
+    .hero{padding:110px 0 56px;background:var(--c-bg-2)}
+    .hero__tag{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--c-accent);margin-bottom:14px}
+    .hero__tag::before{content:'';display:block;width:20px;height:2px;background:var(--c-accent);border-radius:2px}
+    .hero__title{font-size:clamp(32px,5vw,60px);font-weight:900;color:var(--c-dark);line-height:1.08;letter-spacing:-.04em;margin-bottom:14px}
+    .hero__sub{font-size:clamp(15px,2vw,18px);color:var(--c-muted);max-width:520px}
+    /* Catalog list */
+    .catalog{padding:64px 0 88px;background:#fff}
+    .cat-list{display:grid;grid-template-columns:repeat(5,1fr);column-gap:0;row-gap:0}
+    .cat-list__item a{display:block;font-size:16px;font-weight:400;color:var(--c-dark);line-height:2;border-bottom:1px solid var(--c-border);padding:0 4px;transition:color var(--tr)}
+    .cat-list__item a:hover{color:var(--c-accent)}
+    /* CTA banner */
+    .cta-bar{background:var(--c-dark);padding:56px 0}
+    .cta-bar__inner{display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap}
+    .cta-bar__title{font-size:clamp(20px,2.5vw,28px);font-weight:800;color:#fff;letter-spacing:-.02em}
+    .cta-bar__sub{font-size:14px;color:rgba(255,255,255,.5);margin-top:4px}
+    .btn{display:inline-flex;align-items:center;padding:14px 28px;border-radius:var(--r-md);font-size:15px;font-weight:600;cursor:pointer;transition:var(--tr);border:none;font-family:var(--f);white-space:nowrap}
+    .btn--primary{background:var(--c-accent);color:#fff} .btn--primary:hover{background:#e64500;transform:translateY(-1px);box-shadow:0 8px 32px rgba(255,77,0,.35)}
+    /* Footer */
+    .footer{background:var(--c-dark);padding:56px 0 32px}
+    .footer__grid{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px}
+    .footer__brand{font-size:17px;font-weight:800;color:#fff;margin-bottom:10px;letter-spacing:-.02em}
+    .footer__desc{font-size:13px;color:rgba(255,255,255,.4);line-height:1.7;max-width:220px}
+    .footer__col h4{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.35);margin-bottom:14px}
+    .footer__col li{margin-bottom:8px}
+    .footer__col a{font-size:13px;color:rgba(255,255,255,.55);transition:color var(--tr)} .footer__col a:hover{color:#fff}
+    .footer__bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+    .footer__copy{font-size:12px;color:rgba(255,255,255,.3)}
+    /* Float */
+    .float-btn{position:fixed;bottom:24px;right:24px;z-index:990;width:52px;height:52px;background:#29A9EB;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(41,169,235,.4);transition:transform var(--tr)}
+    .float-btn:hover{transform:scale(1.08)}
+    .float-btn svg{width:26px;height:26px;fill:#fff}
+    /* Responsive */
+    @media(max-width:1024px){.cat-list{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:768px){
+      .cat-list{grid-template-columns:repeat(2,1fr)}
+      .cta-bar__inner{flex-direction:column;align-items:flex-start}
+      .footer__grid{grid-template-columns:1fr 1fr;gap:32px}
+      .nav-menu{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:#fff;flex-direction:column;align-items:stretch;padding:80px 16px 32px;gap:4px;overflow-y:auto;-webkit-overflow-scrolling:touch;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1)}
+      .nav-menu.open{display:flex;transform:none}
+      .nav-link{padding:12px 16px;font-size:16px}
+      .hamburger{display:flex}
+    }
+    @media(max-width:480px){
+      .cat-list{grid-template-columns:repeat(2,1fr)}
+      .footer__grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+<header class="header" id="header">
+  <div class="container">
+    <nav class="nav">
+      <a href="index.html" class="logo" aria-label="DsPrint — на головну">
+        <svg class="logo__icon" viewBox="0 0 30 30" fill="none"><rect width="30" height="30" rx="7" fill="#FF4D00"/><path d="M7 8h8c3.866 0 7 3.134 7 7s-3.134 7-7 7H7V8z" fill="#fff"/><rect x="10" y="12" width="4" height="6" rx="1" fill="#FF4D00"/></svg>
+        <span><span style="color:#1a1a1a">Ds</span><span style="color:#FF4D00">Print</span></span>
+      </a>
+      <ul class="nav-menu" id="navMenu" role="list">
+        <li><a href="catalog.html" class="nav-link active">Каталог продукції</a></li>
+        <li><a href="labels.html" class="nav-link">Наклейки</a></li>
+        <li><a href="stickerpacks.html" class="nav-link">Стікерпаки</a></li>
+        <li><a href="foil.html" class="nav-link">Фольгування</a></li>
+        <li><a href="lamination.html" class="nav-link">Ламінування</a></li>
+        <li><a href="materials.html" class="nav-link">Матеріали</a></li>
+        <li><a href="index.html#order" class="nav-link nav-link--cta">Замовити</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Меню" aria-expanded="false" aria-controls="navMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <div class="hero__tag">Каталог</div>
+    <h1 class="hero__title">Каталог продукції</h1>
+    <p class="hero__sub">Цифровий друк у Львові — понад 20 видів продукції від 1 примірника</p>
+  </div>
+</section>
+
+<!-- Products -->
+<section class="catalog">
+  <div class="container">
+    <ul class="cat-list">
+      <li class="cat-list__item"><a href="index.html#order">Бейджі</a></li>
+      <li class="cat-list__item"><a href="index.html#order">Бланки</a></li>
+      <li class="cat-list__item"><a href="index.html#order">Блокноти</a></li>
+      <li class="cat-list__item"><a href="index.html#order">Брошури</a></li>
+      <li class="cat-list__item"><a href="index.html#order">Буклети</a></li>
+      <li class="cat-list__item"><a href="index.html#order">Візитки</a></li>
+      <li class="cat-list__item"><a href="index.html#order">Вітальні листівки</a></li>
+      <li class="cat-list__item"><a href="index.html#order">Запрошення</a></li>
+      <li class="cat-list__item"><a href="index.html#order">Календар перекидний</a></li>
+      <li class="cat-list__item"><a href="index.html#order">Календарик</a></li>
+      <li class="cat-list__item"><a href="index.html#order">Каталоги</a></li>
+      <li class="cat-list__item"><a href="index.html#order">Конверти</a></li>
+      <li class="cat-list__item"><a href="index.html#order">Листівки</a></li>
+      <li class="cat-list__item"><a href="index.html#order">Листовий друк</a></li>
+      <li class="cat-list__item"><a href="index.html#order">Меню</a></li>
+      <li class="cat-list__item"><a href="index.html#order">Наклейки</a></li>
+      <li class="cat-list__item"><a href="index.html#order">Папки</a></li>
+      <li class="cat-list__item"><a href="index.html#order">Ручки та запальнички</a></li>
+      <li class="cat-list__item"><a href="index.html#order">Сертифікати</a></li>
+      <li class="cat-list__item"><a href="index.html#order">Стікерпаки</a></li>
+      <li class="cat-list__item"><a href="index.html#order">Таблички</a></li>
+      <li class="cat-list__item"><a href="index.html#order">Флаєри</a></li>
+      <li class="cat-list__item"><a href="index.html#order">Чохли для телефонів</a></li>
+      <li class="cat-list__item"><a href="index.html#order">Цінники</a></li>
+      <li class="cat-list__item"><a href="index.html#order">Щоденники</a></li>
+    </ul>
+  </div>
+</section>
+
+<!-- CTA banner -->
+<div class="cta-bar">
+  <div class="container">
+    <div class="cta-bar__inner">
+      <div>
+        <div class="cta-bar__title">Не знайшли потрібне?</div>
+        <div class="cta-bar__sub">Зв'яжіться з нами — надрукуємо будь-що</div>
+      </div>
+      <a href="index.html#order" class="btn btn--primary">Залишити заявку →</a>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand"><span style="color:#fff">Ds</span><span style="color:#FF4D00">Print</span></div>
+        <p class="footer__desc">Професійний друк наклейок з 2005 року</p>
+      </div>
+      <div class="footer__col">
+        <h4>Послуги</h4>
+        <ul>
+          <li><a href="catalog.html">Каталог продукції</a></li>
+          <li><a href="labels.html">Наклейки</a></li>
+          <li><a href="stickerpacks.html">Стікерпаки</a></li>
+          <li><a href="foil.html">Фольгування</a></li>
+          <li><a href="lamination.html">Ламінування</a></li>
+          <li><a href="materials.html">Матеріали</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Контакти</h4>
+        <ul>
+          <li><a href="mailto:dsprint.ua@gmail.com">dsprint.ua@gmail.com</a></li>
+          <li><a href="tel:+380322000000">+38 032 200-00-00</a></li>
+          <li><a href="#">вул. Джерельна 38, Львів</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Години роботи</h4>
+        <ul>
+          <li><span style="color:rgba(255,255,255,.55)">Пн–Пт: 9:00–18:00</span></li>
+          <li><span style="color:rgba(255,255,255,.55)">Сб: 10:00–15:00</span></li>
+          <li><span style="color:rgba(255,255,255,.55)">Нд: вихідний</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span class="footer__copy">© 2026 DsPrint — Всі права захищені</span>
+      <span class="footer__copy">Львів, Україна</span>
+    </div>
+  </div>
+</footer>
+
+<a href="https://t.me/dsprint_lviv" class="float-btn" aria-label="Telegram" target="_blank" rel="noopener">
+  <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+</a>
+
+<script>
+'use strict';
+const ham = document.getElementById('hamburger'), menu = document.getElementById('navMenu');
+function closeNav(){ham.classList.remove('open');menu.classList.remove('open');ham.setAttribute('aria-expanded','false');document.body.style.overflow='';}
+document.addEventListener('DOMContentLoaded', () => closeNav());
+ham.addEventListener('click', () => { const open = ham.classList.toggle('open'); menu.classList.toggle('open', open); ham.setAttribute('aria-expanded', open); document.body.style.overflow = open ? 'hidden' : ''; });
+menu.addEventListener('click', e => { if (e.target.closest('a')) closeNav(); });
+</script>
+</body>
+</html>
