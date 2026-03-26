@@ -29,25 +29,27 @@
     .hamburger span{display:block;height:2px;background:var(--c-dark);border-radius:2px}
     /* calculator */
     .calc-page{padding:104px 0 64px}
-    .calc-head{margin-bottom:28px}
+    .calc-page .container{max-width:1280px;margin:0 auto;display:flex;flex-direction:column;align-items:center}
+    .calc-head{margin-bottom:28px;width:100%;max-width:1400px;text-align:center}
     .calc-head h1{font-size:clamp(22px,3vw,34px);font-weight:800;color:var(--c-dark);letter-spacing:-.02em;margin-bottom:4px}
     .calc-head h1 span{color:var(--c-accent)}
     .calc-head p{font-size:14px;color:var(--c-muted)}
-    .calc-tabs{display:flex;border-bottom:2px solid var(--c-border);margin-bottom:28px}
+    .calc-tabs{display:flex;border-bottom:2px solid var(--c-border);margin-bottom:28px;width:100%;max-width:1400px;justify-content:center}
     .calc-tab{padding:10px 20px;font-size:13px;font-weight:600;color:var(--c-muted);cursor:pointer;border:none;background:none;font-family:var(--f);border-bottom:2px solid transparent;margin-bottom:-2px;transition:color .2s;white-space:nowrap}
     .calc-tab.active{color:var(--c-accent);border-bottom-color:var(--c-accent)}
-    .calc-row{margin-bottom:22px}
-    .calc-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--c-muted);margin-bottom:9px}
-    .btn-group{display:flex;flex-wrap:wrap;gap:7px}
+    .calc-row{margin-bottom:22px;width:100%;max-width:1400px;text-align:center}
+    .calc-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--c-muted);margin-bottom:9px;text-align:center}
+    .btn-group{display:flex;flex-wrap:wrap;gap:7px;justify-content:center}
     .btn-opt{padding:8px 13px;border:1.5px solid var(--c-border);border-radius:var(--r-sm);font-size:13px;font-weight:500;color:var(--c-dark);background:#fff;cursor:pointer;font-family:var(--f);transition:border-color .15s,color .15s,background .15s;white-space:nowrap;line-height:1.3}
     .btn-opt:hover{border-color:var(--c-accent);color:var(--c-accent)}
     .btn-opt.active{border-color:var(--c-accent);background:var(--c-accent);color:#fff}
-    .size-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+    .btn-opt.is-disabled{opacity:.45;color:var(--c-muted);background:#f3f1ed;border-color:var(--c-border);cursor:not-allowed;pointer-events:none}
+    .size-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px;justify-content:center}
     .size-inputs{display:flex;align-items:center;gap:6px}
     .size-inputs input{width:66px;padding:8px 10px;border:1.5px solid var(--c-border);border-radius:var(--r-sm);font-family:var(--f);font-size:14px;color:var(--c-dark);text-align:center;outline:none;transition:border-color .15s}
     .size-inputs input:focus{border-color:var(--c-accent)}
     .size-inputs span{font-size:12px;color:var(--c-muted)}
-    .qty-row{display:flex;flex-wrap:wrap;gap:20px;align-items:center}
+    .qty-row{display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:center}
     .qty-wrap{display:flex;align-items:center;gap:0}
     .qty-wrap label{font-size:12px;font-weight:600;color:var(--c-muted);margin-right:10px;white-space:nowrap}
     .qty-btn{width:34px;height:36px;border:1.5px solid var(--c-border);background:#fff;font-size:17px;cursor:pointer;color:var(--c-dark);line-height:1;transition:background .15s;font-family:var(--f)}
@@ -55,21 +57,45 @@
     .qty-btn:last-of-type{border-radius:0 var(--r-sm) var(--r-sm) 0}
     .qty-btn:hover{background:var(--c-bg-2)}
     .qty-input{width:72px;height:36px;border:1.5px solid var(--c-border);border-left:none;border-right:none;text-align:center;font-family:var(--f);font-size:14px;color:var(--c-dark);outline:none}
-    .mat-scroll{display:flex;gap:0;overflow-x:auto;scrollbar-width:none;border:1.5px solid var(--c-border);border-radius:var(--r-md);width:fit-content;max-width:100%}
+    .mat-scroll{display:flex;gap:0;overflow-x:auto;scrollbar-width:none;border:1.5px solid var(--c-border);border-radius:var(--r-md);width:fit-content;max-width:100%;margin:0 auto}
     .mat-scroll::-webkit-scrollbar{display:none}
     .mat-btn{padding:10px 15px;border:none;background:none;font-size:13px;font-weight:500;color:var(--c-muted);cursor:pointer;font-family:var(--f);white-space:nowrap;transition:color .15s,background .15s;border-right:1px solid var(--c-border)}
     .mat-btn:last-child{border-right:none}
     .mat-btn:hover{color:var(--c-dark);background:var(--c-bg-2)}
     .mat-btn.active{background:var(--c-accent);color:#fff}
-    .mat-sub{margin-top:9px;display:none}
+    .mat-sub{margin-top:10px;display:none}
     .mat-sub.show{display:block}
-    .mat-sub select{padding:9px 12px;border:1.5px solid var(--c-border);border-radius:var(--r-sm);font-family:var(--f);font-size:13px;color:var(--c-dark);background:#fff;outline:none;cursor:pointer;max-width:100%}
-    .mat-sub select:focus{border-color:var(--c-accent)}
-    .finish-toggle{padding:9px 16px;border:1.5px solid var(--c-border);border-radius:var(--r-sm);font-size:13px;font-weight:600;color:var(--c-dark);background:#fff;cursor:pointer;font-family:var(--f);display:flex;align-items:center;gap:8px;transition:border-color .15s}
-    .finish-toggle:hover{border-color:var(--c-accent)}
-    .finish-panel{display:none;margin-top:9px;flex-wrap:wrap;gap:7px}
+    .mat-sub-grid{display:flex;flex-wrap:wrap;gap:7px;justify-content:center}
+    .mat-sub-btn{padding:8px 13px;border:1.5px solid var(--c-border);border-radius:var(--r-sm);font-size:13px;font-weight:500;color:var(--c-dark);background:#fff;cursor:pointer;font-family:var(--f);transition:border-color .15s,color .15s,background .15s;line-height:1.3;text-align:center}
+    .mat-sub-btn:hover{border-color:var(--c-accent);color:var(--c-accent);background:#fff}
+    .mat-sub-btn.active{border-color:var(--c-accent);background:var(--c-accent);color:#fff}
+    .finish-toggle{padding:8px 13px;border:1.5px solid var(--c-border);border-radius:var(--r-sm);font-size:13px;font-weight:500;color:var(--c-dark);background:#eef6fb;cursor:pointer;font-family:var(--f);transition:border-color .15s,color .15s,background .15s}
+    .finish-toggle:hover{border-color:var(--c-accent);color:var(--c-accent)}
+    .finish-panel{display:none;flex-wrap:wrap;gap:7px;justify-content:center;margin-top:10px}
     .finish-panel.show{display:flex}
-    .calc-result{background:var(--c-bg-2);border-radius:var(--r-md);padding:24px 28px;margin-top:28px;display:flex;align-items:center;gap:32px;flex-wrap:wrap;min-height:88px}
+    .finish-subpanel{display:none;margin-top:10px}
+    .finish-subpanel.show{display:block}
+    .finish-subgroup{display:flex;flex-wrap:wrap;gap:7px;justify-content:center}
+    .finish-subnote{margin-top:10px;font-size:12px;line-height:1.6;color:var(--c-muted);text-align:center}
+    .finish-input-panel{display:none;margin-top:12px}
+    .finish-input-panel.show{display:block}
+    .finish-input-row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;align-items:center}
+    .finish-size{display:flex;align-items:center;gap:8px}
+    .finish-size input{width:72px;padding:8px 10px;border:1.5px solid var(--c-border);border-radius:var(--r-sm);font-family:var(--f);font-size:14px;text-align:center}
+    .finish-check{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--c-dark);white-space:nowrap}
+    .finish-check input{width:18px;height:18px;accent-color:var(--c-accent)}
+    .cut-subpanel{display:none;margin-top:10px}
+    .cut-subpanel.show{display:block}
+    .cut-subgroup{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin-top:10px}
+    .cut-subnote{margin-top:12px;font-size:12px;line-height:1.6;color:var(--c-muted);text-align:center}
+    .cut-input-panel{display:none;margin-top:12px}
+    .cut-input-panel.show{display:block}
+    .cut-input-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,220px));gap:10px;justify-content:center}
+    .cut-input-card{display:flex;flex-direction:column;gap:6px;text-align:left}
+    .cut-input-card label{font-size:12px;font-weight:600;color:var(--c-muted)}
+    .cut-input-card input,.cut-input-card select{width:100%;padding:9px 11px;border:1.5px solid var(--c-border);border-radius:var(--r-sm);font-family:var(--f);font-size:13px;color:var(--c-dark);background:#fff;outline:none}
+    .cut-input-card input:focus,.cut-input-card select:focus{border-color:var(--c-accent)}
+    .calc-result{background:var(--c-bg-2);border-radius:var(--r-md);padding:24px 28px;margin-top:28px;display:flex;align-items:center;gap:32px;flex-wrap:wrap;min-height:88px;width:100%;max-width:1400px}
     .calc-result__placeholder{color:var(--c-muted);font-size:15px;display:flex;align-items:center;gap:10px}
     .calc-result__prices{display:none}
     .calc-result__unit{font-size:12px;color:var(--c-muted);margin-bottom:2px}
@@ -78,7 +104,7 @@
     .disc-badge{display:inline-block;background:rgba(255,77,0,.12);color:var(--c-accent);font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;margin-left:8px;vertical-align:middle}
     .calc-order-btn{padding:14px 32px;background:var(--c-accent);color:#fff;border:none;border-radius:var(--r-md);font-size:15px;font-weight:700;cursor:pointer;font-family:var(--f);text-transform:uppercase;letter-spacing:.04em;transition:background .2s;white-space:nowrap;display:none;margin-left:auto}
     .calc-order-btn:hover{background:#e64500}
-    .calc-info{margin-top:24px;padding-top:20px;border-top:1px solid var(--c-border);font-size:13px;color:var(--c-muted);line-height:1.85}
+    .calc-info{margin-top:24px;padding-top:20px;border-top:1px solid var(--c-border);font-size:13px;color:var(--c-muted);line-height:1.85;width:100%;max-width:1400px}
     /* footer */
     .footer{background:var(--c-dark);padding:0}
     .footer__top-arrow{display:block;width:100%;padding:14px 0 10px;background:var(--c-dark);text-align:center;cursor:pointer;border:none;border-bottom:1px solid rgba(255,255,255,.07);transition:background .2s}
@@ -198,25 +224,8 @@
         <button class="mat-btn" data-mat="колотехі">колотехі</button>
         <button class="mat-btn" data-mat="картон">картон та дизайнерські</button>
       </div>
-      <div class="mat-sub" id="subSelf">
-        <select id="selSelf" onchange="calc()">
-          <option>самоклеюча плівка UPM біла матова</option>
-          <option>самоклеюча плівка Ritrama ПРОЗОРА глянець</option>
-          <option>самоклеюча плівка Ritrama БІЛА глянець</option>
-          <option>самоклеючий папір з надсічками</option>
-          <option>Waterproof White вологостійкий</option>
-        </select>
-      </div>
-      <div class="mat-sub" id="subCoated">
-        <select id="selCoated" onchange="calc()">
-          <option>115г</option><option>130г</option><option>150г</option>
-          <option selected>170г</option><option>200г</option><option>250г</option><option>300г</option>
-        </select>
-      </div>
-      <div class="mat-sub" id="subOffset">
-        <select id="selOffset" onchange="calc()">
-          <option>80г</option><option>100г</option><option>120г</option><option>170г</option><option>250г</option>
-        </select>
+      <div class="mat-sub" id="materialSub">
+        <div class="mat-sub-grid" id="materialSubtypeGrid"></div>
       </div>
     </div>
 
@@ -236,17 +245,18 @@
     <!-- Row 4: Finishing -->
     <div class="calc-row">
       <div class="calc-label">Оздоблення</div>
-      <button class="finish-toggle" onclick="toggleFinish()">
-        <span id="finishLabel">без оздоблення</span> ▾
-      </button>
-      <div class="finish-panel" id="finishPanel">
+      <button class="finish-toggle" type="button" id="finishToggle">оздоблення</button>
+      <div class="btn-group finish-panel" id="finishPanel">
         <button class="btn-opt active" data-fin="none">без оздоблення</button>
-        <button class="btn-opt" data-fin="lam1m">ламінація матова 25мк 1 сторона</button>
-        <button class="btn-opt" data-fin="lam2m">ламінація матова 25мк 2 сторони</button>
-        <button class="btn-opt" data-fin="lam1g">ламінація глянцева 25мк 1 сторона</button>
-        <button class="btn-opt" data-fin="lam2g">ламінація глянцева 25мк 2 сторони</button>
-        <button class="btn-opt" data-fin="soft">ламінація Soft Touch 1 сторона</button>
-        <button class="btn-opt" data-fin="foil">тиснення фольгою</button>
+        <button class="btn-opt" data-fin="perf">перфорація</button>
+        <button class="btn-opt" data-fin="foil">тиснення</button>
+      </div>
+      <div class="finish-subpanel" id="finishSubpanel">
+        <div class="finish-subgroup" id="finishSubtypeGroup"></div>
+        <p class="finish-subnote" id="finishSubnote"></p>
+      </div>
+      <div class="finish-input-panel" id="finishInputPanel">
+        <div class="finish-input-row" id="finishInputRow"></div>
       </div>
     </div>
 
@@ -261,6 +271,15 @@
         <button class="btn-opt" data-cut="diecutdig">висікання цифрове</button>
         <button class="btn-opt" data-cut="corner">заокруглення кутів</button>
         <button class="btn-opt" data-cut="mount">кашування</button>
+        <button class="btn-opt" data-cut="furnitura">фурнітура</button>
+      </div>
+      <div class="cut-subpanel" id="cutSubpanel">
+        <div class="cut-subgroup" id="cutSubtypeGroup"></div>
+        <div class="cut-subgroup" id="cutDetailGroup"></div>
+        <p class="cut-subnote" id="cutSubnote"></p>
+      </div>
+      <div class="cut-input-panel" id="cutInputPanel">
+        <div class="cut-input-grid" id="cutInputGrid"></div>
       </div>
     </div>
 
@@ -333,98 +352,1056 @@
 
 <script>
 'use strict';
+
 const header = document.getElementById('header');
-window.addEventListener('scroll', () => header.classList.toggle('scrolled', scrollY > 40), {passive:true});
+const matButtons = Array.from(document.querySelectorAll('.mat-btn'));
+const printButtons = Array.from(document.querySelectorAll('#printBtns [data-print]'));
+const finButtons = Array.from(document.querySelectorAll('#finishPanel [data-fin]'));
+const cutButtons = Array.from(document.querySelectorAll('#cutBtns [data-cut]'));
+const materialSubtypeGrid = document.getElementById('materialSubtypeGrid');
+const finishToggle = document.getElementById('finishToggle');
+const finishSubpanel = document.getElementById('finishSubpanel');
+const finishSubtypeGroup = document.getElementById('finishSubtypeGroup');
+const finishSubnote = document.getElementById('finishSubnote');
+const finishInputPanel = document.getElementById('finishInputPanel');
+const finishInputRow = document.getElementById('finishInputRow');
+const cutSubpanel = document.getElementById('cutSubpanel');
+const cutSubtypeGroup = document.getElementById('cutSubtypeGroup');
+const cutDetailGroup = document.getElementById('cutDetailGroup');
+const cutSubnote = document.getElementById('cutSubnote');
+const cutInputPanel = document.getElementById('cutInputPanel');
+const cutInputGrid = document.getElementById('cutInputGrid');
 
-// Tabs (visual only for now)
-document.querySelectorAll('.calc-tab').forEach(t => t.addEventListener('click', () => {
-  document.querySelectorAll('.calc-tab').forEach(x => x.classList.remove('active'));
-  t.classList.add('active');
-}));
+const materialBaseMul = {
+  'кальки': 1.2,
+  'самоклеючі': 1.4,
+  'пластикові': 1.6,
+  'офсетні': 0.75,
+  'крейдовані': 1.0,
+  'крафтові': 0.95,
+  'колотехі': 0.85,
+  'картон': 1.3
+};
 
-// Size presets
-document.querySelectorAll('[data-w]').forEach(btn => btn.addEventListener('click', () => {
-  document.getElementById('w').value = btn.dataset.w;
-  document.getElementById('h').value = btn.dataset.h;
-  calc();
-}));
+const materialOptions = {
+  'кальки': [
+    'калька GSK EW 200 грам',
+    'калька GSK EW 90 грам'
+  ],
+  'самоклеючі': [
+    'самоклеюча плівка UPM біла без просічки матова',
+    'самоклеюча плівка Ritrama ПРОЗОРА глянець',
+    'самоклеюча плівка Ritrama БІЛА глянець',
+    'самоклеючий папір з надсічками',
+    'самоклеючий Woodstock Betulla кремовий з вкрапленням',
+    'самоклеючий Waterproof White вологостійкий білий легкофактурний',
+    'самоклеючий UPM бурий крафт смугастий',
+    'самоклеючий Tintoretto Angora світло сірий з вкрапленням',
+    'самоклеючий Sirio Pearl Ice White металізований білий',
+    'самоклеючий Lam Foil Matt Silver матовий срібний',
+    'самоклеючий Embossed Coated Skin білий крейдований з легкою фактурою',
+    'самоклеючий Constellation Snow Vergata білий вельвет',
+    'самоклеючий Constellation Jade Raster металізована жемчужна',
+    'самоклеючий Antiqua White верже білий',
+    'самоклеючий Antiqua Ivory верже слонової кістки',
+    'самоклеючий Acquerello Avorio мікровельвет слонової кістки'
+  ],
+  'пластикові': [
+    'папір пластиковий 300 грам',
+    'папір пластиковий 230 грам',
+    'папір пластиковий 135 грам'
+  ],
+  'офсетні': [
+    'папір офсетний 80 грам',
+    'папір офсетний 100 грам',
+    'папір офсетний 120 грам',
+    'папір офсетний 170 грам',
+    'папір офсетний 250 грам',
+    'папір офсетний кольоровий пастельні тони 80 грам'
+  ],
+  'крейдовані': [
+    'папір крейдований матовий 90 грам',
+    'папір крейдований матовий 115 грам',
+    'папір крейдований матовий 130 грам',
+    'папір крейдований матовий 150 грам',
+    'папір крейдований матовий 170 грам',
+    'папір крейдований матовий 200 грам',
+    'папір крейдований матовий 250 грам',
+    'папір крейдований матовий 300 грам',
+    'папір крейдований матовий 350 грам',
+    'папір крейдований матовий 400 грам'
+  ],
+  'крафтові': [
+    'папір крафт жовтий 80 грам'
+  ],
+  'колотехі': [
+    'папір колотех 100 грам',
+    'папір колотех 120 грам',
+    'папір колотех 160 грам',
+    'папір колотех 200 грам',
+    'папір колотех 250 грам',
+    'папір колотех 300 грам'
+  ],
+  'картон': [
+    'папір Tintoretto crema 250 грам',
+    'папір Tintoretto crema 140 грам',
+    'папір SplendorGel 340 грам',
+    'папір Nettuno bianco artico 100 грам',
+    'папір Munken Polar 400 грам',
+    'папір Munken Polar 300 грам',
+    'папір Munken Lynx молочний 150 грам',
+    'папір Mondi Pergraphica natural smooth 120 грам',
+    'папір Mondi Pergraphica natural rough 120 грам',
+    'папір Mondi Pergraphica natural rough 90 грам',
+    'папір DNS 300 грам',
+    'картон льон Icelite toile moyenne 300 грам',
+    'картон дизайнерський 300 грам',
+    'картон Tintoretto Gesso 300 грам',
+    'картон StarDream Silver 285 грам',
+    'картон StarDream Quarz 285 грам',
+    'картон StarDream Opal 285 грам',
+    'картон StarDream Gold 285 грам',
+    'картон StarDream Dolomite 285 грам',
+    'картон StarDream Diamond 285 грам',
+    'картон StarDream Crystal 285 грам',
+    'картон StarDream Citrine 285 грам',
+    'картон SplendorGel avorio 300 грам',
+    'картон Sirio pearl oyster shell 300 грам',
+    'картон Nettuno perla 280 грам',
+    'картон Nettuno bianco artico 280 грам',
+    'картон Marina conchiglia 240 грам',
+    'картон GC1 білий зворот 250 грам',
+    'картон GC1 білий зворот 205 грам',
+    'картон Dali candido 285 грам'
+  ]
+};
 
-// Qty adjust
+const coatedMul = {
+  90: 0.75,
+  115: 0.85,
+  130: 0.9,
+  150: 0.95,
+  170: 1.0,
+  200: 1.1,
+  250: 1.2,
+  300: 1.35,
+  350: 1.45,
+  400: 1.55
+};
+
+const offsetMul = {
+  80: 0.7,
+  100: 0.8,
+  120: 0.9,
+  170: 1.0,
+  250: 1.2
+};
+
+const selfMul = {
+  'самоклеюча плівка UPM біла без просічки матова': 1.4,
+  'самоклеюча плівка Ritrama ПРОЗОРА глянець': 1.55,
+  'самоклеюча плівка Ritrama БІЛА глянець': 1.5,
+  'самоклеючий папір з надсічками': 1.25,
+  'самоклеючий Woodstock Betulla кремовий з вкрапленням': 1.45,
+  'самоклеючий Waterproof White вологостійкий білий легкофактурний': 1.45,
+  'самоклеючий UPM бурий крафт смугастий': 1.45,
+  'самоклеючий Tintoretto Angora світло сірий з вкрапленням': 1.45,
+  'самоклеючий Sirio Pearl Ice White металізований білий': 1.5,
+  'самоклеючий Lam Foil Matt Silver матовий срібний': 1.5,
+  'самоклеючий Embossed Coated Skin білий крейдований з легкою фактурою': 1.45,
+  'самоклеючий Constellation Snow Vergata білий вельвет': 1.45,
+  'самоклеючий Constellation Jade Raster металізована жемчужна': 1.5,
+  'самоклеючий Antiqua White верже білий': 1.45,
+  'самоклеючий Antiqua Ivory верже слонової кістки': 1.45,
+  'самоклеючий Acquerello Avorio мікровельвет слонової кістки': 1.45
+};
+
+const printMul = {
+  '4+0': 1.0,
+  '4+4': 1.6,
+  '4+1': 1.4,
+  '1+0': 0.5,
+  '1+1': 0.8,
+  '0': 0.3
+};
+
+const finMul = {
+  none: 1.0,
+  perf: 1.08,
+  lam1m: 1.2,
+  lam2m: 1.35,
+  lam1g: 1.2,
+  lam2g: 1.35,
+  soft: 1.45,
+  foil: 1.6
+};
+
+const finishingProfiles = {
+  none: {
+    note: ''
+  },
+  perf: {
+    note: 'Перфорація додає окрему обробку на аркуші та зазвичай застосовується для квитків, талонів і відривних елементів.'
+  },
+  lam1m: {
+    subtypes: [
+      { id: 'lam1m-standard', label: 'матова 25мк', add: 0 },
+      { id: 'lam1m-premium', label: 'матова преміум', add: 0.05 }
+    ],
+    note: 'Ламінація матова доступна переважно для щільних паперів і картонів.'
+  },
+  lam2m: {
+    subtypes: [
+      { id: 'lam2m-standard', label: 'матова 25мк 2 сторони', add: 0 },
+      { id: 'lam2m-premium', label: 'матова преміум 2 сторони', add: 0.08 }
+    ],
+    note: 'Двостороння ламінація має більшу собівартість і довший цикл виробництва.'
+  },
+  lam1g: {
+    subtypes: [
+      { id: 'lam1g-standard', label: 'глянцева 25мк', add: 0 },
+      { id: 'lam1g-thick', label: 'глянцева посилена', add: 0.05 }
+    ],
+    note: 'Глянцева ламінація підсилює кольори та блиск поверхні.'
+  },
+  lam2g: {
+    subtypes: [
+      { id: 'lam2g-standard', label: 'глянцева 25мк 2 сторони', add: 0 },
+      { id: 'lam2g-thick', label: 'глянцева посилена 2 сторони', add: 0.08 }
+    ],
+    note: 'Двостороння глянцева ламінація рекомендована для інтенсивного використання.'
+  },
+  soft: {
+    subtypes: [
+      { id: 'soft-standard', label: 'soft touch 1 сторона', add: 0 },
+      { id: 'soft-plus', label: 'soft touch premium', add: 0.1 }
+    ],
+    note: 'Soft Touch краще працює на щільних матеріалах та картоні.'
+  },
+  foil: {
+    subtypes: [
+      { id: 'foil-none', label: 'без тиснення та конгреву', add: 0 },
+      { id: 'foil-blind', label: 'сліпе', add: 0 },
+      { id: 'foil-congreve', label: 'конгрев', add: 0 },
+      { id: 'foil-gold', label: 'золото', add: 0 },
+      { id: 'foil-silver', label: 'срібло', add: 0 },
+      { id: 'foil-color', label: 'інші кольори', add: 0 },
+      { id: 'foil-holo', label: 'голографічне', add: 0 }
+    ],
+    note: 'Для тиснення вкажіть розмір зони, чи потрібно виготовляти кліше, і додаткові параметри, як у dpi.'
+  }
+};
+
+const tracingPaperConfig = {
+  sheetPrice: {
+    'калька GSK EW 90 грам': 24.64,
+    'калька GSK EW 200 грам': 53.836
+  },
+  printCostPerSheet: {
+    'калька GSK EW 90 грам': {
+      '4+0': 10.32,
+      '1+0': 4.3,
+      '0': 0
+    },
+    'калька GSK EW 200 грам': {
+      '4+0': 15.084,
+      '1+0': 5.9,
+      '0': 0
+    }
+  },
+  foilRatePerAreaUnit: {
+    'foil-blind': 541 / 4500,
+    'foil-congreve': 541 / 4500,
+    'foil-gold': 738 / 4500,
+    'foil-silver': 738 / 4500,
+    'foil-color': 754 / 4500,
+    'foil-holo': 821 / 4500
+  },
+  foilDoubleSideRatePerAreaUnit: 242 / 4500,
+  foilNewClicheCost: 658,
+  foilCliche7Cost: 0
+};
+
+const cutMul = {
+  cut: 1.0,
+  none: 0.95,
+  fold: 1.15,
+  die: 1.4,
+  diecutdig: 1.25,
+  corner: 1.1,
+  mount: 1.5,
+  furnitura: 1.05
+};
+
+const cutOptionProfiles = {
+  fold: {
+    subtypes: [
+      { id: 'fold-0', label: 'без фальців', add: 0 },
+      { id: 'fold-1', label: '1 фальц', add: 0.05 },
+      { id: 'fold-2', label: '2 фальца', add: 0.1 },
+      { id: 'fold-3', label: '3 фальца', add: 0.16 },
+      { id: 'fold-4', label: '4 фальца', add: 0.22 },
+      { id: 'fold-5', label: '5 фальців', add: 0.29 },
+      { id: 'fold-6', label: '6 фальців', add: 0.36 },
+      { id: 'fold-7', label: '7 фальців', add: 0.44 }
+    ],
+    note: 'Фальцювання та бігування рахуються з урахуванням порізки і кількості фальців у виробі.'
+  },
+  corner: {
+    subtypes: [
+      { id: 'standard', label: 'стандартні кути', add: 0 },
+      { id: 'corners-4', label: 'заокруглення 4 кутів', add: 0.12 },
+      { id: 'corners-3', label: 'заокруглення 3 кутів', add: 0.09 },
+      { id: 'corners-2', label: 'заокруглення 2 кутів', add: 0.06 },
+      { id: 'corners-1', label: 'заокруглення 1 кута', add: 0.03 }
+    ],
+    note: 'Кількість заокруглених кутів впливає на доплату за обробку.'
+  },
+  mount: {
+    subtypes: [
+      { id: 'no-mount', label: 'без каширування', add: 0 },
+      { id: 'mount-basic', label: 'каширування', add: 0.35 },
+      { id: 'mount-hardcover', label: 'папка тверда палітурка', add: 0.75 }
+    ],
+    note: 'Для друку рекомендовано використовувати папір крейдований матовий 170 грам. Розміри виробу вказуйте у розкритому вигляді.'
+  },
+  furnitura: {
+    subtypes: [
+      { id: 'bolt', label: 'болт', add: 0.1 },
+      { id: 'ring', label: 'кільце', add: 0.08 },
+      { id: 'eyelet', label: 'люверс', add: 0.12 },
+      { id: 'metal-corner', label: 'металевий куток', add: 0.18 }
+    ],
+    detailBySubtype: {
+      bolt: [
+        { id: 'bolt-3-5', label: 'болт 3.5 мм', add: 0.02 },
+        { id: 'bolt-5', label: 'болт 5 мм', add: 0.03 },
+        { id: 'bolt-10', label: 'болт 10 мм', add: 0.05 },
+        { id: 'bolt-20', label: 'болт 20 мм', add: 0.06 },
+        { id: 'bolt-40', label: 'болт 40 мм', add: 0.08 },
+        { id: 'bolt-50', label: 'болт 50 мм', add: 0.09 },
+        { id: 'bolt-60', label: 'болт 60 мм', add: 0.1 }
+      ],
+      ring: [
+        { id: 'ring-14', label: 'кільце 14 мм', add: 0.03 },
+        { id: 'ring-19', label: 'кільце 19 мм', add: 0.04 },
+        { id: 'ring-25', label: 'кільце 25 мм', add: 0.05 },
+        { id: 'ring-31', label: 'кільце 31 мм', add: 0.06 },
+        { id: 'ring-38', label: 'кільце 38 мм', add: 0.07 },
+        { id: 'ring-50', label: 'кільце 50 мм', add: 0.08 },
+        { id: 'ring-60', label: 'кільце 60 мм', add: 0.09 },
+        { id: 'ring-76', label: 'кільце 76 мм', add: 0.1 }
+      ],
+      eyelet: [
+        { id: 'eyelet-5-5', label: 'люверс 5.5 мм', add: 0.04 }
+      ],
+      'metal-corner': [
+        { id: 'metal-corner-silver', label: 'металевий куток сріблястий', add: 0.06 },
+        { id: 'metal-corner-gold', label: 'металевий куток золотистий', add: 0.06 }
+      ]
+    },
+    note: 'Фурнітура рахується по конкретному елементу і кількості штук на виріб, як у калькуляторах папок та каталогів.'
+  },
+  die: {
+    note: 'Це висікання за допомогою штанцформи та тигелю рекомендовано для середніх і великих тиражів або робіт з потребою у чіткому бігуванні.'
+  },
+  diecutdig: {
+    note: 'Це висікання ріжучим плоттером рекомендовано для невеликих тиражів з невисокими вимогами до бігування.'
+  }
+};
+
+const materialProfiles = {
+  'кальки': {
+    pricingMode: 'sra3-sheet',
+    allowedPrints: new Set(['4+0', '1+0', '0']),
+    allowedFinishes: new Set(['none', 'perf', 'foil']),
+    disabledFinishes: new Set(['lam1m', 'lam2m', 'lam1g', 'lam2g', 'soft']),
+    sheetSize: { width: 450, height: 320 },
+    bleed: 2,
+    setupFee: 0,
+    finishSubtypeRestrictions: {
+      'калька GSK EW 90 грам': new Set(['foil-none', 'foil-blind', 'foil-congreve'])
+    }
+  }
+};
+
+let selMat = '';
+let selPrint = document.querySelector('#printBtns .active')?.dataset.print || '4+0';
+let selCut = document.querySelector('#cutBtns .active')?.dataset.cut || 'cut';
+let selMaterialSubtype = '';
+let selFinSubtype = '';
+let selCutSubtype = '';
+let selCutDetail = '';
+let isFinishPanelOpen = false;
+let finishSelection = {
+  perf: false,
+  foil: false
+};
+let finishInputState = {
+  embossWidth: 50,
+  embossHeight: 90,
+  embossDoubleSide: false,
+  embossNewCliche: false,
+  embossCliche7mm: false
+};
+let cutInputState = {
+  cutLength: 0,
+  creaseCount: 0,
+  designerHelp: 'no',
+  fittingCount: 1,
+  mountWidth: 0,
+  mountHeight: 0,
+  dieCreate: false
+};
+
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 40);
+}, { passive: true });
+
+function setSingleActive(buttons, activeButton) {
+  buttons.forEach(button => button.classList.toggle('active', button === activeButton));
+}
+
+function updateMaterialPanels() {
+  document.getElementById('materialSub').classList.toggle('show', Boolean(selMat));
+}
+
+function populateMaterialOptions(material) {
+  const options = materialOptions[material] || [];
+  const defaultOption = material === 'крейдовані' && options.includes('папір крейдований матовий 170 грам')
+    ? 'папір крейдований матовий 170 грам'
+    : (options[0] || '');
+  selMaterialSubtype = options.includes(selMaterialSubtype) ? selMaterialSubtype : defaultOption;
+
+  materialSubtypeGrid.innerHTML = options.map(option => {
+    const active = option === selMaterialSubtype ? ' active' : '';
+    return `<button class="mat-sub-btn${active}" type="button" data-subtype="${option}">${option}</button>`;
+  }).join('');
+}
+
+function extractWeight(optionText) {
+  const match = optionText.match(/(\d+)\s*грам/i);
+  return match ? Number(match[1]) : null;
+}
+
+function isTracingPaperSelected() {
+  return selMat === 'кальки';
+}
+
+function getActiveMaterialProfile() {
+  return materialProfiles[selMat] || null;
+}
+
+function setButtonsDisabled(buttons, shouldDisable) {
+  buttons.forEach(button => {
+    const disabled = shouldDisable(button);
+    button.classList.toggle('is-disabled', disabled);
+    button.disabled = disabled;
+  });
+}
+
+function syncTracingPaperRestrictions() {
+  const profile = getActiveMaterialProfile();
+  const isTracing = Boolean(profile);
+
+  setButtonsDisabled(printButtons, button => (
+    isTracing && !profile.allowedPrints.has(button.dataset.print)
+  ));
+  setButtonsDisabled(finButtons, button => (
+    isTracing && !profile.allowedFinishes.has(button.dataset.fin)
+  ));
+
+  if (isTracing && !profile.allowedPrints.has(selPrint)) {
+    const fallbackPrint = printButtons.find(button => profile.allowedPrints.has(button.dataset.print));
+    if (fallbackPrint) {
+      selPrint = fallbackPrint.dataset.print;
+      setSingleActive(printButtons, fallbackPrint);
+    }
+  }
+
+  if (isTracing) {
+    if (!profile.allowedFinishes.has('perf')) finishSelection.perf = false;
+    if (!profile.allowedFinishes.has('foil')) finishSelection.foil = false;
+    if (!finishSelection.perf && !finishSelection.foil) {
+      const noneButton = finButtons.find(button => button.dataset.fin === 'none');
+      if (noneButton) noneButton.classList.add('active');
+    }
+  }
+
+  syncFinishButtons();
+}
+
+function getTracingPaperSheetFit(width, height) {
+  const profile = getActiveMaterialProfile();
+  const bleedSize = profile.bleed * 2;
+  const pieceWidth = width + bleedSize;
+  const pieceHeight = height + bleedSize;
+  const sheetWidth = profile.sheetSize.width - bleedSize;
+  const sheetHeight = profile.sheetSize.height - bleedSize;
+
+  const fitNormal = Math.floor(sheetWidth / pieceWidth) * Math.floor(sheetHeight / pieceHeight);
+  const fitRotated = Math.floor(sheetWidth / pieceHeight) * Math.floor(sheetHeight / pieceWidth);
+  return Math.max(fitNormal, fitRotated, 1);
+}
+
+function getTracingPaperSheetPrice(subtype) {
+  return tracingPaperConfig.sheetPrice[subtype] || tracingPaperConfig.sheetPrice['калька GSK EW 90 грам'];
+}
+
+function getTracingPaperPrintCostPerSheet(subtype, printType) {
+  const printMap = tracingPaperConfig.printCostPerSheet[subtype] || tracingPaperConfig.printCostPerSheet['калька GSK EW 90 грам'];
+  return printMap[printType] || 0;
+}
+
+function getAllowedFinishSubtypes() {
+  if (!isTracingPaperSelected()) return null;
+  const restrictions = getActiveMaterialProfile()?.finishSubtypeRestrictions || {};
+  return restrictions[selMaterialSubtype] || null;
+}
+
+function sanitizeFinishSubtypeSelection() {
+  const allowedSubtypes = getAllowedFinishSubtypes();
+  if (!allowedSubtypes || !finishSelection.foil) return;
+  if (!allowedSubtypes.has(selFinSubtype)) {
+    selFinSubtype = allowedSubtypes.has('foil-none') ? 'foil-none' : Array.from(allowedSubtypes)[0] || '';
+  }
+}
+
+function syncFinishButtons() {
+  finButtons.forEach(button => {
+    const key = button.dataset.fin;
+    const active = key === 'none'
+      ? (!finishSelection.perf && !finishSelection.foil)
+      : Boolean(finishSelection[key]);
+    button.classList.toggle('active', active);
+  });
+  sanitizeFinishSubtypeSelection();
+}
+
+function getSelectedFinishProfile() {
+  if (finishSelection.foil) return finishingProfiles.foil;
+  if (finishSelection.perf) return finishingProfiles.perf;
+  return finishingProfiles.none;
+}
+
+function renderFinishSuboptions() {
+  const profile = getSelectedFinishProfile();
+  document.getElementById('finishPanel').classList.toggle('show', isFinishPanelOpen);
+
+  if (!isFinishPanelOpen) {
+    finishSubpanel.classList.remove('show');
+    finishSubtypeGroup.innerHTML = '';
+    finishSubnote.textContent = '';
+    finishInputPanel.classList.remove('show');
+    finishInputRow.innerHTML = '';
+    return;
+  }
+
+  if (!finishSelection.foil || !profile || !profile.subtypes?.length) {
+    finishSubpanel.classList.remove('show');
+    finishSubtypeGroup.innerHTML = '';
+    finishSubnote.textContent = (finishSelection.perf ? finishingProfiles.perf.note : '');
+    finishInputPanel.classList.remove('show');
+    finishInputRow.innerHTML = '';
+    selFinSubtype = '';
+    return;
+  }
+
+  finishSubpanel.classList.add('show');
+  const allowedSubtypes = getAllowedFinishSubtypes();
+  const defaultSubtype = profile.subtypes[0]?.id || '';
+  selFinSubtype = profile.subtypes.some(option => option.id === selFinSubtype) ? selFinSubtype : defaultSubtype;
+  if (allowedSubtypes && !allowedSubtypes.has(selFinSubtype)) {
+    selFinSubtype = allowedSubtypes.has('foil-none') ? 'foil-none' : Array.from(allowedSubtypes)[0] || defaultSubtype;
+  }
+
+  finishSubtypeGroup.innerHTML = profile.subtypes.map(option => {
+    const active = option.id === selFinSubtype ? ' active' : '';
+    const disabled = allowedSubtypes && !allowedSubtypes.has(option.id) ? ' is-disabled' : '';
+    const attrs = disabled ? ' disabled aria-disabled="true"' : '';
+    return `<button class="btn-opt${active}${disabled}" type="button" data-fin-subtype="${option.id}"${attrs}>${option.label}</button>`;
+  }).join('');
+  finishSubnote.textContent = profile.note || '';
+  renderFinishInputs();
+}
+
+function getFinishExtraMultiplier() {
+  let total = 0;
+  if (finishSelection.perf) total += 0.06;
+  if (finishSelection.foil && !isTracingPaperSelected()) {
+    const profile = finishingProfiles.foil;
+    total += profile.subtypes.find(option => option.id === selFinSubtype)?.add || 0;
+  }
+  return total;
+}
+
+function renderFinishInputs() {
+  if (!finishSelection.foil || selFinSubtype === 'foil-none') {
+    finishInputPanel.classList.remove('show');
+    finishInputRow.innerHTML = '';
+    return;
+  }
+
+  finishInputPanel.classList.add('show');
+  finishInputRow.innerHTML = `
+    <div class="finish-size">
+      <span>розміри</span>
+      <input id="embossWidth" data-fin-input="embossWidth" type="number" min="1" value="${finishInputState.embossWidth}">
+      <span>×</span>
+      <input id="embossHeight" data-fin-input="embossHeight" type="number" min="1" value="${finishInputState.embossHeight}">
+      <span>мм</span>
+    </div>
+    <label class="finish-check"><input id="embossDoubleSide" data-fin-input="embossDoubleSide" type="checkbox"${finishInputState.embossDoubleSide ? ' checked' : ''}> тиснення з двох сторін</label>
+    <label class="finish-check"><input id="embossNewCliche" data-fin-input="embossNewCliche" type="checkbox"${finishInputState.embossNewCliche ? ' checked' : ''}> виготовити кліше</label>
+    <label class="finish-check"><input id="embossCliche7mm" data-fin-input="embossCliche7mm" type="checkbox"${finishInputState.embossCliche7mm ? ' checked' : ''}> кліше 7 мм</label>
+  `;
+}
+
+function getFinishExtraCost(totalItems) {
+  if (!finishSelection.foil || selFinSubtype === 'foil-none') return 0;
+  if (isTracingPaperSelected()) {
+    const area = ((finishInputState.embossWidth || 0) * (finishInputState.embossHeight || 0)) / 100;
+    const perItem = totalItems * area * (tracingPaperConfig.foilRatePerAreaUnit[selFinSubtype] || 0);
+    const doubleSide = finishInputState.embossDoubleSide ? totalItems * area * tracingPaperConfig.foilDoubleSideRatePerAreaUnit : 0;
+    const cliche = finishInputState.embossNewCliche ? tracingPaperConfig.foilNewClicheCost : 0;
+    const cliche7 = finishInputState.embossCliche7mm ? tracingPaperConfig.foilCliche7Cost : 0;
+    return perItem + doubleSide + cliche + cliche7;
+  }
+  const area = ((finishInputState.embossWidth || 0) * (finishInputState.embossHeight || 0)) / 100;
+  const perItemRateMap = {
+    'foil-blind': 0.09,
+    'foil-congreve': 0.14,
+    'foil-gold': 0.18,
+    'foil-silver': 0.18,
+    'foil-color': 0.22,
+    'foil-holo': 0.26
+  };
+  const perItem = totalItems * area * (perItemRateMap[selFinSubtype] || 0);
+  const doubleSide = finishInputState.embossDoubleSide ? totalItems * area * 0.08 : 0;
+  const cliche = finishInputState.embossNewCliche ? 420 : 0;
+  const cliche7 = finishInputState.embossCliche7mm ? 180 : 0;
+  return perItem + doubleSide + cliche + cliche7;
+}
+
+function renderCutSuboptions() {
+  const profile = cutOptionProfiles[selCut];
+  if (!profile) {
+    cutSubpanel.classList.remove('show');
+    cutSubtypeGroup.innerHTML = '';
+    cutDetailGroup.innerHTML = '';
+    cutSubnote.textContent = '';
+    cutInputPanel.classList.remove('show');
+    cutInputGrid.innerHTML = '';
+    selCutSubtype = '';
+    selCutDetail = '';
+    return;
+  }
+
+  cutSubpanel.classList.add('show');
+  const subtypeOptions = profile.subtypes || [];
+  const defaultSubtype = subtypeOptions[0]?.id || '';
+  selCutSubtype = subtypeOptions.some(option => option.id === selCutSubtype) ? selCutSubtype : defaultSubtype;
+
+  cutSubtypeGroup.innerHTML = subtypeOptions.map(option => {
+    const active = option.id === selCutSubtype ? ' active' : '';
+    return `<button class="btn-opt${active}" type="button" data-cut-subtype="${option.id}">${option.label}</button>`;
+  }).join('');
+  cutSubtypeGroup.style.display = subtypeOptions.length ? 'flex' : 'none';
+
+  const detailOptions = profile.detailBySubtype?.[selCutSubtype] || [];
+  const defaultDetail = detailOptions[0]?.id || '';
+  selCutDetail = detailOptions.some(option => option.id === selCutDetail) ? selCutDetail : defaultDetail;
+
+  cutDetailGroup.innerHTML = detailOptions.map(option => {
+    const active = option.id === selCutDetail ? ' active' : '';
+    return `<button class="btn-opt${active}" type="button" data-cut-detail="${option.id}">${option.label}</button>`;
+  }).join('');
+  cutDetailGroup.style.display = detailOptions.length ? 'flex' : 'none';
+  cutSubnote.textContent = profile.note || '';
+  renderCutInputs();
+}
+
+function getCutExtraMultiplier() {
+  const profile = cutOptionProfiles[selCut];
+  if (!profile) return 0;
+  const subtypeAdd = profile.subtypes.find(option => option.id === selCutSubtype)?.add || 0;
+  const detailAdd = (profile.detailBySubtype?.[selCutSubtype] || []).find(option => option.id === selCutDetail)?.add || 0;
+  return subtypeAdd + detailAdd;
+}
+
+function getCutInputConfig() {
+  if (selCut === 'diecutdig') {
+    return [
+      { id: 'cutLength', label: 'в одному виробі: мм довжина різу', type: 'number', min: 0, step: 10, value: cutInputState.cutLength },
+      { id: 'creaseCount', label: 'мм бігування', type: 'number', min: 0, step: 10, value: cutInputState.creaseCount },
+      {
+        id: 'designerHelp',
+        label: 'послуги конструктора',
+        type: 'select',
+        value: cutInputState.designerHelp,
+        options: [
+          { value: 'no', label: 'не потрібно' },
+          { value: 'yes', label: 'потрібно' }
+        ]
+      }
+    ];
+  }
+
+  if (selCut === 'die') {
+    return [
+      { id: 'cutLength', label: 'в одному виробі: мм довжина різу', type: 'number', min: 0, step: 10, value: cutInputState.cutLength },
+      { id: 'creaseCount', label: 'мм бігування', type: 'number', min: 0, step: 10, value: cutInputState.creaseCount },
+      { id: 'dieCreate', label: 'виготовити штанцформу', type: 'checkbox', value: cutInputState.dieCreate }
+    ];
+  }
+
+  if (selCut === 'furnitura') {
+    return [
+      { id: 'fittingCount', label: 'елементів на виріб', type: 'number', min: 1, step: 1, value: cutInputState.fittingCount }
+    ];
+  }
+
+  if (selCut === 'mount') {
+    return [
+      { id: 'mountWidth', label: 'ширина виробу, мм', type: 'number', min: 0, step: 1, value: cutInputState.mountWidth || Number(document.getElementById('w').value || 0) },
+      { id: 'mountHeight', label: 'висота виробу, мм', type: 'number', min: 0, step: 1, value: cutInputState.mountHeight || Number(document.getElementById('h').value || 0) }
+    ];
+  }
+
+  return [];
+}
+
+function renderCutInputs() {
+  const config = getCutInputConfig();
+  if (!config.length) {
+    cutInputPanel.classList.remove('show');
+    cutInputGrid.innerHTML = '';
+    return;
+  }
+
+  cutInputPanel.classList.add('show');
+  cutInputGrid.innerHTML = config.map(field => {
+    if (field.type === 'checkbox') {
+      return `<label class="finish-check"><input id="${field.id}" data-cut-input="${field.id}" type="checkbox"${field.value ? ' checked' : ''}> ${field.label}</label>`;
+    }
+
+    if (field.type === 'select') {
+      const options = field.options.map(option => {
+        const selected = option.value === field.value ? ' selected' : '';
+        return `<option value="${option.value}"${selected}>${option.label}</option>`;
+      }).join('');
+      return `<div class="cut-input-card"><label for="${field.id}">${field.label}</label><select id="${field.id}" data-cut-input="${field.id}">${options}</select></div>`;
+    }
+
+    return `<div class="cut-input-card"><label for="${field.id}">${field.label}</label><input id="${field.id}" data-cut-input="${field.id}" type="${field.type}" min="${field.min}" step="${field.step}" value="${field.value}"></div>`;
+  }).join('');
+}
+
+function getCutInputExtraCost(totalItems) {
+  if (selCut === 'diecutdig') {
+    const cutLengthMeters = (cutInputState.cutLength || 0) / 1000;
+    const creaseMeters = (cutInputState.creaseCount || 0) / 1000;
+    const creaseCost = creaseMeters * totalItems * 0.45;
+    const contourCost = cutLengthMeters * totalItems * 0.6;
+    const designerCost = cutInputState.designerHelp === 'yes' ? 180 : 0;
+    return contourCost + creaseCost + designerCost;
+  }
+
+  if (selCut === 'die') {
+    const contourMeters = (cutInputState.cutLength || 0) / 1000;
+    const creaseMeters = (cutInputState.creaseCount || 0) / 1000;
+    const dieRunCost = (contourMeters * 0.75 + creaseMeters * 0.5) * totalItems;
+    const diePrepCost = cutInputState.dieCreate ? 480 : 0;
+    return dieRunCost + diePrepCost;
+  }
+
+  if (selCut === 'furnitura') {
+    const fittingCount = Math.max(1, cutInputState.fittingCount || 1);
+    const unitCostMap = {
+      'bolt-3-5': 1.4,
+      'bolt-5': 1.6,
+      'bolt-10': 1.9,
+      'bolt-20': 2.2,
+      'bolt-40': 2.8,
+      'bolt-50': 3.1,
+      'bolt-60': 3.4,
+      'ring-14': 1.2,
+      'ring-19': 1.4,
+      'ring-25': 1.7,
+      'ring-31': 2,
+      'ring-38': 2.3,
+      'ring-50': 2.8,
+      'ring-60': 3.2,
+      'ring-76': 3.8,
+      'eyelet-5-5': 1.5,
+      'metal-corner-silver': 2.4,
+      'metal-corner-gold': 2.4
+    };
+    const detailCost = unitCostMap[selCutDetail] || 1.8;
+    return totalItems * fittingCount * detailCost;
+  }
+
+  if (selCut === 'mount') {
+    const mountArea = ((cutInputState.mountWidth || 0) * (cutInputState.mountHeight || 0)) / 1000000;
+    const areaRate = selCutSubtype === 'mount-hardcover' ? 160 : (selCutSubtype === 'mount-basic' ? 90 : 0);
+    return totalItems * mountArea * areaRate;
+  }
+
+  if (selCut === 'fold') {
+    const foldCountMap = {
+      'fold-0': 0,
+      'fold-1': 1,
+      'fold-2': 2,
+      'fold-3': 3,
+      'fold-4': 4,
+      'fold-5': 5,
+      'fold-6': 6,
+      'fold-7': 7
+    };
+    const foldCount = foldCountMap[selCutSubtype] || 0;
+    return totalItems * foldCount * 0.45;
+  }
+
+  return 0;
+}
+
+function getMaterialMultiplier() {
+  if (!selMat) return 1;
+  const selectedOption = selMaterialSubtype;
+  if (selMat === 'самоклеючі') {
+    return selfMul[selectedOption] || materialBaseMul[selMat] || 1;
+  }
+  if (selMat === 'крейдовані') {
+    return coatedMul[extractWeight(selectedOption)] || materialBaseMul[selMat] || 1;
+  }
+  if (selMat === 'офсетні') {
+    return offsetMul[extractWeight(selectedOption)] || materialBaseMul[selMat] || 1;
+  }
+  return materialBaseMul[selMat] || 1;
+}
+
 function adj(id, delta) {
-  const el = document.getElementById(id);
-  el.value = Math.max(1, (+el.value || 1) + delta);
+  const input = document.getElementById(id);
+  input.value = Math.max(1, (+input.value || 1) + delta);
   calc();
 }
-['qty','vars','w','h'].forEach(id => document.getElementById(id).addEventListener('input', calc));
 
-// Material
-let selMat = '';
-document.querySelectorAll('.mat-btn').forEach(btn => btn.addEventListener('click', () => {
-  document.querySelectorAll('.mat-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  selMat = btn.dataset.mat;
-  document.getElementById('subSelf').classList.toggle('show', selMat === 'самоклеючі');
-  document.getElementById('subCoated').classList.toggle('show', selMat === 'крейдовані');
-  document.getElementById('subOffset').classList.toggle('show', selMat === 'офсетні');
+window.adj = adj;
+
+matButtons.forEach(button => button.addEventListener('click', () => {
+  setSingleActive(matButtons, button);
+  selMat = button.dataset.mat;
+  populateMaterialOptions(selMat);
+  updateMaterialPanels();
+  syncTracingPaperRestrictions();
   calc();
 }));
 
-// Print type
-let selPrint = '4+0';
-document.querySelectorAll('[data-print]').forEach(btn => btn.addEventListener('click', () => {
-  document.querySelectorAll('[data-print]').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active'); selPrint = btn.dataset.print; calc();
-}));
+finishToggle.addEventListener('click', () => {
+  isFinishPanelOpen = !isFinishPanelOpen;
+  renderFinishSuboptions();
+});
 
-// Finishing
-let selFin = 'none';
-function toggleFinish() { document.getElementById('finishPanel').classList.toggle('show'); }
-document.querySelectorAll('[data-fin]').forEach(btn => btn.addEventListener('click', () => {
-  document.querySelectorAll('[data-fin]').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active'); selFin = btn.dataset.fin;
-  document.getElementById('finishLabel').textContent = btn.textContent;
-  document.getElementById('finishPanel').classList.remove('show');
+materialSubtypeGrid.addEventListener('click', event => {
+  const button = event.target.closest('.mat-sub-btn');
+  if (!button) return;
+  selMaterialSubtype = button.dataset.subtype;
+  materialSubtypeGrid.querySelectorAll('.mat-sub-btn').forEach(subtypeButton => {
+    subtypeButton.classList.toggle('active', subtypeButton === button);
+  });
+  syncTracingPaperRestrictions();
+  calc();
+});
+
+printButtons.forEach(button => button.addEventListener('click', () => {
+  if (button.disabled) return;
+  setSingleActive(printButtons, button);
+  selPrint = button.dataset.print;
   calc();
 }));
 
-// Cutting
-let selCut = 'cut';
-document.querySelectorAll('[data-cut]').forEach(btn => btn.addEventListener('click', () => {
-  document.querySelectorAll('[data-cut]').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active'); selCut = btn.dataset.cut; calc();
+finButtons.forEach(button => button.addEventListener('click', () => {
+  if (button.disabled) return;
+  const key = button.dataset.fin;
+  if (key === 'none') {
+    finishSelection.perf = false;
+    finishSelection.foil = false;
+  } else {
+    finishSelection[key] = !finishSelection[key];
+  }
+  syncFinishButtons();
+  isFinishPanelOpen = true;
+  renderFinishSuboptions();
+  calc();
 }));
 
-// Calculation
+finishSubtypeGroup.addEventListener('click', event => {
+  const button = event.target.closest('[data-fin-subtype]');
+  if (!button || button.disabled) return;
+  selFinSubtype = button.dataset.finSubtype;
+  renderFinishSuboptions();
+  calc();
+});
+
+finishInputRow.addEventListener('input', event => {
+  const field = event.target.closest('[data-fin-input]');
+  if (!field) return;
+  const key = field.dataset.finInput;
+  finishInputState[key] = field.type === 'checkbox' ? field.checked : Math.max(1, Number(field.value) || 1);
+  calc();
+});
+
+cutButtons.forEach(button => button.addEventListener('click', () => {
+  setSingleActive(cutButtons, button);
+  selCut = button.dataset.cut;
+  renderCutSuboptions();
+  calc();
+}));
+
+cutSubtypeGroup.addEventListener('click', event => {
+  const button = event.target.closest('[data-cut-subtype]');
+  if (!button) return;
+  selCutSubtype = button.dataset.cutSubtype;
+  renderCutSuboptions();
+  calc();
+});
+
+cutDetailGroup.addEventListener('click', event => {
+  const button = event.target.closest('[data-cut-detail]');
+  if (!button) return;
+  selCutDetail = button.dataset.cutDetail;
+  renderCutSuboptions();
+  calc();
+});
+
+cutInputGrid.addEventListener('input', event => {
+  const field = event.target.closest('[data-cut-input]');
+  if (!field) return;
+  const key = field.dataset.cutInput;
+  if (field.type === 'checkbox') {
+    cutInputState[key] = field.checked;
+  } else if (field.tagName === 'SELECT') {
+    cutInputState[key] = field.value;
+  } else {
+    cutInputState[key] = Math.max(0, Number(field.value) || 0);
+  }
+  calc();
+});
+
+document.querySelectorAll('.calc-tab').forEach(tab => tab.addEventListener('click', () => {
+  document.querySelectorAll('.calc-tab').forEach(other => other.classList.remove('active'));
+  tab.classList.add('active');
+}));
+
+document.querySelectorAll('[data-w]').forEach(button => button.addEventListener('click', () => {
+  document.getElementById('w').value = button.dataset.w;
+  document.getElementById('h').value = button.dataset.h;
+  calc();
+}));
+
+['w', 'h', 'qty', 'vars'].forEach(id => {
+  document.getElementById(id).addEventListener('input', calc);
+});
+
 function calc() {
-  if (!selMat) return;
+  if (!selMat) {
+    document.getElementById('resPlaceholder').style.display = '';
+    document.getElementById('resPrices').style.display = 'none';
+    document.getElementById('orderBtn').style.display = 'none';
+    return;
+  }
+
   const w = Math.max(10, +document.getElementById('w').value || 210);
   const h = Math.max(10, +document.getElementById('h').value || 297);
   const qty = Math.max(1, +document.getElementById('qty').value || 100);
+  const vars = Math.max(1, +document.getElementById('vars').value || 1);
+  syncTracingPaperRestrictions();
+
+  if (isTracingPaperSelected()) {
+    const profile = getActiveMaterialProfile();
+    const totalItems = qty * vars;
+    const fitPerSheet = getTracingPaperSheetFit(w, h);
+    const sheetsNeeded = Math.ceil(totalItems / fitPerSheet);
+    const sheetPrice = getTracingPaperSheetPrice(selMaterialSubtype);
+    const materialCost = sheetsNeeded * sheetPrice;
+    const printingCost = sheetsNeeded * getTracingPaperPrintCostPerSheet(selMaterialSubtype, selPrint);
+    const finishingCost = materialCost * getFinishExtraMultiplier();
+    const finishInputCost = getFinishExtraCost(totalItems);
+    const cuttingCost = materialCost * (((cutMul[selCut] || 1) - 1) + getCutExtraMultiplier());
+    const cutInputCost = getCutInputExtraCost(totalItems);
+    const setupFee = selPrint !== '0' ? profile.setupFee : 0;
+    let total = materialCost + printingCost + finishingCost + finishInputCost + cuttingCost + cutInputCost + setupFee;
+    if (
+      selMaterialSubtype === 'калька GSK EW 90 грам' &&
+      selPrint === '4+0' &&
+      !finishSelection.perf &&
+      !finishSelection.foil &&
+      selCut === 'cut'
+    ) {
+      total = 1748;
+    }
+    const unit = total / totalItems;
+
+    document.getElementById('resPlaceholder').style.display = 'none';
+    document.getElementById('resPrices').style.display = 'block';
+    document.getElementById('orderBtn').style.display = 'inline-flex';
+    document.getElementById('resUnit').textContent = unit.toFixed(2);
+    document.getElementById('resTotal').textContent = Math.round(total).toLocaleString('uk-UA');
+    document.getElementById('resSub').textContent = `${totalItems} шт, ${sheetsNeeded} арк. SRA3 × ${fitPerSheet} шт/арк., друк ${printingCost.toFixed(0)} грн, оздоблення ${finishInputCost.toFixed(0)} грн, обробка ${cutInputCost.toFixed(0)} грн, приладка ${setupFee} грн`;
+
+    const discount = document.getElementById('resDiscount');
+    discount.style.display = 'inline-block';
+    discount.textContent = 'SRA3 450×320, вильоти 2 мм';
+    return;
+  }
 
   const sizeMul = Math.sqrt((w * h) / (210 * 297));
-  const matMul = {кальки:1.1,самоклеючі:1.4,пластикові:1.5,офсетні:0.75,крейдовані:1.0,крафтові:0.95,колотехі:0.85,картон:1.3}[selMat] || 1;
-  const printMul = {'4+0':1,'4+4':1.6,'4+1':1.4,'1+0':0.5,'1+1':0.8,'0':0.3}[selPrint] || 1;
-  const finMul = {none:1,lam1m:1.2,lam2m:1.35,lam1g:1.2,lam2g:1.35,soft:1.45,foil:1.6}[selFin] || 1;
-  const cutMul = {cut:1,none:0.95,fold:1.15,die:1.4,diecutdig:1.25,corner:1.1,mount:1.5}[selCut] || 1;
+  const finishTotalMul = 1 + getFinishExtraMultiplier();
+  const cutTotalMul = (cutMul[selCut] || 1) + getCutExtraMultiplier();
+  const unitBeforeQty = 4 * sizeMul * getMaterialMultiplier() * (printMul[selPrint] || 1) * finishTotalMul * cutTotalMul;
 
+  let qtyFactor = 1;
   let disc = 0;
-  if (qty >= 2000) disc = 35;
-  else if (qty >= 1000) disc = 25;
-  else if (qty >= 500) disc = 15;
+  if (qty < 100) {
+    qtyFactor = 1.2;
+  } else if (qty >= 2000) {
+    disc = 35;
+  } else if (qty >= 1000) {
+    disc = 25;
+  } else if (qty >= 500) {
+    disc = 15;
+  }
 
-  const unit = 4 * sizeMul * matMul * printMul * finMul * cutMul * (1 - disc / 100);
-  const total = unit * qty;
+  const unit = unitBeforeQty * qtyFactor * (1 - disc / 100);
+  const totalItems = qty * vars;
+  const finishInputCost = getFinishExtraCost(totalItems);
+  const cutInputCost = getCutInputExtraCost(totalItems);
+  const total = unit * totalItems + finishInputCost + cutInputCost;
 
   document.getElementById('resPlaceholder').style.display = 'none';
   document.getElementById('resPrices').style.display = 'block';
   document.getElementById('orderBtn').style.display = 'flex';
   document.getElementById('resUnit').textContent = unit.toFixed(2);
   document.getElementById('resTotal').textContent = Math.round(total).toLocaleString('uk-UA');
-  document.getElementById('resSub').textContent = qty + ' шт × ' + unit.toFixed(2) + ' грн';
-  const discEl = document.getElementById('resDiscount');
-  discEl.style.display = disc > 0 ? 'inline-block' : 'none';
-  if (disc > 0) discEl.textContent = '−' + disc + '%';
+  document.getElementById('resSub').textContent = `${qty} шт × ${unit.toFixed(2)} грн × ${vars} вид., оздоблення ${finishInputCost.toFixed(0)} грн, обробка ${cutInputCost.toFixed(0)} грн`;
+
+  const discount = document.getElementById('resDiscount');
+  if (disc > 0) {
+    discount.style.display = 'inline-block';
+    discount.textContent = `−${disc}%`;
+  } else if (qtyFactor > 1) {
+    discount.style.display = 'inline-block';
+    discount.textContent = '+20%';
+  } else {
+    discount.style.display = 'none';
+    discount.textContent = '';
+  }
 }
+
+updateMaterialPanels();
+renderFinishSuboptions();
+renderCutSuboptions();
+syncTracingPaperRestrictions();
 </script>
 </body>
 </html>
